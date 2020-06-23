@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'src/styles/normalize';
+
+body {
+    font-family: 'Poppins';
+    color: #000;
+}
+
+button {
+  border-width: 0;
+}
+
+@import 'src/styles/typography';
+@import 'src/styles/sections/homepage/hero';
+@import 'src/styles/sections/homepage/regions';
+@import 'src/styles/sections/homepage/credits';

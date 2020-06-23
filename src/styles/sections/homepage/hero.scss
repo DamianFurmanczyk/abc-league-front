@@ -1,0 +1,67 @@
+@import '../../typography';
+.hero {
+    background: url('/assets/img/heroImg.png') 50% 50%;
+    background-size: cover;
+    color: #fff;
+    padding: 15px 13%;
+}
+
+.hero_nav.nav {
+    .nav_ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        list-style-type: none;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav_li {
+        @include heroNavLiSizedText;
+    }
+    .nav_li--icon {
+        img {
+            height: 80px;
+            margin-bottom: -15px;
+        }
+        width: auto;
+        &.nav_li {
+            margin-right: 2.4rem !important;
+        }
+    }
+    .nav_ul-left-side-wrapper {
+        display: flex;
+        list-style-type: none;
+        justify-content: space-between;
+        align-items: center;
+        .nav_li {
+            margin-right: 3rem;
+        }
+    }
+}
+
+.hero_article {
+    margin-top: 15%;
+    h1 {
+        font-size: 3.5rem;
+        letter-spacing: 2px;
+        line-height: 1.2;
+        margin-bottom: 2.7rem;
+    }
+    p {
+        font-size: 1.4rem;
+        margin-bottom: 3rem;
+    }
+    button {
+        text-transform: uppercase;
+        font-size: 1.3rem;
+        background: #F5D213;
+        padding: 1.6rem 3.2rem;
+        border-radius: 3.2rem;
+        border-width: 0;
+        font-weight: bold;
+    }
+}
+
+.hero_reviews {
+    margin: 11% 0 7% 0;
+}

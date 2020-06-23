@@ -1,0 +1,38 @@
+.regions {
+    margin: 4% 3rem;
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 4%;
+    }
+}
+
+.regions-wrapper {
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin: 3% auto 0 auto;
+}
+
+.region {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1rem;
+    &:first-of-type {
+        margin-left: 0;
+    }
+    &:last-of-type {
+        margin-top: -27px;
+        .region_caption {
+            margin-bottom: 1.2rem;
+        }
+    }
+    .region_caption {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: .6rem;
+    }
+}

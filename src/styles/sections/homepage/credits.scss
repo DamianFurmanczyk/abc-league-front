@@ -1,0 +1,103 @@
+@import '../../_colors';
+@import '../../mixins/blocks';
+
+.add-credits {
+  background: $lightGray;
+  padding: 3% 0;
+
+}
+
+.credits-wrapper {
+  @include container;
+  display: flex;
+  justify-content: space-between;
+}
+
+.credit {
+  padding: 1.4rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  background: #fff;
+  border-radius: .9rem;
+
+  >div {
+    text-align: center;
+  }
+
+  small {
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.credit_cost {
+  small {
+    font-size: .8rem;
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+    display: inline-block;
+  }
+
+  margin: .8rem 0 1.3rem 0;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.credit_quantity {
+  small {
+    color: $gray;
+    font-size: .8rem;
+    margin-bottom: 1.1rem;
+  }
+}
+
+.credit_quantity-times {
+  width: 7rem;
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+
+  button {
+    &:first-of-type {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-of-type {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    border-radius: .4rem;
+    background: $lightGray2;
+    color: $darkGray;
+    font-size: 1.3rem;
+    width: 36px;
+    padding: 0;
+    height: 33px;
+  }
+}
+
+.credit_actions {
+  margin-top: 1.1rem;
+  button {
+    font-size: .7rem;
+    letter-spacing: -1px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    width: 6rem;
+    padding: .8rem .5rem;
+    border-radius: 1.8rem;
+    &:first-of-type{
+      margin-right: .3rem;
+      background: $blue;
+      color: white;
+    }
+    &:last-of-type{
+      background: $lightGray;
+    }
+  }
+}
