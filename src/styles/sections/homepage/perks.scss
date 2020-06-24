@@ -1,0 +1,60 @@
+@import '../../_colors';
+@import '../../mixins/blocks';
+
+.perks-wrapper  {
+  @include container(1400px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:first-of-type {
+    padding-top: 5.5%;
+    margin-bottom: 3.5%;
+  }
+  &:last-of-type {
+    padding-bottom: 5.5%;
+  }
+}
+
+.perk {
+  width: calc(100%/3 - 1px);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  	flex: 1 0 auto;
+    align-items: center;
+  }
+
+  img {
+    height: 95px;
+    margin-bottom: 2.6rem;
+  }
+  article {
+    padding: 0 12%;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    width: 100%;
+  }
+  h3 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-bottom: 1.3rem;
+  }
+  p {
+    padding: 0 10%;
+    flex: 1 0 auto;
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+}
+
+.perk-separator {
+  height: 200px;
+  width: 3px;
+  background: darken($lightGray2, 5%);
+}

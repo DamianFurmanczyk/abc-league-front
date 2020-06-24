@@ -1,0 +1,17 @@
+@import '../../_colors';
+@import '../../mixins/blocks';
+
+.payment-options {
+  background: $lightGray2;
+  padding: 2.5% 0;
+}
+
+.payment-options-list {
+  @include container;
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    filter: grayscale(100%);
+  }
+}
