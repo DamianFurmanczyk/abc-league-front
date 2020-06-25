@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'styles/mixins/elements';
+@import 'styles/colors';
+@import 'styles/typography';
+@import 'styles/mixins/blocks';
 
 @import 'src/styles/normalize';
 
@@ -11,16 +15,14 @@ button {
   border-width: 0;
 }
 
-@import 'src/styles/typography';
 
-@import 'src/styles/sections/homepage/hero';
-@import 'src/styles/sections/homepage/credits';
-@import 'src/styles/sections/homepage/perks';
-@import 'src/styles/sections/homepage/credits';
-@import 'src/styles/sections/homepage/payment_methods';
+b {
+  font-weight: bold;
+}
 
-@import 'src/styles/sections/shared/regions';
-@import 'src/styles/sections/shared/footer';
+@import 'src/styles/sections/homepage';
+
+@import 'src/styles/sections/shared';
 
 @import 'src/styles/sections/accounts';
 

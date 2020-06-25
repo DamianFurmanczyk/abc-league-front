@@ -1,0 +1,134 @@
+.checkout {
+  padding: 6%;
+  background: $lightGray3;
+}
+
+.checkout-dialog {
+  display: table;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.checkout-dialog_products-list_li-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout-dialog_products-list {
+  margin-bottom: 3rem;
+  margin-top: 1.5rem;
+
+  .account_quantity-times {
+    float: right;
+    margin: -.5rem 0 0 0;
+  }
+
+  img {
+    height: 1.7rem;
+    margin-right: .6rem;
+  }
+
+  small {
+    float: right;
+    font-size: .8rem;
+    margin-top: .8rem;
+  }
+}
+
+.checkout-dialog_top-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  span {
+    float: right;
+  }
+}
+
+.checkout-dialog_hr {
+  background: $lightGray;
+  height: 2px;
+  margin: 1.6rem auto;
+}
+
+.checkout-dialog_order-summary {
+
+  .total-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    b {
+      font-size: 1.4rem;
+      font-weight: bolder;
+      float: right;
+    }
+  }
+
+}
+
+.checkout-dialog_order-summary-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: .8rem;
+  margin-top: 1rem;
+  width: 100%;
+  color: $gray2;
+
+  button {
+    background: transparent;
+    color: $blue;
+    margin-right: -.3rem;
+  }
+}
+
+.checkout-dialog_info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+
+  img {
+    height: 50px;
+    margin-bottom: .6rem;
+  }
+
+  aside {
+    max-width: 190px;
+    line-height: 1.6;
+    font-size: .8rem;
+    text-align: center;
+
+    &:first-of-type {
+      margin-right: 1.5rem;
+    }
+  }
+}
+
+.payment-tile {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: .7rem;
+  margin-right: 1rem;
+  border: 1px solid $lightGray4;
+  border-radius: .4rem;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &--single-payment {
+    justify-content: center;
+  }
+
+  &--top {
+    margin-bottom: 1rem;
+    margin-right: 0;
+  }
+
+}
+
+.payment-tiles-wrapper {
+  display: flex;
+}
