@@ -1,0 +1,84 @@
+
+.account-options {
+  background: $lightGray;
+  padding: 4% 0;
+}
+
+.account-options-wrapper {
+  @include container(1400px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.account {
+  margin-right: 20px;
+
+  flex: 1 0 auto;
+
+  padding: 1.4rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  background: #fff;
+  border-radius: .9rem;
+  text-align: center;
+
+  li {
+    font-size: .9rem;
+    line-height: 2.2;
+  }
+}
+
+.account_actions {
+  width: 100%;
+  button {
+    @include rounded_btn--blue;
+    width: 100%;
+    font-size: .9rem;
+    font-weight: lighter;
+    letter-spacing: .03rem;
+    padding: .7rem .4rem;
+  }
+}
+
+
+.account_cost {
+  small {
+    font-size: .8rem;
+    margin-bottom: -.2rem;
+    display: inline-block;
+
+    &:last-of-type {
+      margin-bottom: 1.5rem;
+    }
+  }
+  margin: .8rem 0 1.1rem 0;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+
+.account_quantity-times {
+  @include qtity_btns;
+  margin: .9rem 0 1.3rem 0;
+}
+
+.account--bestseller {
+  position: relative;
+
+  &::after {
+    @include rounded_btn--blue;
+
+    content: 'BESTSELLER';
+    font-weight: normal;
+    font-size: .85rem;
+    letter-spacing: .05rem;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    box-shadow: 0 0 20px -5px $blue;
+    transform: translateY(-40%);
+    left: -10px;
+  }
+}

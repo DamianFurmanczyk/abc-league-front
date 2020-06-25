@@ -1,0 +1,38 @@
+.accounts_faq {
+  padding: 6% 0;
+}
+
+.accounts_faq-wrapper {
+  @include container;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  article {
+    text-align: center;
+    padding: 3.5rem;
+    border: 3px solid $lightGray2;
+    border-radius: 1.2rem;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      font-weight: bold;
+    }
+
+    p {
+      line-height: 2.3;
+    }
+
+    width: calc(50% - 10rem);
+    margin-bottom: 3.5rem;
+
+    &:nth-last-of-type(-n+2) {
+      margin-bottom: 0;
+  }
+
+    &:nth-child(2n - 1) {
+      margin-right: 3.5rem;
+    }
+  }
+}

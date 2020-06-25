@@ -1,5 +1,6 @@
 @import '../../_colors';
 @import '../../mixins/blocks';
+@import '../../mixins/elements';
 
 .add-credits {
   background: $lightGray;
@@ -54,31 +55,7 @@
 }
 
 .credit_quantity-times {
-  width: 7rem;
-  display: flex;
-  justify-items: center;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.3rem;
-
-  button {
-    &:first-of-type {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    &:last-of-type {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    border-radius: .4rem;
-    background: $lightGray2;
-    color: $darkGray;
-    font-size: 1.3rem;
-    width: 36px;
-    padding: 0;
-    height: 33px;
-  }
+  @include qtity_btns;
 }
 
 .credit_actions {

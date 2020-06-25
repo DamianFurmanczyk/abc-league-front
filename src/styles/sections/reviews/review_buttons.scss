@@ -1,0 +1,65 @@
+.reviews {
+  padding: 6% 0;
+}
+
+.btns-wrapper {
+  @include container;
+  display:  flex;
+  justify-content: center;
+  margin-bottom: 3%;
+
+  button {
+    @include rounded_btn--blue;
+    padding: .6rem 2.2rem;
+    padding-top: .8rem;
+    border-radius: 3.5rem;
+    font-size: 1.1rem;
+    letter-spacing: .05rem;
+    font-weight: lighter;
+    width: auto;
+  }
+}
+
+.reviews-sort {
+  @include rounded_btn--blue;
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-right: 1.5rem;
+  padding: .8rem 2.2rem;
+  border-radius: 3.5rem;
+  width: 7.5rem;
+
+  small {
+    font-size: .7rem;
+    letter-spacing: .05rem;
+    font-weight: lighter;
+    margin-bottom: .5rem;
+    display: inline-block;
+  }
+
+  label {
+    position: relative;
+    &::after {
+      content: '>';
+      position: absolute;
+      right: .3rem;
+      top: .4rem;
+    }
+  }
+}
+
+.select--blue {
+  @include appearance(none);
+  font-size: 1.2rem;
+  color: #fff;
+  border-width: 0;
+  background: $blue;
+  width: 7.5rem;
+
+  option {
+    background: #fff;
+    color: $blackish;
+  }
+}

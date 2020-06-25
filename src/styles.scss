@@ -14,11 +14,14 @@ button {
 @import 'src/styles/typography';
 
 @import 'src/styles/sections/homepage/hero';
-@import 'src/styles/sections/homepage/regions';
 @import 'src/styles/sections/homepage/credits';
 @import 'src/styles/sections/homepage/perks';
 @import 'src/styles/sections/homepage/credits';
 @import 'src/styles/sections/homepage/payment_methods';
-@import 'src/styles/sections/homepage/footer';
 
+@import 'src/styles/sections/shared/regions';
+@import 'src/styles/sections/shared/footer';
 
+@import 'src/styles/sections/accounts';
+
+@import 'src/styles/sections/reviews';
