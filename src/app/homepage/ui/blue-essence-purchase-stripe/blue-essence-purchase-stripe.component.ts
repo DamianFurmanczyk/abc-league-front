@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blue-essence-purchase-stripe.component.scss']
 })
 export class BlueEssencePurchaseStripeComponent implements OnInit {
-
+siema = 'siema';
   constructor() { }
 
   ngOnInit(): void {
