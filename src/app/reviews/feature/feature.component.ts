@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Review } from './../../models/reviews.interface';
+import { ReviewsFacade } from './../../+ngrx/state/facades/reviews.facade';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-feature',
@@ -6,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feature.component.scss']
 })
 export class ReviewsFeatureComponent implements OnInit {
+  reviews: Review[];
 
-
-  constructor() { }
+  constructor(private route: ActivatedRoute, private facade: ReviewsFacade) { }
 
   ngOnInit(): void {
+    this.reviews= this.route.snapshot.data.reviews;
   }
 
 }

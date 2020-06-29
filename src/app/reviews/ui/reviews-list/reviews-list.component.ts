@@ -1,21 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { DataAccessService } from './../../../+ngrx/services/app.service';
+import { Review } from './../../../models/reviews.interface';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
-import { AppPartialState } from '../../../+ngrx/state/app.reducer';
-import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-reviews-list',
   templateUrl: './reviews-list.component.html',
-  styleUrls: ['./reviews-list.component.scss']
+  styleUrls: ['./reviews-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewsListComponent implements OnInit {
+export class ReviewsListComponent implements OnInit, OnDestroy {
+  sub: Subscription;
 
-  //@ts-ignore
-  reviews$ = this.store$.pipe(tap(res => {this.reviews = res; console.log(res);console.log(this.reviews)}));
-  reviews = ['asd'];
-  constructor(private store$: Store<AppPartialState>) { }
+  @Input() reviews: Review[];
+
+  constructor(private dataAccess: DataAccessService) { }
 
   ngOnInit(): void {
+    this.sub = this.dataAccess.getReviews().pipe(
+      first()
+    ).subscribe(
+      res => {
+        // this.reviews = res
+      }
+    );
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

@@ -31,16 +31,8 @@ export class AppEffects {
     ofType(fromAppActions.Types.LoadAppropCurrency),
     mergeMap((action: fromAppActions.LoadAppropCurrency) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
-        map(resp => {
-          console.log('getCurrencyAdequateToUsersCountry');
-          console.log(resp)
-          return new fromAppActions.LoadAppropCurrencySuccess(resp);
-        }),
-        catchError((err, caught) => {
-          console.log('getCurrencyAdequateToUsersCountry');
-          console.log(err)
-          return of(new fromAppActions.LoadAppropCurrencyFail(err));
-        })
+        map(resp => new fromAppActions.LoadAppropCurrencySuccess(resp)),
+        catchError(err => of(new fromAppActions.LoadAppropCurrencyFail(err)))
       )
     )
   );
@@ -50,14 +42,19 @@ export class AppEffects {
     ofType(fromAppActions.Types.LoadReviews),
     mergeMap((action: fromAppActions.LoadReviews) =>
       this.dataAccessService.getReviews().pipe(
-        map(resp => {
-          console.log('getReviews');
-          return new fromAppActions.LoadReviewsSuccess(resp);
-        }),
-        catchError((err, caught) => {
-          console.log('getReviews');
-          return of(new fromAppActions.LoadReviewsFail(err));
-        })
+        map(resp => new fromAppActions.LoadReviewsSuccess(resp)),
+        catchError(err => of(new fromAppActions.LoadReviewsFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  loadRegions$ = this.actions$.pipe(
+    ofType(fromAppActions.Types.LoadRegions),
+    mergeMap((action: fromAppActions.LoadRegions) =>
+      this.dataAccessService.getRegions().pipe(
+        map(resp => new fromAppActions.LoadRegionsSuccess(resp)),
+        catchError(err => of(new fromAppActions.LoadRegionsFail(err)))
       )
     )
   );

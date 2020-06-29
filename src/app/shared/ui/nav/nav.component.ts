@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-
+  dropOpen = false;
   constructor() { }
+
+  toggleDrop() {
+    this.dropOpen = !this.dropOpen;
+  }
 
   ngOnInit(): void {
   }

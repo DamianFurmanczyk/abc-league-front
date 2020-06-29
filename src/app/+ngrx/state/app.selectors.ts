@@ -6,16 +6,34 @@ import {
   AppStateInterface
 } from './app.reducer';
 
-export const getPlanetsState = createFeatureSelector<
+export const getAppState = createFeatureSelector<
   AppPartialState,
   AppStateInterface
 >(APP_FEATURE_KEY);
 
 const { selectAll } = appAdapter.getSelectors();
 
-export const getFavouritePlanetsState = createSelector(
-  getPlanetsState,
-  (state: AppStateInterface) => state
+export const getCurrency = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.currency
 );
 
+export const getReviews = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviews
+);
+
+export const getReviewsLoading = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsLoading
+);
+
+export const getRegions = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsLoading
+);
+
+export const getRegionsLoading = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsLoading
 );

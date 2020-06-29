@@ -9,7 +9,13 @@
           <li routerLink="/" class="nav_li nav_li--dropdown">More</li>
       </div>
 
-      <li class="nav_li nav_li--dropdown-white-bg">PLN</li>
+      <li [class]="'nav_li nav_li--dropdown nav_li--currency ' + (dropOpen && 'active')"  (click)='toggleDrop()'>PLN
+        <ul>
+            <li><b>$</b> <span>USD</span></li>
+            <li><b>$</b> <span>EUR</span></li>
+            <li><b>$</b> <span>GBP</span></li>
+        </ul>
+      </li>
 
   </ul>
 </nav>

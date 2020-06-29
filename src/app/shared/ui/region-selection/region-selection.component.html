@@ -3,64 +3,10 @@
       <h2>Choose your region</h2>
       <div class="regions-wrapper">
 
-          <figure class="region">
-              <div class="region_caption">RU</div>
+          <figure (click)="selectRegion()" *ngFor="let region of regions" class="region">
+              <div class="region_caption">{{region.full_name}}</div>
               <div class="region_img-wrapper">
-                  <img src="assets/img/RU.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">OCE</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/OCE.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">EUNE</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/EUNE.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">NA</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/NA.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">EUW</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/EUW.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">LAN</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/LAN.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">LAS</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/LAS.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">BR</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/BR.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">TR</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/TR.png" alt="region_img">
-              </div>
-          </figure>
-          <figure class="region">
-              <div class="region_caption">JP</div>
-              <div class="region_img-wrapper">
-                  <img src="assets/img/JP.png" alt="region_img">
+                  <img [src]="'assets/img/' + region.name + '.png'" alt="region_img">
               </div>
           </figure>
 

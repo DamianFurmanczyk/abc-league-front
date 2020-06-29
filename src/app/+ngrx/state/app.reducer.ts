@@ -1,26 +1,13 @@
+import { Review } from './../../models/reviews.interface';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 import { fromAppActions } from './app.actions';
 
+export const APP_FEATURE_KEY = 'app';
+
 export interface AppDetailsInterface {
 
 };
-
-export interface review {
-  author: string,
-  created_at: string,
-  id: number,
-  stars: number,
-  tekst: string,
-  updated_at: string
-}
-
-export interface AppStateInterface {
-  currency: string | null,
-  reviews: review[] | null
-}
-
-export const APP_FEATURE_KEY = 'app';
 
 export const appAdapter: EntityAdapter<
   AppDetailsInterface
@@ -28,28 +15,33 @@ export const appAdapter: EntityAdapter<
   // selectId: model => model.name
 });
 
-export const initialState: AppStateInterface = {
-  currency: 'asd',
-  reviews: null,
-  // planets: planetsAdapter.getInitialState(),
-  // favouritePlanets: planetsAdapter.getInitialState(),
-  // count: 0,
-  // page: 1,
-  // error: null,
-  // loading: false,
-  // detailsLoading: false,
-  // planetDetails: null,
-  // detailsError: null
-};
+export interface AppStateInterface {
+  currency: string | null,
+  reviews: Review[] | null,
+  reviewsLoading: boolean,
+  currencyLoading: boolean,
+  regions: any[],
+  regionsLoading: boolean,
+  selectedRegion: any,
+  selectedRegionAccounts: any[]
+  reviewsLoadingErr: boolean,
+  currencyLoadingErr: boolean,
+  regionsLoadingErr: boolean,
+}
 
-// function extractId(planetInfo: PlanetDetailsInterface) {
-//   let url = planetInfo.url;
-//   if (url) {
-//     if (url[url.length - 1] === '/') url = url.substring(0, url.length - 1);
-//     url = url.slice(url.lastIndexOf('/') + 1);
-//     return { ...planetInfo, url };
-//   } else return planetInfo;
-// }
+export const initialState: AppStateInterface = {
+  currency: null,
+  reviews: null,
+  reviewsLoading: false,
+  reviewsLoadingErr: false,
+  currencyLoading: false,
+  currencyLoadingErr: false,
+  regions: [],
+  regionsLoading: false,
+  regionsLoadingErr: false,
+  selectedRegion: null,
+  selectedRegionAccounts: []
+};
 
 export interface AppPartialState {
   readonly [APP_FEATURE_KEY]: AppStateInterface;
@@ -61,12 +53,77 @@ export function reducer(
 ) {
   switch (action.type) {
 
-    case fromAppActions.Types.LoadCurrenciesSuccess: {
-      if (!action.payload) break;
+
+    case fromAppActions.Types.LoadCurrencies: {
 
       state = {
         ...state,
+        currencyLoading: true,
+        currencyLoadingErr: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadCurrenciesSuccess: {
+
+      state = {
+        ...state,
+        currencyLoading: false,
         currency: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadCurrenciesFail: {
+
+      state = {
+        ...state,
+        currencyLoading: false,
+        currencyLoadingErr: action.payload
+      };
+
+    }
+
+    case fromAppActions.Types.LoadRegions: {
+
+      state = {
+        ...state,
+        regionsLoading: true,
+        regionsLoadingErr: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadRegionsSuccess: {
+
+      state = {
+        ...state,
+        regionsLoading: false,
+        selectedRegion: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadRegionsFail: {
+
+      state = {
+        ...state,
+        regionsLoading: false,
+        regionsLoadingErr: action.payload
+      };
+
+    }
+
+    case fromAppActions.Types.LoadReviews: {
+
+      state = {
+        ...state,
+        reviewsLoading: true,
+        reviewsLoadingErr: false
       };
 
       break;
@@ -75,7 +132,19 @@ export function reducer(
     case fromAppActions.Types.LoadReviewsSuccess: {
       state = {
         ...state,
-        reviews: action.payload
+        reviews: action.payload,
+        reviewsLoading: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadReviewsFail: {
+      state = {
+        ...state,
+        reviews: action.payload,
+        reviewsLoadingError: true,
+        reviewsLoading: false
       };
 
       break;

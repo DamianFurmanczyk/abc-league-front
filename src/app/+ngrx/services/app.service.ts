@@ -1,3 +1,4 @@
+import { Review } from './../../models/reviews.interface';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -15,25 +16,22 @@ export class DataAccessService {
 
     apiUrl = 'http://api.abcleague.webup-dev.pl/';
 
-    // todo?
-    // getAvailableCurrencies() {
-    //   return this.http.get(this.apiUrl + 'currency');
-    // }
+    // http://api.abcleague.webup-dev.pl/pay_paypal?email=da@gmail.com&currency=PLN&price=1&quantity=2&description=asd
 
     getCurrencyAdequateToUsersCountry() {
-      this.http.get(this.apiUrl + 'reviews').pipe(tap(console.log));
-      return this.http.get(this.apiUrl + 'currency').pipe(
-        take(2)
-      );
+      return this.http.get(this.apiUrl + 'currency');
     }
 
     getReviews() {
-      console.log('ttpppaspdspdas')
-      return this.http.get(this.apiUrl + 'reviews').pipe(tap(console.log));
+      return this.http.get<Review[]>(this.apiUrl + 'reviews');
+    }
+
+    getRegions() {
+      return this.http.get(this.apiUrl + 'regions');
     }
 
     sendReview(review) {
-      return this.http.post(this.apiUrl + 'reviews/add', {...review, ...review, tekst: review.tekst.trim()});
+      return this.http.post(this.apiUrl + 'reviews/add', {...review, tekst: review.tekst.trim()});
     }
 
   // getPlanets(page: number = 1): Observable<any> {

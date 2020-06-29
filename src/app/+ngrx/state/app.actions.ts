@@ -17,7 +17,34 @@ export namespace fromAppActions {
 
     AddReview =  'Add Review',
     AddReviewSuccess =  'Add Review Success',
-    AddReviewFail =  'Add Review Fail'
+    AddReviewFail =  'Add Review Fail',
+
+    LoadRegions =  'Load Regions',
+    LoadRegionsSuccess =  'Load Regions Success',
+    LoadRegionsFail =  'Load Regions Fail',
+
+    SelectRegion =  'Select Regions'
+  }
+
+  export class SelectRegion implements Action {
+    readonly type = Types.SelectRegion;
+
+    constructor(public payload) {}
+  }
+  export class LoadRegions implements Action {
+    readonly type = Types.LoadRegions;
+
+    constructor() {}
+  }
+  export class LoadRegionsSuccess implements Action {
+    readonly type = Types.LoadRegionsSuccess;
+
+    constructor(public payload) {}
+  }
+  export class LoadRegionsFail implements Action {
+    readonly type = Types.LoadRegionsFail;
+
+    constructor(public payload) {}
   }
 
   export class LoadReviews implements Action {
@@ -81,4 +108,7 @@ export namespace fromAppActions {
     | LoadReviewsSuccess
     | LoadReviewsFail
     | LoadAppropCurrencyFail
+    | LoadRegions
+    | LoadRegionsSuccess
+    | LoadRegionsFail
 }
