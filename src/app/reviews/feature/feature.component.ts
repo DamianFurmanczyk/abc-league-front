@@ -10,11 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReviewsFeatureComponent implements OnInit {
   reviews: Review[];
+  showAddReviewFormFlag: boolean = false;
+
+  onToggleAddReviewForm() {
+    this.showAddReviewFormFlag = !this.showAddReviewFormFlag
+  }
 
   constructor(private route: ActivatedRoute, private facade: ReviewsFacade) { }
 
   ngOnInit(): void {
     this.reviews= this.route.snapshot.data.reviews;
+    console.log(this.route.snapshot.data.reviews)
   }
 
 }

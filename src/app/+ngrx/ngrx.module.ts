@@ -1,3 +1,5 @@
+import { CurrencyResolver } from './../resolvers/currency.resolver';
+import { MainComponent } from './../main/main.component';
 import { RegionsResolver } from './../resolvers/regions.resolver';
 import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
 import { ReviewsFacade } from './state/facades/reviews.facade';
@@ -36,7 +38,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
 
 @NgModule({
-  declarations: [    AppComponent,
+  declarations: [    MainComponent, AppComponent,
     RegionSelectionComponent,
     PerksListComponent,
     ReviewsFeatureComponent,
@@ -69,7 +71,8 @@ import { AppComponent } from '../app.component';
     DataAccessService,
     ReviewsResolver,
     ReviewsFacade,
-    RegionsResolver
+    RegionsResolver,
+    CurrencyResolver
   ]
 })
 export class DataAccessModule {}

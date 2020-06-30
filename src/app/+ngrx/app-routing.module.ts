@@ -1,3 +1,6 @@
+import { CurrencyResolver } from './../resolvers/currency.resolver';
+import { MainComponent } from './../main/main.component';
+import { AccountsResolver } from './../resolvers/accounts.resolver';
 import { RegionsResolver } from './../resolvers/regions.resolver';
 import { ReviewsResolver } from './../resolvers/reviews.resolver';
 import { NgModule } from '@angular/core';
@@ -8,19 +11,24 @@ import { ReviewsFeatureComponent } from '../reviews/feature/feature.component';
 
 const routes: Routes = [
   {
-  path: '',
-  resolve: {regions: RegionsResolver},
-  component: HomepageFeatureComponent
-}, {
-  path: 'reviews',
-  resolve: {reviews: ReviewsResolver},
-  component: ReviewsFeatureComponent
-}, {
-  path: 'accounts',
-  resolve: {regions: RegionsResolver},
-  component: AccountsFeatureComponent
-}, {
-  path: '**', redirectTo: ''
+    path: '',
+    component: MainComponent, 
+    resolve: {regions: RegionsResolver, accounts: AccountsResolver, currency: CurrencyResolver},
+    children: [
+    {
+      path: '',
+      component: HomepageFeatureComponent
+    }, {
+      path: 'reviews',
+      resolve: {reviews: ReviewsResolver},
+      component: ReviewsFeatureComponent
+    }, {
+      path: 'accounts',
+      component: AccountsFeatureComponent
+    }, {
+      path: '**', redirectTo: ''
+    }
+  ]
 }
 ];
 

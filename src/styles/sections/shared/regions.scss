@@ -1,5 +1,6 @@
 .regions {
     margin: 5% 3rem;
+
     h2 {
         text-align: center;
         font-size: 2rem;
@@ -17,6 +18,9 @@
 }
 
 .region {
+    &.active {
+        filter: brightness(0%);
+    }
     display: flex;
     flex-direction: column;
     justify-content: center;

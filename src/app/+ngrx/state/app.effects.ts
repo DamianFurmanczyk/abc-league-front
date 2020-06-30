@@ -8,9 +8,10 @@ import {
   switchMap,
   tap,
   first,
-  withLatestFrom
+  withLatestFrom,
+  concatMap
 } from 'rxjs/operators';
-import { of, EMPTY } from 'rxjs';
+import { of, EMPTY, forkJoin } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppPartialState } from './app.reducer';
 import { fromAppActions } from './app.actions';
@@ -31,7 +32,11 @@ export class AppEffects {
     ofType(fromAppActions.Types.LoadAppropCurrency),
     mergeMap((action: fromAppActions.LoadAppropCurrency) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
-        map(resp => new fromAppActions.LoadAppropCurrencySuccess(resp)),
+        mergeMap(resp => {
+          console.log(resp)
+          return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp['0']), of(resp['0'])])
+        }),
+        map(resp => new fromAppActions.LoadAppropCurrencySuccess({name: resp[1], exchangeRateToDollar: resp[0]})),
         catchError(err => of(new fromAppActions.LoadAppropCurrencyFail(err)))
       )
     )
@@ -55,6 +60,17 @@ export class AppEffects {
       this.dataAccessService.getRegions().pipe(
         map(resp => new fromAppActions.LoadRegionsSuccess(resp)),
         catchError(err => of(new fromAppActions.LoadRegionsFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  loadAccounts$ = this.actions$.pipe(
+    ofType(fromAppActions.Types.LoadAccounts, fromAppActions.Types.SelectRegion),
+    mergeMap((action: fromAppActions.LoadAccounts) =>
+      this.dataAccessService.getAccounts().pipe(
+        map(resp => new fromAppActions.LoadAccountsSuccess(resp)),
+        catchError(err => of(new fromAppActions.LoadAccountsFail(err)))
       )
     )
   );

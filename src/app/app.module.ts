@@ -30,7 +30,7 @@ import { DataAccessModule } from './+ngrx/ngrx.module';
       }
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

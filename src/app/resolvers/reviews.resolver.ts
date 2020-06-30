@@ -1,4 +1,4 @@
-import { AppFacade } from './../+ngrx/state/facades/app.facade';
+import { ReviewsFacade } from './../+ngrx/state/facades/reviews.facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { map, take } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
@@ -11,15 +11,15 @@ import { fromAppActions } from '../+ngrx/state/app.actions';
 
 @Injectable()
 export class ReviewsResolver implements Resolve<Observable<Action>> {
-  constructor(private facade: AppFacade, private action$: Actions) {}
+  constructor(private facade: ReviewsFacade, private action$: Actions) {}
 
   resolve() {
 
-    this.facade.loadRegions();
+    this.facade.loadReviews();
 
     return this.action$.pipe(
-      ofType(fromAppActions.Types.LoadRegionsSuccess),
-      map((a: fromAppActions.LoadRegionsSuccess) => a.payload),
+      ofType(fromAppActions.Types.LoadReviewsSuccess),
+      map((a: fromAppActions.LoadReviewsSuccess) => a.payload),
       take(1)
     );
   

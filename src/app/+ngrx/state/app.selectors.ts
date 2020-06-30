@@ -12,7 +12,6 @@ export const getAppState = createFeatureSelector<
 >(APP_FEATURE_KEY);
 
 const { selectAll } = appAdapter.getSelectors();
-
 export const getCurrency = createSelector(
   getAppState,
   (state: AppStateInterface) => state.currency
@@ -36,4 +35,14 @@ export const getRegions = createSelector(
 export const getRegionsLoading = createSelector(
   getAppState,
   (state: AppStateInterface) => state.reviewsLoading
+);
+
+export const getAccounts = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.accounts
+);
+
+export const getSelectedRegion = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.selectedRegion
 );

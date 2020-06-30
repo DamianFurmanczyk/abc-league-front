@@ -1,3 +1,4 @@
+import { AppFacade } from './../state/facades/app.facade';
 import { Review } from './../../models/reviews.interface';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -11,19 +12,33 @@ import { tap, map, take } from 'rxjs/operators';
 export class DataAccessService {
   constructor(
     // @Inject(SWAPI_API) public apiUrl: string,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private facade: AppFacade
+  ) {
+    this.facade.selectedRegion$.pipe(
+      tap(res => this.selectedRegion = res)
+    ).subscribe();
+  }
 
+    selectedRegion: any = {};
     apiUrl = 'http://api.abcleague.webup-dev.pl/';
 
     // http://api.abcleague.webup-dev.pl/pay_paypal?email=da@gmail.com&currency=PLN&price=1&quantity=2&description=asd
 
     getCurrencyAdequateToUsersCountry() {
-      return this.http.get(this.apiUrl + 'currency');
+      return this.http.get<string>(this.apiUrl + 'currency');
+    }
+
+    getExchangeRateToDollar(currency: string) {
+      return this.http.get(this.apiUrl + `convert/1/USD/${currency}`);
     }
 
     getReviews() {
       return this.http.get<Review[]>(this.apiUrl + 'reviews');
+    }
+
+    getAccounts() {
+      return this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id);
     }
 
     getRegions() {

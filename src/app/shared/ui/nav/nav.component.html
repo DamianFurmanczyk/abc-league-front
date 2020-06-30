@@ -9,11 +9,9 @@
           <li routerLink="/" class="nav_li nav_li--dropdown">More</li>
       </div>
 
-      <li [class]="'nav_li nav_li--dropdown nav_li--currency ' + (dropOpen && 'active')"  (click)='toggleDrop()'>PLN
+      <li [class]="'nav_li nav_li--dropdown nav_li--currency ' + (dropOpen && 'active')"  (click)='toggleDrop()'> {{activeCurrency}}
         <ul>
-            <li><b>$</b> <span>USD</span></li>
-            <li><b>$</b> <span>EUR</span></li>
-            <li><b>$</b> <span>GBP</span></li>
+            <li *ngFor="let curr of currencyOptions"><b>$</b> <span>{{curr}}</span></li>
         </ul>
       </li>
 

@@ -1,8 +1,9 @@
 import { DataAccessService } from './../../../+ngrx/services/app.service';
 import { Review } from './../../../models/reviews.interface';
-import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-reviews-list',
@@ -10,24 +11,18 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./reviews-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewsListComponent implements OnInit, OnDestroy {
-  sub: Subscription;
-
+export class ReviewsListComponent implements OnInit {
+  @Output() toggleAddReviewForm = new EventEmitter<void>();
   @Input() reviews: Review[];
 
-  constructor(private dataAccess: DataAccessService) { }
+  sub: Subscription;
 
-  ngOnInit(): void {
-    this.sub = this.dataAccess.getReviews().pipe(
-      first()
-    ).subscribe(
-      res => {
-        // this.reviews = res
-      }
-    );
+  onToggleAddReviewForm() {
+    this.toggleAddReviewForm.emit();
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+  constructor() { }
+
+  ngOnInit(): void {
   }
 }

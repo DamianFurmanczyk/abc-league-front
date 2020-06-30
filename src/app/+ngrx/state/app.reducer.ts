@@ -16,17 +16,19 @@ export const appAdapter: EntityAdapter<
 });
 
 export interface AppStateInterface {
-  currency: string | null,
+  currency: { name: string, exchangeRateToDollar: number } | null,
   reviews: Review[] | null,
   reviewsLoading: boolean,
   currencyLoading: boolean,
   regions: any[],
   regionsLoading: boolean,
   selectedRegion: any,
-  selectedRegionAccounts: any[]
   reviewsLoadingErr: boolean,
   currencyLoadingErr: boolean,
   regionsLoadingErr: boolean,
+  accounts: any[] | null,
+  accountsLoading: boolean,
+  accountsLoadingErr: boolean
 }
 
 export const initialState: AppStateInterface = {
@@ -39,8 +41,10 @@ export const initialState: AppStateInterface = {
   regions: [],
   regionsLoading: false,
   regionsLoadingErr: false,
-  selectedRegion: null,
-  selectedRegionAccounts: []
+  selectedRegion: {id: '1', name: 'EUNE'},
+  accounts: [],
+  accountsLoading: false,
+  accountsLoadingErr: false
 };
 
 export interface AppPartialState {
@@ -54,37 +58,6 @@ export function reducer(
   switch (action.type) {
 
 
-    case fromAppActions.Types.LoadCurrencies: {
-
-      state = {
-        ...state,
-        currencyLoading: true,
-        currencyLoadingErr: false
-      };
-
-      break;
-    }
-
-    case fromAppActions.Types.LoadCurrenciesSuccess: {
-
-      state = {
-        ...state,
-        currencyLoading: false,
-        currency: action.payload
-      };
-
-      break;
-    }
-
-    case fromAppActions.Types.LoadCurrenciesFail: {
-
-      state = {
-        ...state,
-        currencyLoading: false,
-        currencyLoadingErr: action.payload
-      };
-
-    }
 
     case fromAppActions.Types.LoadRegions: {
 
@@ -102,6 +75,59 @@ export function reducer(
       state = {
         ...state,
         regionsLoading: false,
+        regions: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.SelectRegion: {
+      
+      state = {
+        ...state,
+        selectedRegion: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadAppropCurrency: {
+
+      state = {
+        ...state,
+        regionsLoading: true,
+        regionsLoadingErr: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadAppropCurrencySuccess: {
+      
+      state = {
+        ...state,
+        currencyLoading: false,
+        currency: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadAppropCurrencyFail: {
+
+      state = {
+        ...state,
+        currencyLoading: false,
+        currencyLoadingErr: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.SelectRegion: {
+      
+      state = {
+        ...state,
         selectedRegion: action.payload
       };
 
@@ -142,9 +168,38 @@ export function reducer(
     case fromAppActions.Types.LoadReviewsFail: {
       state = {
         ...state,
-        reviews: action.payload,
-        reviewsLoadingError: true,
+        reviewsLoadingErr: true,
         reviewsLoading: false
+      };
+
+      break;
+    }
+    case fromAppActions.Types.LoadAccounts: {
+
+      state = {
+        ...state,
+        accountsLoading: true,
+        accountsLoadingErr: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadAccountsSuccess: {
+      state = {
+        ...state,
+        accounts: action.payload,
+        accountsLoading: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadAccountsFail: {
+      state = {
+        ...state,
+        accountsLoadingErr: true,
+        accountsLoading: false
       };
 
       break;

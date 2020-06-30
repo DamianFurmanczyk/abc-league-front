@@ -1,15 +1,22 @@
+<div class="add-review-form-overlay"></div>
+
 <form class="add-review-form">
-    <h2>Add review <span>x</span></h2>
+    <h2>Add review <span (click)='onToggleAddReviewForm()'>x</span></h2>
 
     <div class="rating-display">
         <small>Rating</small>
         *****
     </div>
 
-    <label for="name"></label>
-    <input type="text" id="name">
+    <div class="add-review-form_input-wrapper">
+        <label for="name">Name</label>
+        <input type="text" id="name">
+    </div>
 
-    <textarea id="review" cols="30" rows="10" placeholder="Type your review here"></textarea>
+    <div class="add-review-form_input-wrapper">
+        <label for="review">Review</label>
+        <textarea id="review" cols="20" rows="8" placeholder="Type your review here"></textarea>
+    </div>
 
     <button>
         POST REVIEW

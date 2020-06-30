@@ -3,13 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export namespace fromAppActions {
   export enum Types {
-    LoadCurrencies = 'Load Currencies',
-    LoadCurrenciesSuccess = 'Load Currencies Success',
-    LoadCurrenciesFail = '[Planets List] Load Currencies Fail',
-
-    LoadAppropCurrency = 'Load Currencies',
-    LoadAppropCurrencySuccess = 'Load Currencies Success',
-    LoadAppropCurrencyFail = '[Planets List] Load Currencies Fail',
+    LoadAppropCurrency = 'Load Currency',
+    LoadAppropCurrencySuccess = 'Load Currency Success',
+    LoadAppropCurrencyFail = '[Planets List] Load Currency Fail',
 
     LoadReviews =  'Load Reviews',
     LoadReviewsSuccess =  'Load Reviews Success',
@@ -23,11 +19,30 @@ export namespace fromAppActions {
     LoadRegionsSuccess =  'Load Regions Success',
     LoadRegionsFail =  'Load Regions Fail',
 
+    LoadAccounts =  'Load Accounts',
+    LoadAccountsSuccess =  'Load Accounts Success',
+    LoadAccountsFail =  'Load Accounts Fail',
+
     SelectRegion =  'Select Regions'
   }
 
   export class SelectRegion implements Action {
     readonly type = Types.SelectRegion;
+
+    constructor(public payload) {}
+  }
+  export class LoadAccounts implements Action {
+    readonly type = Types.LoadAccounts;
+
+    constructor() {}
+  }
+  export class LoadAccountsSuccess implements Action {
+    readonly type = Types.LoadAccountsSuccess;
+
+    constructor(public payload) {}
+  }
+  export class LoadAccountsFail implements Action {
+    readonly type = Types.LoadAccountsFail;
 
     constructor(public payload) {}
   }
@@ -80,28 +95,7 @@ export namespace fromAppActions {
     constructor(public payload) {}
   }
 
-  export class LoadCurrencies implements Action {
-    readonly type = Types.LoadCurrencies;
-
-    constructor() {}
-  }
-
-  export class LoadCurrenciesSuccess implements Action {
-    readonly type = Types.LoadCurrenciesSuccess;
-
-    constructor(public payload) {}
-  }
-
-  export class LoadCurrenciesFail implements Action {
-    readonly type = Types.LoadCurrenciesFail;
-
-    constructor(public payload) {}
-  }
-
   export type CollectiveType =
-    | LoadCurrencies
-    | LoadCurrenciesSuccess
-    | LoadCurrenciesFail
     | LoadAppropCurrency
     | LoadAppropCurrencySuccess
     | LoadReviews
@@ -111,4 +105,8 @@ export namespace fromAppActions {
     | LoadRegions
     | LoadRegionsSuccess
     | LoadRegionsFail
+    | LoadAccounts
+    | LoadAccountsSuccess
+    | LoadAccountsFail
+    | SelectRegion
 }
