@@ -118,6 +118,13 @@
     margin-right: 0;
   }
 
+  
+
+  img {
+    height: 32px;
+    filter: grayscale(0%);
+  }
+
   &--single-payment {
     justify-content: center;
   }

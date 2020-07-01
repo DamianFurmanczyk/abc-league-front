@@ -8,7 +8,7 @@
       <div class="account_cost">
         <small>BASIC</small> <br>
         <small>30 lvl instant delivery</small> <br>
-        {{acc.price_usd + ' ' + currency.name}}
+        {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
       </div>
 
       <ul>

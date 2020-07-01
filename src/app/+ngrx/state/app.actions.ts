@@ -3,9 +3,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export namespace fromAppActions {
   export enum Types {
-    LoadAppropCurrency = 'Load Currency',
-    LoadAppropCurrencySuccess = 'Load Currency Success',
-    LoadAppropCurrencyFail = '[Planets List] Load Currency Fail',
+    loadCurrencyBasedOnLocation = 'Load Currency Based On Location',
+    loadCurrencyBasedOnLocationSuccess = 'Load Currency Based On Location Success',
+    loadCurrencyBasedOnLocationFail = 'Load Currency Based On Location Fail',
+
+    LoadCurrency =  'Load Currency',
+    LoadCurrencySuccess =  'Load Currency Success',
+    LoadCurrencyFail =  'Load Currency Fail',
 
     LoadReviews =  'Load Reviews',
     LoadReviewsSuccess =  'Load Reviews Success',
@@ -46,6 +50,21 @@ export namespace fromAppActions {
 
     constructor(public payload) {}
   }
+  export class LoadCurrency implements Action {
+    readonly type = Types.LoadCurrency;
+
+    constructor(public payload: string) {}
+  }
+  export class LoadCurrencySuccess implements Action {
+    readonly type = Types.LoadCurrencySuccess;
+
+    constructor(public payload) {}
+  }
+  export class LoadCurrencyFail implements Action {
+    readonly type = Types.LoadCurrencyFail;
+
+    constructor(public payload) {}
+  }
   export class LoadRegions implements Action {
     readonly type = Types.LoadRegions;
 
@@ -77,36 +96,39 @@ export namespace fromAppActions {
 
     constructor(public payload) {}
   }
-  export class LoadAppropCurrency implements Action {
-    readonly type = Types.LoadAppropCurrency;
+  export class loadCurrencyBasedOnLocation implements Action {
+    readonly type = Types.loadCurrencyBasedOnLocation;
 
     constructor() {}
   }
 
-  export class LoadAppropCurrencySuccess implements Action {
-    readonly type = Types.LoadAppropCurrencySuccess;
+  export class loadCurrencyBasedOnLocationSuccess implements Action {
+    readonly type = Types.loadCurrencyBasedOnLocationSuccess;
 
     constructor(public payload) {}
   }
 
-  export class LoadAppropCurrencyFail implements Action {
-    readonly type = Types.LoadAppropCurrencyFail;
+  export class loadCurrencyBasedOnLocationFail implements Action {
+    readonly type = Types.loadCurrencyBasedOnLocationFail;
 
     constructor(public payload) {}
   }
 
   export type CollectiveType =
-    | LoadAppropCurrency
-    | LoadAppropCurrencySuccess
+    | loadCurrencyBasedOnLocation
+    | loadCurrencyBasedOnLocationSuccess
     | LoadReviews
     | LoadReviewsSuccess
     | LoadReviewsFail
-    | LoadAppropCurrencyFail
+    | loadCurrencyBasedOnLocationFail
     | LoadRegions
     | LoadRegionsSuccess
     | LoadRegionsFail
     | LoadAccounts
     | LoadAccountsSuccess
     | LoadAccountsFail
+    | LoadCurrency
+    | LoadCurrencySuccess
+    | LoadCurrencyFail
     | SelectRegion
 }

@@ -5,6 +5,7 @@ export interface Account {
     id: number,
     name: string,
     price_usd: string,
+    priceAfterConversion?: number,
     quantity: number,
     region_id: number,
     regions: null | string[],

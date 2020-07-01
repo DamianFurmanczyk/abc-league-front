@@ -9,8 +9,15 @@ export const APP_FEATURE_KEY = 'app';
 function getAccountsWithAppropCurrency(currency: currencyData, accArr: Account[]) {
   let accountsAccCopy = JSON.parse(JSON.stringify(accArr));
 
+  console.log(accArr)
+
   accountsAccCopy = accountsAccCopy.map(el => {
-    el.price_usd = String(+el.price_usd * currency.exchangeRateToDollar)
+    // console.log(+el.price_usd + ' ' + currency.exchangeRateToDollar, ' ' , +el.price_usd * currency.exchangeRateToDollar)
+    // console.log(String((+el.price_usd.split(' ')[0] * currency.exchangeRateToDollar).toFixed(2)))
+    // console.log(currency.exchangeRateToDollar);
+    const newPrice =+el.price_usd * currency.exchangeRateToDollar
+    el.priceAfterConversion = (newPrice).toFixed(2)
+    // console.log(el);
     return el;
   });
   
@@ -103,18 +110,18 @@ export function reducer(
       break;
     }
 
-    case fromAppActions.Types.LoadAppropCurrency: {
+    case fromAppActions.Types.loadCurrencyBasedOnLocation: {
 
       state = {
         ...state,
-        regionsLoading: true,
-        regionsLoadingErr: false
+        currencyLoading: true,
+        currencyLoadingErr: false
       };
 
       break;
     }
 
-    case fromAppActions.Types.LoadAppropCurrencySuccess: {
+    case fromAppActions.Types.loadCurrencyBasedOnLocationSuccess: {
 
       state = {
         ...state,
@@ -126,7 +133,7 @@ export function reducer(
       break;
     }
 
-    case fromAppActions.Types.LoadAppropCurrencyFail: {
+    case fromAppActions.Types.loadCurrencyBasedOnLocationFail: {
 
       state = {
         ...state,
@@ -155,6 +162,41 @@ export function reducer(
         regionsLoadingErr: action.payload
       };
 
+    }
+
+    
+    case fromAppActions.Types.LoadCurrency: {
+
+      state = {
+        ...state,
+        currencyLoading: true,
+        currencyLoadingErr: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadCurrencySuccess: {
+console.log(action.payload);
+console.log(state.accounts);
+      state = {
+        ...state,
+        currencyLoading: false,
+        currency: action.payload,
+        accounts: { acc: state.accounts.acc.length == 0 ? [] : getAccountsWithAppropCurrency(action.payload, state.accounts.acc), count: state.accounts.count }
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadCurrencyFail: {
+      state = {
+        ...state,
+        currencyLoadingErr: true,
+        currencyLoading: false
+      };
+
+      break;
     }
 
     case fromAppActions.Types.LoadReviews: {
@@ -199,7 +241,8 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadAccountsSuccess: {
-      const accountsWithAppropCurrency = getAccountsWithAppropCurrency(state.currency || {name: 'USD', exchangeRateToDollar: 1}, action.payload.acc);
+      const accountsWithAppropCurrency = getAccountsWithAppropCurrency(state.currency || {name: 'USD', exchangeRateToDollar: 1}, 
+      action.payload.acc);
 
       state = {
         ...state,

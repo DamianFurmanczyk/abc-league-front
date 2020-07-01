@@ -1,17 +1,21 @@
-<nav class="hero_nav nav">
+<nav  [ngClass]="[activeClassSet ? 'active' : '', activeClassScrollSet && !activeClassSet ? 'scrollActive' : '']" class="hero_nav nav">
   <ul class="nav_ul">
       <div class="nav_ul-left-side-wrapper">
-          <li routerLink="/" class="nav_li nav_li--icon">
+          <li routerLink="/" routerLinkActive="active" class="nav_li nav_li--icon">
               <img src="assets/img/navIcon.png" alt="icon" />
           </li>
-          <li routerLink="/accounts" class="nav_li">Accounts</li>
-          <li routerLink="/reviews" class="nav_li">Reviews</li>
+          <li routerLink="/accounts" routerLinkActive="active" class="nav_li">Accounts</li>
+          <li routerLink="/reviews" routerLinkActive="active" class="nav_li">Reviews</li>
           <li routerLink="/" class="nav_li nav_li--dropdown">More</li>
       </div>
 
       <li [class]="'nav_li nav_li--dropdown nav_li--currency ' + (dropOpen && 'active')"  (click)='toggleDrop()'> {{activeCurrency}}
         <ul>
-            <li *ngFor="let curr of currencyOptions"><b>$</b> <span>{{curr}}</span></li>
+            <li 
+            (click)='onCurrencyChange(curr)' 
+            *ngFor="let curr of currencyOptions">
+              <b>$</b> <span>{{curr}}</span>
+            </li>
         </ul>
       </li>
 

@@ -1,3 +1,4 @@
+import { NavTrackScroll } from './../../directives/nav_activation_tracker';
 import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';
 import { RegionsResolver } from './../resolvers/regions.resolver';
@@ -5,7 +6,7 @@ import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review
 import { ReviewsFacade } from './state/facades/reviews.facade';
 import { ReviewsResolver } from '../resolvers/reviews.resolver';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -56,7 +57,8 @@ import { AppComponent } from '../app.component';
     AddReviewFormComponent,
     ReviewsFeatureComponent,
     AccountsFeatureComponent,
-    NavComponent],
+    NavComponent
+  ],
   imports: [
     AppRoutingModule,
     CommonModule,

@@ -28,16 +28,40 @@ import { DataAccessService } from '../services/app.service'
 export class AppEffects {
 
   @Effect()
-  loadAppropCurrency$ = this.actions$.pipe(
-    ofType(fromAppActions.Types.LoadAppropCurrency),
-    mergeMap((action: fromAppActions.LoadAppropCurrency) =>
+  loadCurrencyBasedOnLocation$ = this.actions$.pipe(
+    ofType(fromAppActions.Types.loadCurrencyBasedOnLocation),
+    mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
         mergeMap(resp => {
           console.log(resp)
           return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp['0']), of(resp['0'])])
         }),
-        map(resp => new fromAppActions.LoadAppropCurrencySuccess({name: resp[1], exchangeRateToDollar: resp[0]})),
-        catchError(err => of(new fromAppActions.LoadAppropCurrencyFail(err)))
+        map(resp => new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0]})),
+        catchError(err => of(new fromAppActions.loadCurrencyBasedOnLocationFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  loadCurrency$ = this.actions$.pipe(
+    ofType(fromAppActions.Types.LoadCurrency),
+    mergeMap((action: fromAppActions.LoadCurrency) =>
+      this.dataAccessService.getExchangeRateToDollar(action.payload).pipe(
+          map(resp => new fromAppActions.LoadCurrencySuccess({name: action.payload, exchangeRateToDollar: resp}),
+          catchError(err => of(new fromAppActions.LoadCurrencyFail(err)))
+      )
+    )
+  )
+);
+
+
+  @Effect()
+  LoadCurrency$ = this.actions$.pipe(
+    ofType(fromAppActions.Types.LoadCurrency),
+    mergeMap((action: fromAppActions.LoadCurrency) =>
+      this.dataAccessService.getExchangeRateToDollar(action.payload).pipe(
+        map(resp => new fromAppActions.LoadCurrencySuccess({name: action.payload, exchangeRateToDollar: resp})),
+        catchError(err => of(new fromAppActions.LoadCurrencyFail(err)))
       )
     )
   );
@@ -77,16 +101,16 @@ export class AppEffects {
 
   // @Effect()
   // loadCurrencies$ = this.actions$.pipe(
-  //   ofType(fromAppActions.Types.LoadAppropCurrency),
-  //   mergeMap((action: fromAppActions.LoadAppropCurrency) =>
+  //   ofType(fromAppActions.Types.loadCurrencyBasedOnLocation),
+  //   mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
   //     this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
   //       map(resp => {
   //         console.log('asd123');
-  //         return new fromAppActions.LoadAppropCurrencySuccess(resp);
+  //         return new fromAppActions.loadCurrencyBasedOnLocationSuccess(resp);
   //       }),
   //       catchError((err, caught) => {
   //         console.log('asd');
-  //         return of(new fromAppActions.LoadAppropCurrencyFail(err));
+  //         return of(new fromAppActions.loadCurrencyBasedOnLocationFail(err));
   //       })
   //     )
   //   )

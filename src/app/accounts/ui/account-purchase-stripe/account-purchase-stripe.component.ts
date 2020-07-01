@@ -17,8 +17,6 @@ interface AccountWithCountAndOrderQty extends Account {
 export class AccountPurchaseStripeComponent {
   @Input() currency: currencyData;
   @Input() set accounts(accountsData: { acc: Account[], count: number[] }) {
-    console.log(accountsData);
-    console.log(accountsData.acc);
     
     if(!accountsData.acc) return;
 
@@ -34,7 +32,6 @@ export class AccountPurchaseStripeComponent {
 
   changeOrderQuantity(q: number, id: number) {
     let targetedAccountOrderQty = this.accountsSet[id].orderQty;
-    console.log(this.accountsSet[id]);
     if( (q == -1 && targetedAccountOrderQty - 1 < 1) || (q == 1 && targetedAccountOrderQty + 1 > this.accountsSet[id].count)) return;
     this.accountsSet[id].orderQty +=  q;
   }

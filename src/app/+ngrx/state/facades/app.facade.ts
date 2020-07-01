@@ -31,9 +31,15 @@ export class AppFacade {
     );
   }
 
-  LoadCurrency(): void {
+  loadCurrencyBasedOnLocation(): void {
     this.store.dispatch(
-      new fromAppActions.LoadAppropCurrency()
+      new fromAppActions.loadCurrencyBasedOnLocation()
+    );
+  }
+
+  LoadCurrency(currency: string): void {
+    this.store.dispatch(
+      new fromAppActions.LoadCurrency(currency)
     );
   }
 

@@ -20,7 +20,6 @@ export class ReviewsFeatureComponent implements OnInit {
 
   ngOnInit(): void {
     this.reviews= this.route.snapshot.data.reviews;
-    console.log(this.route.snapshot.data.reviews)
   }
 
 }
