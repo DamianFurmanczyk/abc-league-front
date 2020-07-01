@@ -11,6 +11,8 @@
     background: $yellow;
     border-radius: 1.3rem;
     padding: .7rem 1.2rem;
+    position: absolute;
+    right: 0;
     top: .8rem;
     overflow: hidden;
     width: 48.5px;
@@ -49,6 +51,7 @@
 .hero_nav.nav {
     position: absolute;
     top: 0;
+    width: 100vw;
 
     &.scrollActive {
         z-index: 100;
@@ -67,11 +70,12 @@
         }
     }
 
-    padding: 15px 13%;
+    padding: 15px 0;
     .nav_ul {
+        margin: 0 13%;
+        position: relative;
         max-width: 100vw;
         padding: 0;
-        margin: 0;
         display: flex;
         list-style-type: none;
         justify-content: space-between;
