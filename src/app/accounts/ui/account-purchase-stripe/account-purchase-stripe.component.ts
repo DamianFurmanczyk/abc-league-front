@@ -1,3 +1,4 @@
+import { currencyData } from './../../../models/currencyData.interface';
 import { HttpClient } from '@angular/common/http';
 
 import { Account } from './../../../models/account.interface';
@@ -14,14 +15,18 @@ interface AccountWithCountAndOrderQty extends Account {
 })
 
 export class AccountPurchaseStripeComponent {
+  @Input() currency: currencyData;
   @Input() set accounts(accountsData: { acc: Account[], count: number[] }) {
-console.log(accountsData);
+    console.log(accountsData);
+    console.log(accountsData.acc);
+    
     if(!accountsData.acc) return;
 
     const accounts_with_count = accountsData.acc.map((el, i) => { 
         return { ...el, count: accountsData.count[i], orderQty: 1 }
       }
     );
+    
     this.accountsSet = accounts_with_count;
   }
 

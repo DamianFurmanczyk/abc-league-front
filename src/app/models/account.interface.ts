@@ -1,3 +1,4 @@
+import { currencyData } from './currencyData.interface';
 export interface Account {
     created_at: null | string,
     description: string,

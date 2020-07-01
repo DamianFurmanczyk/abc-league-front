@@ -8,22 +8,24 @@
       <div class="account_cost">
         <small>BASIC</small> <br>
         <small>30 lvl instant delivery</small> <br>
-        {{acc.price_usd}}
+        {{acc.price_usd + ' ' + currency.name}}
       </div>
 
       <ul>
         <li [innerHTML]='acc.description'></li>
       </ul>
 
-      <div class="account_quantity-times">
-        <button (click)='changeOrderQuantity(-1, i)'>-</button>
-          {{acc.orderQty}}
-        <button (click)='changeOrderQuantity(1, i)'>+</button>
-      </div>
+      <div class="flex-align-bottom-wrapper">
+        <div class="account_quantity-times">
+          <button (click)='changeOrderQuantity(-1, i)'>-</button>
+            {{acc.orderQty}}
+          <button (click)='changeOrderQuantity(1, i)'>+</button>
+        </div>
 
-    <div class="account_actions">
-      <button>buy now</button>
-    </div>
+      <div class="account_actions">
+        <button>buy now</button>
+      </div>
+      </div>
     </div>
 
     <!-- <div class="account">

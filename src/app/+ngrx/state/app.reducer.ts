@@ -1,9 +1,21 @@
+import { Account } from './../../models/account.interface';
+import { currencyData } from './../../models/currencyData.interface';
 import { Review } from './../../models/reviews.interface';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 import { fromAppActions } from './app.actions';
-
 export const APP_FEATURE_KEY = 'app';
+
+function getAccountsWithAppropCurrency(currency: currencyData, accArr: Account[]) {
+  let accountsAccCopy = JSON.parse(JSON.stringify(accArr));
+
+  accountsAccCopy = accountsAccCopy.map(el => {
+    el.price_usd = String(+el.price_usd * currency.exchangeRateToDollar)
+    return el;
+  });
+  
+  return accountsAccCopy;
+}
 
 export interface AppDetailsInterface {
 
@@ -16,7 +28,7 @@ export const appAdapter: EntityAdapter<
 });
 
 export interface AppStateInterface {
-  currency: { name: string, exchangeRateToDollar: number } | null,
+  currency: currencyData | null,
   reviews: Review[] | null,
   reviewsLoading: boolean,
   currencyLoading: boolean,
@@ -26,7 +38,7 @@ export interface AppStateInterface {
   reviewsLoadingErr: boolean,
   currencyLoadingErr: boolean,
   regionsLoadingErr: boolean,
-  accounts: any[] | null,
+  accounts: {acc: Account[], count: number[]},
   accountsLoading: boolean,
   accountsLoadingErr: boolean
 }
@@ -42,7 +54,7 @@ export const initialState: AppStateInterface = {
   regionsLoading: false,
   regionsLoadingErr: false,
   selectedRegion: {id: '1', name: 'EUNE'},
-  accounts: [],
+  accounts: {acc: [], count: []},
   accountsLoading: false,
   accountsLoadingErr: false
 };
@@ -103,11 +115,12 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadAppropCurrencySuccess: {
-      
+
       state = {
         ...state,
         currencyLoading: false,
-        currency: action.payload
+        currency: action.payload,
+        accounts: { acc: state.accounts.acc.length == 0 ? [] : getAccountsWithAppropCurrency(action.payload, state.accounts.acc), count: state.accounts.count }
       };
 
       break;
@@ -186,9 +199,11 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadAccountsSuccess: {
+      const accountsWithAppropCurrency = getAccountsWithAppropCurrency(state.currency || {name: 'USD', exchangeRateToDollar: 1}, action.payload.acc);
+
       state = {
         ...state,
-        accounts: action.payload,
+        accounts: {...action.payload, acc: accountsWithAppropCurrency},
         accountsLoading: false
       };
 
