@@ -24,6 +24,7 @@
     "@ngrx/schematics": "github:ngrx/schematics-builds",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
+    "font-awesome": "^4.7.0",
     "rxjs": "~6.5.4",
     "same-height": "^1.0.0",
     "tslib": "^1.10.0",

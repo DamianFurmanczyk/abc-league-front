@@ -14,12 +14,12 @@ export class MainComponent implements OnInit, OnDestroy {
   destroyed$: Subject<boolean> = new Subject();
 
   onScrollObs = fromEvent(window, 'scroll').pipe(
-    throttleTime(300, undefined, {leading: true, trailing: true}),
+    throttleTime(10, undefined, {leading: true, trailing: true}),
     tap(e => {
-      console.log(e);
+      // console.log(e);
       this.scrollStyles = window.pageYOffset > 0;
-      console.log(this.scrollStyles)
-      console.log(window.pageYOffset)
+      // console.log(this.scrollStyles)
+      // console.log(window.pageYOffset)
     }),
     takeUntil(this.destroyed$)
   ).subscribe();

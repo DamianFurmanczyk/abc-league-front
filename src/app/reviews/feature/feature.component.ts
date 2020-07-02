@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Review } from './../../models/reviews.interface';
 import { ReviewsFacade } from './../../+ngrx/state/facades/reviews.facade';
 import { Component, OnInit, Input } from '@angular/core';
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./feature.component.scss']
 })
 export class ReviewsFeatureComponent implements OnInit {
-  reviews: Review[];
+  reviews$: Observable<Review[]>;
   showAddReviewFormFlag: boolean = false;
 
   onToggleAddReviewForm() {
@@ -19,7 +20,7 @@ export class ReviewsFeatureComponent implements OnInit {
   constructor(private route: ActivatedRoute, private facade: ReviewsFacade) { }
 
   ngOnInit(): void {
-    this.reviews= this.route.snapshot.data.reviews;
+    this.reviews$ = this.facade.reviews$;
   }
 
 }

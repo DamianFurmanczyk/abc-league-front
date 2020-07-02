@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkout-dialog.component.scss']
 })
 export class CheckoutDialogComponent implements OnInit {
+  showCouponInputFlag: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleCouponInputDisplay() {
+    this.showCouponInputFlag = !this.showCouponInputFlag;
   }
 
 }

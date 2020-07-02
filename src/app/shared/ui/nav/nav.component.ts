@@ -25,14 +25,14 @@ export class NavComponent implements OnInit {
   
   activeClassScrollSet: boolean
   activeClassSet: boolean;
-  dropOpen = false;
+  dropOpen = [false, false];
   activeCurrency: string = '';
   currencyOptions: string[] = ['PLN', 'EUR', 'GBP', 'USD'];
 
   constructor() { }
 
-  toggleDrop() {
-    this.dropOpen = !this.dropOpen;
+  toggleDrop(i: number) {
+    this.dropOpen[i] = !this.dropOpen[i];
   }
 
   onCurrencyChange(currency: string) {

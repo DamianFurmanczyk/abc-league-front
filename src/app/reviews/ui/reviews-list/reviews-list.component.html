@@ -17,6 +17,7 @@
 
     <button (click)='onToggleAddReviewForm()'>
       WRITE A REVIEW
+      <span class="fa fa-pencil"></span>
     </button>
   </div>
 
@@ -25,7 +26,7 @@
       <div class="review_header">
         <img src="assets/img/flag.svg" alt="flag">
         <span class="reviewer-name">{{review.author}}</span>
-        <span class="review-rating">{{review.stars}}</span>
+        <span class="review-rating" [innerHTML]='starsMap[review.stars]'></span>
       </div>
       <div class="review_content">
         {{review.tekst}}

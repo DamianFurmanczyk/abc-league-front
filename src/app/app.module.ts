@@ -14,9 +14,10 @@ import { AppEffects } from './+ngrx/state/app.effects';
 import * as fromApp from './+ngrx/state/app.reducer';
 import { RouterModule } from '@angular/router';
 import { DataAccessModule } from './+ngrx/ngrx.module';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [TermsAndConditionsComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

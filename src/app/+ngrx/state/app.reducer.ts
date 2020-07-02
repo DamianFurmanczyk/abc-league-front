@@ -211,9 +211,16 @@ console.log(state.accounts);
     }
 
     case fromAppActions.Types.LoadReviewsSuccess: {
+      console.log(action.payload.map)
+      let reviewsCopy = JSON.parse(JSON.stringify(action.payload));
       state = {
         ...state,
-        reviews: action.payload,
+        reviews: reviewsCopy.map(el => {
+          if(!el.updated_at) return el;
+          return  {
+          ...el, updated_at: el.updated_at.split('T')[0]
+        }}
+        ),
         reviewsLoading: false
       };
 

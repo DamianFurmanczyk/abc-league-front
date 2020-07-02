@@ -1,3 +1,4 @@
+import { TermsAndConditionsComponent } from './../components/terms-and-conditions/terms-and-conditions.component';
 import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';
 import { AccountsResolver } from './../resolvers/accounts.resolver';
@@ -25,6 +26,9 @@ const routes: Routes = [
     }, {
       path: 'accounts',
       component: AccountsFeatureComponent
+    }, {
+      path: 'terms-and-conditions',
+      component: TermsAndConditionsComponent
     }, {
       path: '**', redirectTo: ''
     }

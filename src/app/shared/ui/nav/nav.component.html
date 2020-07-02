@@ -6,10 +6,20 @@
           </li>
           <li routerLink="/accounts" routerLinkActive="active" class="nav_li">Accounts</li>
           <li routerLink="/reviews" routerLinkActive="active" class="nav_li">Reviews</li>
-          <li routerLink="/" class="nav_li nav_li--dropdown">More</li>
+          <li class="nav_li nav_li--dropdown" [class]="'nav_li nav_li--dropdown ' + (dropOpen[0] ? 'active' : '')"
+          (click)='toggleDrop(0)'>
+            More 
+            <span class="fa fa-chevron-down"></span>
+            <ul>
+              <li routerLink="/">TOS</li>
+              <li routerLink="/terms-and-conditions">Privacy policy</li>
+              <li routerLink="/">Strona główna</li>
+          </ul>
+          </li>
       </div>
 
-      <li [class]="'nav_li nav_li--dropdown nav_li--currency ' + (dropOpen && 'active')"  (click)='toggleDrop()'> {{activeCurrency}}
+      <li [class]="'nav_li nav_li--dropdown nav_li--currency ' + (dropOpen[1] ? 'active' : '')"  (click)='toggleDrop(1)'> {{activeCurrency}} 
+        <span class="fa fa-chevron-down"></span>
         <ul>
             <li 
             (click)='onCurrencyChange(curr)' 

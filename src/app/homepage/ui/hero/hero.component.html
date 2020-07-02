@@ -2,10 +2,14 @@
   <article class="hero_article">
       <h1>All you need for <br> League of legends</h1>
       <p>Lorem ipsum dolor sit amet, consetetur</p>
-      <button type="button">See offer -></button>
+      <button (click)='navigateAndScrollToAccounts()' type="button">See offer <span class="fa fa-long-arrow-right"></span>
+      </button>
   </article>
 
   <div class="hero_reviews">
-      <div class="stars">*****<span>123 reviews</span></div>
+      <div (click)="navigateAndScrollToReviews()">
+        <span *ngFor="let item of [1,1,1,1,1]" class="fa fa-star"></span>
+        <span class="reviews_count">123 reviews</span>
+      </div>
   </div>
 </header>

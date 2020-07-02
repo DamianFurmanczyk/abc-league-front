@@ -1,6 +1,8 @@
 <section class="checkout">
   <div class="checkout-dialog">
-    <p class="checkout-dialog_top-text">Check out <span>x</span></p>
+    <p class="checkout-dialog_top-text">Check out 
+      <span class="fa fa-times"></span>
+    </p>
 
     <ul class="checkout-dialog_products-list">
 
@@ -33,9 +35,14 @@
 
           1 product
 
-          <button>
-            Add coupon
+          <button [ngClass]="['couponButton', showCouponInputFlag ? 'active' : '']" (click)="toggleCouponInputDisplay()">
+            {{showCouponInputFlag ? 'Cancel' : 'Add coupon'}}
         </button>
+      </div>
+
+      <div [ngClass]="[showCouponInputFlag ? 'active' : '']" class="checkout_code-field">
+        <input type="text" placeholder="Your coupon">
+        <small>Active</small>
       </div>
 
     </div>

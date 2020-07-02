@@ -105,6 +105,50 @@
   }
 }
 
+.couponButton.active {
+  color: $gray;
+}
+
+.checkout_code-field {
+  position: relative;
+  max-height: 0;
+  transition: .4s;
+  overflow: hidden;
+  opacity: .7;
+
+  &.active {
+    max-height: 64px;
+    opacity: 1;
+
+    small {
+      opacity: 1;
+      top: 55%;
+    }
+  }
+
+  input {
+    padding: .9rem;
+    background: $lightGray;
+    color: $gray;
+    font-size: .85rem;
+    margin-top: 1.4rem;
+    box-sizing: border-box;
+    border-width: 0;
+    width: 100%;
+    border-radius: .4rem;
+  }
+
+  small {
+    color: $blue;
+    font-size: .85rem;
+    position: absolute;
+    top: 105%;
+    right: .9rem;
+    opacity: 0;
+    transition: .4s;
+  }
+}
+
 .payment-tile {
   flex: 1 0 auto;
   display: flex;
