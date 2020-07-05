@@ -10,13 +10,13 @@
 
   button {
     @include rounded_btn--blue;
-    padding: .6rem 2.2rem;
-    padding-top: .8rem;
+    padding: 1.3rem 2.2rem;
     border-radius: 3.5rem;
     font-size: 1.1rem;
     letter-spacing: .05rem;
     font-weight: lighter;
     width: auto;
+    margin-left: 1.5rem;
   }
 }
 
@@ -26,10 +26,61 @@
   justify-items: center;
   flex-direction: column;
   text-align: center;
-  margin-right: 1.5rem;
   padding: .8rem 2.2rem;
   border-radius: 3.5rem;
-  width: 7.5rem;
+  width: auto;
+  position: relative;
+  
+  &:hover {
+    border-radius: 2rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: lighten($blue, 5%);
+
+    .fa-chevron-down {
+      transform: rotate(-180deg);
+    }
+
+    ul {
+      display: block;
+    }
+  }
+
+  .fa-chevron-down {
+    font-size: .9rem;
+    display: inline-block;
+    margin-left: .5rem;
+  }
+
+  ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: calc(100% - 2rem);
+    left: 0;
+    margin-top: -.8rem;
+    padding: .7rem 1rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    background: lighten($blue, 5%);
+    font-size: .85rem;
+    text-align: right;
+    color: lighten($gray, 30%);
+    line-height: 2.3;
+
+    li {
+      padding-right: 28%;
+    }
+  }
+
+  p, ul {
+    font-weight: lighter;
+    letter-spacing: .3px;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
 
   small {
     font-size: .7rem;
@@ -47,19 +98,5 @@
       right: .3rem;
       top: .4rem;
     }
-  }
-}
-
-.select--blue {
-  @include appearance(none);
-  font-size: 1.2rem;
-  color: #fff;
-  border-width: 0;
-  background: $blue;
-  width: 7.5rem;
-
-  option {
-    background: #fff;
-    color: $blackish;
   }
 }
