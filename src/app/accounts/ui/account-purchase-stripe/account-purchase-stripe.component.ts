@@ -2,7 +2,8 @@ import { currencyData } from './../../../models/currencyData.interface';
 import { HttpClient } from '@angular/common/http';
 
 import { Account } from './../../../models/account.interface';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 interface AccountWithCountAndOrderQty extends Account {
   count: number,
@@ -16,6 +17,7 @@ interface AccountWithCountAndOrderQty extends Account {
 
 export class AccountPurchaseStripeComponent {
   @Input() currency: currencyData;
+  @Output() checkoutToggle = new EventEmitter();
   @Input() set accounts(accountsData: { acc: Account[], count: number[] }) {
     
     if(!accountsData.acc) return;
@@ -29,6 +31,10 @@ export class AccountPurchaseStripeComponent {
   }
 
   accountsSet: AccountWithCountAndOrderQty[] = [];
+
+  onCheckoutToggle() {
+    this.checkoutToggle.emit();
+  }
 
   changeOrderQuantity(q: number, id: number) {
     let targetedAccountOrderQty = this.accountsSet[id].orderQty;

@@ -71,8 +71,8 @@
     &:first-of-type{
       margin-right: .3rem;
       background: $blue;
-      color: white;
       transition: .4s;
+      color: white;
       &:hover {
         box-shadow: $blue 0 1px 30px -9px;
       }

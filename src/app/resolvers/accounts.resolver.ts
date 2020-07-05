@@ -19,7 +19,7 @@ export class AccountsResolver implements Resolve<Observable<Action>> {
 
 
     return this.action$.pipe(
-      ofType(fromAppActions.Types.LoadAccountsSuccess),
+      ofType(fromAppActions.Types.LoadAccountsSuccess, fromAppActions.Types.LoadAccountsFail),
       map((a: fromAppActions.LoadAccountsSuccess) => a.payload),
       take(1)
     );

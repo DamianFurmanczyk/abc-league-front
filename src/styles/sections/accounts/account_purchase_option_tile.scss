@@ -30,6 +30,7 @@
   border-radius: .9rem;
   text-align: center;
   max-width: 280px;
+  transition: .4s;
 
   li {
     font-size: .9rem;
@@ -46,6 +47,11 @@
     font-weight: lighter;
     letter-spacing: .03rem;
     padding: .7rem .4rem;
+    transition: .4s;
+    
+    &:hover {
+      box-shadow: $blue 0 1px 30px -9px;
+    }
   }
 }
 

@@ -18,7 +18,7 @@ export class RegionsResolver implements Resolve<Observable<Action>> {
     this.facade.loadRegions();
 
     return this.action$.pipe(
-      ofType(fromAppActions.Types.LoadRegionsSuccess),
+      ofType(fromAppActions.Types.LoadRegionsSuccess, fromAppActions.Types.LoadRegionsFail),
       map((a: fromAppActions.LoadRegionsSuccess) => a.payload),
       take(1)
     );

@@ -4,13 +4,15 @@
     background: #fff;
     left: 50%;
     top: 50%;
+
     transform: translate(-50%, -200%);
+    transition: .4s;
     opacity: .3;
+
     padding: 2rem;
     border-radius: 1.4rem;
     width: 80%;
     max-width: 470px;
-    transition: .4s;
 
     &.active {
         transform: translate(-50%, -50%);
@@ -49,15 +51,6 @@
             font-size: .8rem;
             margin-bottom: 1rem;
         }
-    }
-
-    &-overlay {
-        position: fixed;
-        background: transparentize($color: #102020, $amount: 0.2);
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
     }
 
     input, textarea {

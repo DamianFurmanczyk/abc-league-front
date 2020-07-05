@@ -1,96 +1,96 @@
-<section class="checkout">
-  <div class="checkout-dialog">
-    <p class="checkout-dialog_top-text">Check out 
-      <span class="fa fa-times"></span>
-    </p>
+<div class="popup-overlay"></div>
 
-    <ul class="checkout-dialog_products-list">
+<div #popup class="checkout-dialog">
+  <p class="checkout-dialog_top-text">Check out 
+    <span (click)="hideFormAndToggleDisplayAfter()" class="fa fa-times"></span>
+  </p>
 
-      <li>
-        <div class="checkout-dialog_products-list_li-top">
-          <div>
-            <img src="assets/img/3d.svg" alt="box">
-            <b>Legendary BE Pack</b>
-          </div>
+  <ul class="checkout-dialog_products-list">
 
-          <div class="account_quantity-times">
-            <button>-</button>
-            1
-            <button>+</button>
-          </div>
+    <li>
+      <div class="checkout-dialog_products-list_li-top">
+        <div>
+          <img src="assets/img/3d.svg" alt="box">
+          <b>Legendary BE Pack</b>
         </div>
 
-        <small>Buy 2 or more to save 10%</small>
-      </li>
-
-    </ul>
-
-    <div class="checkout-dialog_hr"></div>
-
-    <div class="checkout-dialog_order-summary">
-
-      <div class="total-text">Total <b>200zł</b></div>
-
-      <div class="checkout-dialog_order-summary-bottom">
-
-          1 product
-
-          <button [ngClass]="['couponButton', showCouponInputFlag ? 'active' : '']" (click)="toggleCouponInputDisplay()">
-            {{showCouponInputFlag ? 'Cancel' : 'Add coupon'}}
-        </button>
+        <div class="account_quantity-times">
+          <button>-</button>
+          1
+          <button>+</button>
+        </div>
       </div>
 
-      <div [ngClass]="[showCouponInputFlag ? 'active' : '']" class="checkout_code-field">
-        <input type="text" placeholder="Your coupon">
-        <small>Active</small>
-      </div>
+      <small>Buy 2 or more to save 10%</small>
+    </li>
 
+  </ul>
+
+  <div class="checkout-dialog_hr"></div>
+
+  <div class="checkout-dialog_order-summary">
+
+    <div class="total-text">Total <b>200zł</b></div>
+
+    <div class="checkout-dialog_order-summary-bottom">
+
+        1 product
+
+        <button [ngClass]="['couponButton', showCouponInputFlag ? 'active' : '']" (click)="toggleCouponInputDisplay()">
+          {{showCouponInputFlag ? 'Cancel' : 'Add coupon'}}
+      </button>
     </div>
 
-    <div class="checkout-dialog_hr"></div>
-
-    <div class="checkout-dialog_info">
-
-      <aside>
-        <img src="assets/img/3d.svg" alt="box">
-        <p>Account details will be shown instantly after payment</p>
-      </aside>
-
-      <aside>
-        <img src="assets/img/lock.svg" alt="lock">
-        <p>Account details will be shown instantly after payment</p>
-      </aside>
-
+    <div [ngClass]="[showCouponInputFlag ? 'active' : '']" class="checkout_code-field">
+      <input type="text" placeholder="Your coupon">
+      <small>Active</small>
     </div>
 
-    <div class="checkout-dialog_hr"></div>
+  </div>
 
-    <div class="checkout-dialog_payment-methods">
+  <div class="checkout-dialog_hr"></div>
 
-      <div class="payment-tile payment-tile--top">
-        <img src="assets/img/mastercard-2.svg" alt="paymentOption">
-        <img src="assets/img/maestro.svg" alt="paymentOption">
-        <img src="assets/img/americanExpress.svg" alt="paymentOption">
-        <img src="assets/img/visa.svg" alt="paymentOption">
+  <div class="checkout-dialog_info">
+
+    <aside>
+      <img src="assets/img/3d.svg" alt="box">
+      <p>Account details will be shown instantly after payment</p>
+    </aside>
+
+    <aside>
+      <img src="assets/img/lock.svg" alt="lock">
+      <p>Account details will be shown instantly after payment</p>
+    </aside>
+
+  </div>
+
+  <div class="checkout-dialog_hr"></div>
+
+  <div class="checkout-dialog_payment-methods">
+
+    <div class="payment-tile payment-tile--top">
+      <img src="assets/img/mastercard-2.svg" alt="paymentOption">
+      <img src="assets/img/maestro.svg" alt="paymentOption">
+      <img src="assets/img/americanExpress.svg" alt="paymentOption">
+      <img src="assets/img/visa.svg" alt="paymentOption">
+    </div>
+
+    <div class="payment-tiles-wrapper">
+
+      <div class="payment-tile payment-tile--single-payment">
+        <img src="assets/img/bankTransferTransp.svg" alt="paymentOption">
       </div>
 
-      <div class="payment-tiles-wrapper">
+      <div class="payment-tile payment-tile--single-payment">
+        <img src="assets/img/bitcoinTransp.svg" alt="paymentOption">
+      </div>
 
-        <div class="payment-tile payment-tile--single-payment">
-          <img src="assets/img/bankTransferTransp.svg" alt="paymentOption">
-        </div>
-
-        <div class="payment-tile payment-tile--single-payment">
-          <img src="assets/img/bitcoinTransp.svg" alt="paymentOption">
-        </div>
-
-        <div class="payment-tile">
-          <img src="assets/img/paypal2.svg" alt="paymentOption">
-        </div>
-
+      <div class="payment-tile">
+        <img src="assets/img/paypal2.svg" alt="paymentOption">
       </div>
 
     </div>
 
   </div>
-</section>
+
+</div>

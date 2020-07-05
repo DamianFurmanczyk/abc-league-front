@@ -1,7 +1,7 @@
 <nav  [ngClass]="[activeClassSet ? 'active' : '', activeClassScrollSet && !activeClassSet ? 'scrollActive' : '']" class="hero_nav nav">
   <ul class="nav_ul">
       <div class="nav_ul-left-side-wrapper">
-          <li routerLink="/" routerLinkActive="active" class="nav_li nav_li--icon">
+          <li routerLink="/" (click)="scrollTopOnNavigate('/')" routerLinkActive="active" class="nav_li nav_li--icon">
               <img src="assets/img/navIcon.png" alt="icon" />
           </li>
           <!-- <li routerLink="/accounts" routerLinkActive="active" class="nav_li">Accounts</li> -->
@@ -13,9 +13,9 @@
             More 
             <span class="fa fa-chevron-down"></span>
             <ul>
-              <li routerLink="/">TOS</li>
-              <li routerLink="/terms-and-conditions">Privacy policy</li>
-              <li routerLink="/">Strona główna</li>
+              <li routerLink="/" (click)="scrollTopOnNavigate('/')">TOS</li>
+              <li routerLink="/terms-and-conditions" (click)="scrollTopOnNavigate('/terms-and-conditions')">Privacy policy</li>
+              <li routerLink="/" (click)="scrollTopOnNavigate('/')">Strona główna</li>
           </ul>
           </li>
       </div>
@@ -26,7 +26,7 @@
             <li 
             (click)='onCurrencyChange(curr)' 
             *ngFor="let curr of currencyOptions">
-              <b>$</b> <span>{{curr}}</span>
+              <b>{{currencySymbolMap[curr]}}</b> <span>{{curr}}</span>
             </li>
         </ul>
       </li>

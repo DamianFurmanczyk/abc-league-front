@@ -1,9 +1,17 @@
-.checkout {
-  padding: 6%;
-  background: $lightGray3;
-}
-
 .checkout-dialog {
+  transform: translate(-50%, -200%);
+  transition: .4s;
+
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+
+  &.active {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
   display: table;
   margin: 0 auto;
   background: #fff;
@@ -43,6 +51,7 @@
   font-weight: bold;
 
   span {
+    cursor: pointer;
     float: right;
   }
 }

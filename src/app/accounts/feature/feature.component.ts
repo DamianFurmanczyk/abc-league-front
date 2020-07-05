@@ -1,6 +1,6 @@
 import { currencyData } from './../../models/currencyData.interface';
 
-import { tap, map, takeUntil } from 'rxjs/operators';
+import { tap, takeUntil } from 'rxjs/operators';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Account } from './../../models/account.interface';
 import { AppFacade } from './../../+ngrx/state/facades/app.facade';
@@ -14,12 +14,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class AccountsFeatureComponent implements OnInit, OnDestroy {
   accountsExtended$: BehaviorSubject<{acc: Account[], count: number[]}> = new BehaviorSubject({acc: [], count: []});
   destroyed$: Subject<boolean> = new Subject();
+  currency: Observable<currencyData> = this.facade.currency$;
+
+  showCheckoutFlag: boolean = false;
 
   accounts$ = this.facade.accounts$.pipe(
     tap(res => this.accountsExtended$.next(res)),
     takeUntil(this.destroyed$)
   ).subscribe();
-  currency: Observable<currencyData> = this.facade.currency$;
+
+  onToggleCheckoutFlag() {
+    this.showCheckoutFlag = !this.showCheckoutFlag;
+  }
 
   constructor(private facade: AppFacade) {}
 

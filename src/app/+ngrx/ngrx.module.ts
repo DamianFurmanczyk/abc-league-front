@@ -1,3 +1,4 @@
+
 import { NavTrackScroll } from './../../directives/nav_activation_tracker';
 import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';

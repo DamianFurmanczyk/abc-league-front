@@ -18,7 +18,7 @@ export class CurrencyResolver implements Resolve<Observable<Action>> {
     this.facade.loadCurrencyBasedOnLocation();
 
     return this.action$.pipe(
-      ofType(fromAppActions.Types.loadCurrencyBasedOnLocationSuccess),
+      ofType(fromAppActions.Types.loadCurrencyBasedOnLocationSuccess, fromAppActions.Types.loadCurrencyBasedOnLocationFail),
       map((a: fromAppActions.loadCurrencyBasedOnLocationSuccess) => a.payload),
       take(1)
     );

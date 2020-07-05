@@ -18,7 +18,7 @@ export class ReviewsResolver implements Resolve<Observable<Action>> {
     this.facade.loadReviews();
 
     return this.action$.pipe(
-      ofType(fromAppActions.Types.LoadReviewsSuccess),
+      ofType(fromAppActions.Types.LoadReviewsSuccess, fromAppActions.Types.LoadReviewsFail),
       map((a: fromAppActions.LoadReviewsSuccess) => a.payload),
       take(1)
     );

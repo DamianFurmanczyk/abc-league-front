@@ -1,6 +1,5 @@
 import { ScrollService } from './../../utils/scrolls.service';
-import { AppFacade } from './../../../+ngrx/state/facades/app.facade';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
@@ -29,8 +28,14 @@ export class NavComponent implements OnInit {
   dropOpen = [false, false];
   activeCurrency: string = '';
   currencyOptions: string[] = ['PLN', 'EUR', 'GBP', 'USD'];
+  currencySymbolMap = {
+    'PLN': 'zł',
+    'EUR': '€',
+    'GBP': '£',
+    'USD': '$'
+  }
 
-  constructor(private scrollSer: ScrollService, private router: Router) { }
+  constructor(private scrollSer: ScrollService) { }
 
   scrollTopOnNavigate(path: string) {
     this.scrollSer.scrollToTopOnNavigate();

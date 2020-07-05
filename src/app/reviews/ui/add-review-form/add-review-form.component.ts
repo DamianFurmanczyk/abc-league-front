@@ -12,19 +12,19 @@ export class AddReviewFormComponent implements OnInit, AfterViewInit {
   stars = Array.from(Array(5));
 
   constructor() { 
-    console.log(this.stars)
+    // console.log(this.stars)
   }
 
   hideFormAndToggleDisplayAfter() {
     this.form.nativeElement.classList.remove('active');
     setTimeout(() => {
       this.toggleAddReviewForm.emit();
-    }, 400);
+    }, 350);
   }
 
   ngAfterViewInit() {
-    console.log(this.form)
-    console.log(this.form.nativeElement.classList)
+    // console.log(this.form)
+    // console.log(this.form.nativeElement.classList)
     setTimeout(() => {
       this.form.nativeElement.classList.add('active');
     }, 10);
@@ -35,8 +35,8 @@ export class AddReviewFormComponent implements OnInit, AfterViewInit {
     activeStarsArr.pop()
     this.stars = [...activeStarsArr, ...Array(4-i)];
 
-    console.log(activeStarsArr)
-    console.log(this.stars)
+    // console.log(activeStarsArr)
+    // console.log(this.stars)
   }
 
   ngOnInit(): void {

@@ -48,6 +48,11 @@
         width: 70px;
         background: $yellow !important;
 
+        b {
+            width: 1rem;
+            display: inline-block;
+        }
+
         .fa-chevron-down {
             position: absolute;
             right: 20px;
@@ -81,6 +86,7 @@
     }
 
     .fa-chevron-down {
+        pointer-events: none;
         margin-left: .4rem;
         font-size: .9rem;
         transition: .4s;
