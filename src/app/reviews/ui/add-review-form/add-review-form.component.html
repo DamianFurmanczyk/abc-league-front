@@ -1,13 +1,13 @@
 <div class="add-review-form-overlay"></div>
 
-<form class="add-review-form">
+<form class="add-review-form" #form>
     <h2> Add review
-        <span (click)='onToggleAddReviewForm()' class="fa fa-times"></span>
+        <span (click)='hideFormAndToggleDisplayAfter()' class="fa fa-times"></span>
     </h2>
 
     <div class="rating-display">
         <small>Rating</small>
-        *****
+        <span *ngFor="let item of stars; let i = index" (click)="onStarClick(i)" [ngClass]="['fa fa-star', item == 'active' ? 'active' : '']"></span>
     </div>
 
     <div class="add-review-form_input-wrapper">

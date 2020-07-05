@@ -68,13 +68,13 @@
     font-weight: lighter;
     word-wrap: break-word;
 
-    max-height: 0;
+    height: 0;
     transition: .4s;
     pointer-events: none;
     opacity: 0;
     
     &.active {
-      max-height: 30px;
+      height: 30px;
       pointer-events: all;
       opacity: 1;
     }

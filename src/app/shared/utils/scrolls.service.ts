@@ -18,6 +18,7 @@ export class ScrollService {
     scrollToElem(elSel: string) {
         
         const elY = window.document.querySelector(elSel).getBoundingClientRect().y + + document.documentElement.scrollTop;
+        
         window.scrollTo({
             top: elY,
             behavior: 'smooth',
@@ -25,7 +26,19 @@ export class ScrollService {
           
     }
 
+    scrollToTopOnNavigate() {
+          this.pingWhenNavigated().subscribe(e => this.scrollToTop());
+    }
+
+    scrollToTop(smooth: boolean = false) {
+        window.scrollTo({
+            top: 0,
+            behavior: smooth ? 'smooth' : 'auto',
+          });
+    }
+
     navigateAndScrollToElem(elSel: string) {
+        
         this.pingWhenNavigated().subscribe(e => this.scrollToElem(elSel));
     }
 

@@ -15,6 +15,7 @@ export class HeroComponent implements OnInit {
     
   }
 
+
   navigateAndScrollToAccounts() {
     this.router.navigate(['/accounts']);
     this.scrollSer.navigateAndScrollToElem('.account-options');

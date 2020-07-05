@@ -72,6 +72,10 @@
       margin-right: .3rem;
       background: $blue;
       color: white;
+      transition: .4s;
+      &:hover {
+        box-shadow: $blue 0 1px 30px -9px;
+      }
     }
     &:last-of-type{
       background: $lightGray;

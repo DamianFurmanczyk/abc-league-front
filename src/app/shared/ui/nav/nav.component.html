@@ -4,8 +4,10 @@
           <li routerLink="/" routerLinkActive="active" class="nav_li nav_li--icon">
               <img src="assets/img/navIcon.png" alt="icon" />
           </li>
-          <li routerLink="/accounts" routerLinkActive="active" class="nav_li">Accounts</li>
-          <li routerLink="/reviews" routerLinkActive="active" class="nav_li">Reviews</li>
+          <!-- <li routerLink="/accounts" routerLinkActive="active" class="nav_li">Accounts</li> -->
+          <li routerLink="/accounts" routerLinkActive="active" (click)="scrollTopOnNavigate('/accounts')" class="nav_li">Accounts</li>
+          <!-- <li routerLink="/reviews" routerLinkActive="active" class="nav_li">Reviews</li> -->
+          <li routerLink="/reviews" routerLinkActive="active" (click)="scrollTopOnNavigate('/reviews')" class="nav_li">Reviews</li>
           <li class="nav_li nav_li--dropdown" [class]="'nav_li nav_li--dropdown ' + (dropOpen[0] ? 'active' : '')"
           (click)='toggleDrop(0)'>
             More 
