@@ -28,14 +28,14 @@
   text-align: center;
   padding: .8rem 2.2rem;
   border-radius: 3.5rem;
-  width: auto;
+  width: 133px;
   position: relative;
   
   &:hover {
     border-radius: 2rem;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    background: lighten($blue, 5%);
+    background: #4E6ED9;
 
     .fa-chevron-down {
       transform: rotate(-180deg);
@@ -62,14 +62,15 @@
     padding: .7rem 1rem;
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    background: lighten($blue, 5%);
+    background: #4E6ED9;
     font-size: .85rem;
     text-align: right;
-    color: lighten($gray, 30%);
+    color: #879CE5;
     line-height: 2.3;
 
     li {
       padding-right: 28%;
+      cursor: pointer;
     }
   }
 

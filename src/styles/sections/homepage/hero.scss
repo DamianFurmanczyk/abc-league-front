@@ -9,6 +9,10 @@
     margin-top: -95px;
 }
 
+.nav_li {
+    transition: .4s;
+}
+
 .hero_nav.nav.active {    
     .fa-chevron-down {
         color: #fff;

@@ -1,5 +1,5 @@
 import { currencyData } from './../../../models/currencyData.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Account } from './../../../models/account.interface';
 import { Component, Input, Output } from '@angular/core';
@@ -43,8 +43,33 @@ export class AccountPurchaseStripeComponent {
   }
 
   constructor(private http: HttpClient) {
-  console.log('to rem')
-    // this.http.post('http://api.abcleague.webup-dev.pl/reviews/add?tekst=asd&author=asd&stars=3', {tekst: 'asd', author: 'asd', stars: 3}).subscribe(
+    console.log('to rem')
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Accept': 'application/json'
+    });
+
+    this.http.get('http://api.abcleague.webup-dev.pl/reviews/add/siema/siema/4').subscribe(console.log)
+
+    // this.http.post('http://api.abcleague.webup-dev.pl/pay_paypal', {email: 'siema@gmail.com', currency: 'PLN', price: 3, quantity: 2, description: 'siema'},
+    //  {headers}).subscribe(
+    //   res=>{
+    //     console.log(res)
+    //     console.log('res')
+    //   }
+    // );
+
+//     fetch("http://api.abcleague.webup-dev.pl/pay_paypal?description=123&email=asdas@asd.pl&price=12&currency=USD&quantity=2",{method: "post"})
+//     .then(res => res.json())
+// .then(res => {
+//         console.log(res);
+//     })
+    // this.http.post('http://api.abcleague.webup-dev.pl/reviews/add?tekst=asd&author=asd&stars=3', {tekst: 'asd', author: 'asd', stars: 3}, {headers}).subscribe(
+    //   res=>console.log(res)
+    // );
+    // this.http.post('http://api.abcleague.webup-dev.pl/api/login', {email: 'sad@asd.pl', password: '213321'}, {headers}).subscribe(
     //   res=>console.log(res)
     // );
 

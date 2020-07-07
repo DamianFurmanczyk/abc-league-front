@@ -19,14 +19,16 @@
     <div class="reviews-sort">
       <small>SORT BY</small>
 
-      <p>Worst first
+      <p>{{activeSortingOption}}
         <span class="fa fa-chevron-down"></span>
       </p>
 
       <ul>
-        <li>Newest first</li>
-        <li>Oldest first</li>
-        <li>Best first</li>
+        <li 
+        *ngFor="let sortingOption of remainingSortingOptions; 
+        let i = index" 
+        (click)="onChangeSortingOption(i); sort(sortingOption)"
+        >{{sortingOption}}</li>
       </ul>
     </div>
 
@@ -37,7 +39,7 @@
   </div>
 
   <div class="reviews-wrapper">
-    <div *ngFor="let review of reviews" class="review">
+    <div *ngFor="let review of sortedReviews" class="review">
       <div class="review_header">
         <img src="assets/img/flag.svg" alt="flag">
         <span class="reviewer-name">{{review.author}}</span>
