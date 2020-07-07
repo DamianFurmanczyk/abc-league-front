@@ -2,11 +2,15 @@
 
   <div class="account-options-wrapper">
 
-    <div *ngFor="let acc of accountsSet; let i = index" class="account account--bestseller">
-      <img src="assets/img/Blue1.svg" alt="blue_shards">
+    <div 
+    *ngFor="let acc of accountsSet; let i = index" 
+    class="account account--bestseller" 
+    [ngClass]="{'outOfStock': acc.count == 0, 'alternative': alternativeStyles}"
+    >
+      <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
 
       <div class="account_cost">
-        <small>BASIC</small> <br>
+        <small>{{acc.name}}</small> <br>
         <small>30 lvl instant delivery</small> <br>
         {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
       </div>
@@ -17,13 +21,18 @@
 
       <div class="flex-align-bottom-wrapper">
         <div class="account_quantity-times">
-          <button (click)='changeOrderQuantity(-1, i)'>-</button>
-            {{acc.orderQty}}
-          <button (click)='changeOrderQuantity(1, i)'>+</button>
+
+          <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
+
+          <ng-template #btnsWrapper>
+            <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='changeOrderQuantity(-1, i)'>-</button>
+              {{acc.orderQty}}
+            <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='changeOrderQuantity(1, i)'>+</button>
+          </ng-template>
         </div>
 
       <div class="account_actions">
-        <button (click)="onCheckoutToggle()">buy now</button>
+        <button [disabled]='acc.count == 0' (click)="onCheckoutToggle(); onChangeSelectedAccount(acc)">BUY NOW</button>
       </div>
       </div>
     </div>

@@ -13,8 +13,6 @@ import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
 export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   @HostListener('window:click', ['$event.target'])
   onClick(targetElement: HTMLElement) {
-    console.log(`You clicked on`, targetElement);
-    console.log();
 
     this.elementsThatNeedToDeactivateOnWindowClick.forEach(
       elArr=> elArr.forEach(
@@ -68,7 +66,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 getElementsThatNeedToDeactivateOnWindowClick() {
   return  [
     document.querySelectorAll('.nav_li--dropdown'),
-    document.querySelectorAll(' .faq-column dd')
+    document.querySelectorAll(' .faq-column dd'),
+    document.querySelectorAll('.links-lists-column .trigger')
 ];
 }
 

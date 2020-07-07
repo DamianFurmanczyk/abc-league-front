@@ -51,34 +51,37 @@
       </div>
     </div>
 
-    <div class="links-lists-column">
+    <div #linksCol class="links-lists-column">
       <ul>
-        <li>
-          Reviews </li>
+        <li  (click)="navigateAndScrollToReviews()"> Reviews </li>
 
-          <li>
+          <li (click)="navigateToRoute('/')">
             Homepage </li>
 
-            <li>
-              Therms and conditions </li>
+            <li (click)="navigateToRoute('/terms-and-conditions')"> Therms and conditions </li>
 
-            <li>
-              Privacy policy </li>
+            <li> Privacy policy </li>
 
-            <li>
-              Contact</li>
+            <li>Contact</li>
       </ul>
 
       <ul>
 
-        <li>
-          Buy smart </li>
-        <li>
-          Discord </li>
-        <li>
-          Facebook </li>
-        <li>
-          Dushdue@gmail.com</li>
+        <li (click)="navigateAndScrollToAccounts()">Buy smart </li>
+        <li class="trigger">Discord          
+          <ul class="expendable-list">
+            <li>Luka#5403</li>
+            <li>Petro#1468</li>
+          </ul>
+        </li>
+
+        <li>Facebook </li>
+        <li class="trigger">Email us
+          <ul class="expendable-list">
+            <li>sadads@231231.dsa</li>
+            <li>sadads@231231.dsa</li>
+          </ul>
+        </li>
 
       </ul>
 

@@ -27,7 +27,7 @@ export class ScrollService {
     }
 
     scrollToTopOnNavigate() {
-          this.pingWhenNavigated().subscribe(e => this.scrollToTop());
+        this.pingWhenNavigated().subscribe(e => this.scrollToTop());
     }
 
     scrollToTop(smooth: boolean = false) {
@@ -38,8 +38,11 @@ export class ScrollService {
     }
 
     navigateAndScrollToElem(elSel: string) {
-        
-        this.pingWhenNavigated().subscribe(e => this.scrollToElem(elSel));
+        this.pingWhenNavigated().subscribe(e => {
+            this.scrollToTop();
+            this.scrollToElem(elSel)
+            }
+        );
     }
 
 }

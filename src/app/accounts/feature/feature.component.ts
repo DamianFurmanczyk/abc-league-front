@@ -1,3 +1,4 @@
+import { AccountWithCountAndOrderQty } from './../../models/accountExtended.interface';
 import { currencyData } from './../../models/currencyData.interface';
 
 import { tap, takeUntil } from 'rxjs/operators';
@@ -15,6 +16,7 @@ export class AccountsFeatureComponent implements OnInit, OnDestroy {
   accountsExtended$: BehaviorSubject<{acc: Account[], count: number[]}> = new BehaviorSubject({acc: [], count: []});
   destroyed$: Subject<boolean> = new Subject();
   currency: Observable<currencyData> = this.facade.currency$;
+  selectedAccount: AccountWithCountAndOrderQty;
 
   showCheckoutFlag: boolean = false;
 
@@ -25,6 +27,10 @@ export class AccountsFeatureComponent implements OnInit, OnDestroy {
 
   onToggleCheckoutFlag() {
     this.showCheckoutFlag = !this.showCheckoutFlag;
+  }
+
+  onChangeSelectedAccount(acc: AccountWithCountAndOrderQty) {
+    this.selectedAccount = acc;
   }
 
   constructor(private facade: AppFacade) {}

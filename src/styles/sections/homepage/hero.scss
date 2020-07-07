@@ -118,7 +118,7 @@
 .hero_nav.nav {
     position: absolute;
     top: 0;
-    width: 100vw;
+    width: 100%;
 
     &.scrollActive {
         z-index: 100;
@@ -221,6 +221,6 @@
 
     .fa {
         margin-right: .5rem;
-        color: $gray;
+        color: $yellow;
     }
 }

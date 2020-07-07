@@ -1,14 +1,12 @@
+import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { currencyData } from './../../../models/currencyData.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Account } from './../../../models/account.interface';
 import { Component, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
-interface AccountWithCountAndOrderQty extends Account {
-  count: number,
-  orderQty: number
-}
+
 @Component({
   selector: 'app-account-purchase-stripe',
   templateUrl: './account-purchase-stripe.component.html',
@@ -16,8 +14,10 @@ interface AccountWithCountAndOrderQty extends Account {
 })
 
 export class AccountPurchaseStripeComponent {
+  @Input() alternativeStyles?: boolean;
   @Input() currency: currencyData;
   @Output() checkoutToggle = new EventEmitter();
+  @Output() changeSelectedAccount: EventEmitter<AccountWithCountAndOrderQty> = new EventEmitter();
   @Input() set accounts(accountsData: { acc: Account[], count: number[] }) {
     
     if(!accountsData.acc) return;
@@ -36,6 +36,10 @@ export class AccountPurchaseStripeComponent {
     this.checkoutToggle.emit();
   }
 
+  onChangeSelectedAccount(acc: AccountWithCountAndOrderQty) {
+    this.changeSelectedAccount.emit(acc);
+  }
+
   changeOrderQuantity(q: number, id: number) {
     let targetedAccountOrderQty = this.accountsSet[id].orderQty;
     if( (q == -1 && targetedAccountOrderQty - 1 < 1) || (q == 1 && targetedAccountOrderQty + 1 > this.accountsSet[id].count)) return;
@@ -44,14 +48,14 @@ export class AccountPurchaseStripeComponent {
 
   constructor(private http: HttpClient) {
     console.log('to rem')
-    const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true',
-      'Accept': 'application/json'
-    });
+    // const headers = new HttpHeaders({
+    //   'Content-Type':'application/json',
+    //   'Access-Control-Allow-Origin': '*',
+    //   'Access-Control-Allow-Credentials': 'true',
+    //   'Accept': 'application/json'
+    // });
 
-    this.http.get('http://api.abcleague.webup-dev.pl/reviews/add/siema/siema/4').subscribe(console.log)
+    // this.http.get('http://api.abcleague.webup-dev.pl/reviews/add/siema/siema/4').subscribe(console.log)
 
     // this.http.post('http://api.abcleague.webup-dev.pl/pay_paypal', {email: 'siema@gmail.com', currency: 'PLN', price: 3, quantity: 2, description: 'siema'},
     //  {headers}).subscribe(

@@ -20,34 +20,40 @@ export class DataAccessService {
     ).subscribe();
   }
 
-    selectedRegion: any = {};
-    apiUrl = 'http://api.abcleague.webup-dev.pl/';
+  selectedRegion: any = {};
+  apiUrl = 'http://api.abcleague.webup-dev.pl/';
 
-    // http://api.abcleague.webup-dev.pl/pay_paypal?email=da@gmail.com&currency=PLN&price=1&quantity=2&description=asd
+  // http://api.abcleague.webup-dev.pl/pay_paypal?email=da@gmail.com&currency=PLN&price=1&quantity=2&description=asd
 
-    getCurrencyAdequateToUsersCountry() {
-      return this.http.get<string>(this.apiUrl + 'currency');
-    }
+  getCurrencyAdequateToUsersCountry() {
+    return this.http.get<string>(this.apiUrl + 'currency');
+  }
 
-    getExchangeRateToDollar(currency: string) {
-      return this.http.get(this.apiUrl + `convert/1/USD/${currency}`);
-    }
+  getExchangeRateToDollar(currency: string) {
+    return this.http.get(this.apiUrl + `convert/1/USD/${currency}`);
+  }
 
-    getReviews() {
-      return this.http.get<Review[]>(this.apiUrl + 'reviews');
-    }
+  getReviews() {
+    return this.http.get<Review[]>(this.apiUrl + 'reviews');
+  }
 
-    getAccounts() {
-      return this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id);
-    }
+  getAccounts() {
+    return this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id);
+  }
 
-    getRegions() {
-      return this.http.get(this.apiUrl + 'regions');
-    }
+  getRegions() {
+    return this.http.get(this.apiUrl + 'regions');
+  }
 
-    sendReview(review) {
-      return this.http.post(this.apiUrl + 'reviews/add', {...review, tekst: review.tekst.trim()});
-    }
+  sendReview(review) {
+    return this.http.post(this.apiUrl + 'reviews/add', { ...review, tekst: review.tekst.trim() });
+  }
+
+  initiatePayment(description: string, email: string, price: number | string, currency: string, quantity: number) {
+    return fetch(`http://api.abcleague.webup-dev.pl/pay_paypal?description=${description}&email=${email}&price=${price}&currency=${currency}&quantity=${quantity}`, 
+    { method: "post" })
+      .then(res => res.json());
+  }
 
   // getPlanets(page: number = 1): Observable<any> {
   //   return this.http.get(this.apiUrl + 'planets/?page=' + page);

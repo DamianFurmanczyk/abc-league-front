@@ -14,14 +14,17 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent, 
-    resolve: {regions: RegionsResolver, accounts: AccountsResolver, currency: CurrencyResolver},
+    resolve: {regions: RegionsResolver, accounts: AccountsResolver, currency: CurrencyResolver,reviews: ReviewsResolver},
     children: [
+      {
+        path: 'account-purchase',
+        loadChildren: () => import('./../modules/payment-verification/payment-verification.module').then(m => m.PaymentVerificationModule)
+      },
     {
       path: '',
       component: HomepageFeatureComponent
     }, {
       path: 'reviews',
-      resolve: {reviews: ReviewsResolver},
       component: ReviewsFeatureComponent
     }, {
       path: 'accounts',

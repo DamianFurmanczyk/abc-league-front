@@ -1,9 +1,15 @@
 <app-region-selection></app-region-selection>
+
 <app-account-purchase-stripe 
+(changeSelectedAccount)="onChangeSelectedAccount($event)"
 (checkoutToggle)="onToggleCheckoutFlag()"  
 [currency]='currency | async' 
 [accounts]='accountsExtended$ | async'></app-account-purchase-stripe>
+
 <app-account-faq></app-account-faq>
+
 <app-checkout-dialog 
-*ngIf="showCheckoutFlag" 
+[selectedAccount]='selectedAccount'
+*ngIf="showCheckoutFlag"
+[currency]='currency | async' 
 (checkoutToggle)='onToggleCheckoutFlag()'></app-checkout-dialog>

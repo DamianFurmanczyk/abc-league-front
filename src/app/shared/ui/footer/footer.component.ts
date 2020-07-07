@@ -1,30 +1,58 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { ScrollService } from './../../utils/scrolls.service';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit, AfterViewInit {
+export class FooterComponent implements AfterViewInit {
   @ViewChild('faqColumn') faqCol: ElementRef;
+  @ViewChild('linksCol') linksCol: ElementRef;
   dds: NodeListOf<HTMLElement>;
+  explendableUlsTriggers: NodeListOf<HTMLElement>;
 
-  constructor() { }
+  constructor(private scrollSer: ScrollService, private router: Router) { }
 
-  ngOnInit(): void {
+  navigateToRoute(route: string) {
+    this.scrollSer.scrollToTopOnNavigate();
+    this.router.navigate([route]);
+  }
+
+  navigateAndScrollToAccounts() {
+    this.router.navigate(['/accounts']);
+    this.scrollSer.navigateAndScrollToElem('.account-options');
+  }
+
+  navigateAndScrollToReviews() {
+    this.router.navigate(['/reviews']);
+    this.scrollSer.navigateAndScrollToElem('.reviews');
   }
 
   ngAfterViewInit() {
     this.faqCol.nativeElement.querySelectorAll('dt').forEach((el: HTMLElement) => el.addEventListener('click', toggleSiblingActiveClass))
     this.dds = this.faqCol.nativeElement.querySelectorAll('dd');
+    this.explendableUlsTriggers = this.linksCol.nativeElement.querySelectorAll('.trigger');
+    this.explendableUlsTriggers.forEach((el: HTMLElement) => el.addEventListener('click', toggleChildrenActiveClass));
     const FooterComponent = this;
 
     function  toggleSiblingActiveClass() {
       const siblAlreadyActiveFlag = <HTMLElement>this.nextSibling.classList.contains('active');
-
+      console.log(this.firstChild);
       FooterComponent.dds.forEach(el => el.classList.remove('active'));
 
       if(!siblAlreadyActiveFlag) <HTMLElement>this.nextSibling.classList.add('active');
+    }
+
+    function toggleChildrenActiveClass() {
+      console.log(this.childNodes)
+      console.log(this)
+      const childAlreadyActiveFlag = <HTMLElement>this.classList.contains('active');
+
+      FooterComponent.explendableUlsTriggers.forEach(el => el.classList.remove('active'));
+
+      if(!childAlreadyActiveFlag) <HTMLElement>this.classList.add('active');
     }
   }
 

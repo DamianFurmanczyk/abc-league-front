@@ -8,6 +8,13 @@
   display: flex;
   align-items: stretch;
   justify-content: center;
+
+  &:hover {
+    .account {
+      filter: brightness(98%);
+      opacity: .8;
+    }
+  }
 }
 
 .flex-align-bottom-wrapper {
@@ -19,6 +26,29 @@
 }
 
 .account {
+  transition: .4s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(100%) !important;
+    opacity: 1 !important;
+  }
+
+  &.alternative {
+    
+  }
+
+  &.outOfStock {
+    filter: brightness(98%);
+
+    button {
+      &:hover {
+        box-shadow: none;
+      }
+      background: $lightGray;
+      color: $blackish;
+    }
+  }
+
   margin-right: 20px;
   flex: 1 0 auto;
   padding: 1.4rem;
@@ -75,6 +105,17 @@
 .account_quantity-times {
   @include qtity_btns;
   margin: .9rem 0 1.3rem 0;
+
+  button.deactivated {
+    background: lighten($lightGray2, 2%);
+    color: lighten($darkGray, 20%);
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: .5rem;
+    font-weight: bold;
+  }
 }
 
 .account--bestseller {
