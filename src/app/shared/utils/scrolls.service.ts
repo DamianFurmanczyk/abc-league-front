@@ -37,7 +37,8 @@ export class ScrollService {
           });
     }
 
-    navigateAndScrollToElem(elSel: string) {
+    navigateAndScrollToElem(elSel: string, destination: string) {
+        this.router.navigate([destination]);
         this.pingWhenNavigated().subscribe(e => {
             this.scrollToTop();
             this.scrollToElem(elSel)

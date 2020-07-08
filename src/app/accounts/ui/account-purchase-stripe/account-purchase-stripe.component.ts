@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ScrollService } from './../../../shared/utils/scrolls.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { HttpClient } from '@angular/common/http';
@@ -29,11 +31,22 @@ export class AccountPurchaseStripeComponent {
     
     this.accountsSet = accounts_with_count;
   }
-
+  accountAlternativeDescriptionMap = {
+    Basic: '30000 <br> <small>blue essence</small>',
+    Standard: '40000 <br> <small>blue essence</small>',
+    Premium: '50000 <br> <small>blue essence</small>',
+    Epic: '60000 <br> <small>blue essence</small>',
+    Legendary: '100000 <br> <small>blue essence</small>'
+  }
   accountsSet: AccountWithCountAndOrderQty[] = [];
 
   onCheckoutToggle() {
     this.checkoutToggle.emit();
+  }
+
+  navigateToAccounts() {
+    this.router.navigate(['/accounts']);
+    this.scrollS.navigateAndScrollToElem('.account-options');
   }
 
   onChangeSelectedAccount(acc: AccountWithCountAndOrderQty) {
@@ -45,8 +58,7 @@ export class AccountPurchaseStripeComponent {
     if( (q == -1 && targetedAccountOrderQty - 1 < 1) || (q == 1 && targetedAccountOrderQty + 1 > this.accountsSet[id].count)) return;
     this.accountsSet[id].orderQty +=  q;
   }
-
-  constructor(private http: HttpClient) {
+  constructor(private scrollS: ScrollService, private router: Router) { 
     console.log('to rem')
     // const headers = new HttpHeaders({
     //   'Content-Type':'application/json',

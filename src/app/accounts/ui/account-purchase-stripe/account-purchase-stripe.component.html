@@ -1,11 +1,11 @@
 <section class="account-options">
 
-  <div class="account-options-wrapper">
+  <div *ngIf="!alternativeStyles;else alternative" class="account-options-wrapper">
 
     <div 
     *ngFor="let acc of accountsSet; let i = index" 
     class="account account--bestseller" 
-    [ngClass]="{'outOfStock': acc.count == 0, 'alternative': alternativeStyles}"
+    [ngClass]="{outOfStock: acc.count == 0}"
     >
       <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
 
@@ -15,9 +15,7 @@
         {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
       </div>
 
-      <ul>
-        <li [innerHTML]='acc.description'></li>
-      </ul>
+      <p class="account_description" [innerHTML]='acc.description'></p>
 
       <div class="flex-align-bottom-wrapper">
         <div class="account_quantity-times">
@@ -37,35 +35,47 @@
       </div>
     </div>
 
-    <!-- <div class="account">
-      <img src="assets/img/Blue1.svg" alt="blue_shards">
-
-      <div class="account_cost">
-        <small>BASIC</small> <br>
-        <small>30 lvl instant delivery</small> <br>
-        20 zł
-      </div>
-
-      <ul>
-        <li>Unranked all seasons</li>
-        <li>10 - 19 Champions</li>
-        <li>BE up to 15000</li>
-        <li>Unverified email</li>
-        <li>Lifetime warranty</li>
-      </ul>
-
-      <div class="account_quantity-times">
-        <button>-</button>
-        1
-        <button>+</button>
-      </div>
-
-    <div class="account_actions">
-      <button>buy now</button>
-    </div>
-    </div> -->
-
 
   </div>
+
+  <ng-template #alternative>
+    <div class="account-options-wrapper alternative">
+
+      <div 
+      *ngFor="let acc of accountsSet; let i = index" 
+      class="account account--bestseller alternative"
+      [ngClass]="{outOfStock: acc.count == 0}"
+      >
+        <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
+  
+        <div class="account_cost--alt">
+          <small>{{acc.name | uppercase}}</small> <br>
+          {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
+        </div>
+  
+        <p class="account_description--alt" [innerHTML]='accountAlternativeDescriptionMap[acc.name]'></p>
+  
+        <div class="flex-align-bottom-wrapper">
+          <div class="account_quantity-times--alt">
+  
+            <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
+  
+            <ng-template #btnsWrapper>
+              <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='changeOrderQuantity(-1, i)'>-</button>
+                {{acc.orderQty}}
+              <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='changeOrderQuantity(1, i)'>+</button>
+            </ng-template>
+          </div>
+
+          <div class="account_actions--alt">
+            <button [disabled]='acc.count == 0' (click)="onCheckoutToggle(); onChangeSelectedAccount(acc)">BUY NOW</button>
+            <button (click)="navigateToAccounts()">LEARN MORE</button>
+          </div>
+        </div>
+      </div> 
+  
+    </div>
+  </ng-template>
+
 
 </section>

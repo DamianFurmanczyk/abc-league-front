@@ -21,13 +21,11 @@ export class FooterComponent implements AfterViewInit {
   }
 
   navigateAndScrollToAccounts() {
-    this.router.navigate(['/accounts']);
-    this.scrollSer.navigateAndScrollToElem('.account-options');
+    this.scrollSer.navigateAndScrollToElem('.account-options', '/accounts');
   }
 
   navigateAndScrollToReviews() {
-    this.router.navigate(['/reviews']);
-    this.scrollSer.navigateAndScrollToElem('.reviews');
+    this.scrollSer.navigateAndScrollToElem('.reviews', '/reviews');
   }
 
   ngAfterViewInit() {
