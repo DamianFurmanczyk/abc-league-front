@@ -4,14 +4,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import {
   catchError,
   map,
-  mergeMap,
-  switchMap,
-  tap,
-  first,
-  withLatestFrom,
-  concatMap
+  mergeMap
 } from 'rxjs/operators';
-import { of, EMPTY, forkJoin } from 'rxjs';
+import { of, forkJoin } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppPartialState } from './app.reducer';
 import { fromAppActions } from './app.actions';

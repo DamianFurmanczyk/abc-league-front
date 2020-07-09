@@ -1,19 +1,21 @@
-import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheConditioned.resolver';
-import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
-import { ReviewsCacheConditionedResolver } from './../resolvers/reviewsCacheConditioned.resolver';
 
-import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';
-import { RegionsInitiateResolver } from './../resolvers/regions.resolver';
-import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
 import { ReviewsFacade } from './state/facades/reviews.facade';
-import { ReviewsInitiateResolver } from '../resolvers/reviews.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheConditioned.resolver';
+import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
+import { ReviewsCacheConditionedResolver } from './../resolvers/reviewsCacheConditioned.resolver';
+import { RegionsInitiateResolver } from './../resolvers/regions.resolver';
+import { CurrencyResolver } from './../resolvers/currency.resolver';
+import { ReviewsInitiateResolver } from '../resolvers/reviews.resolver';
+
 import * as fromApp from './state/app.reducer';
+
+import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
 
 import { RegionSelectionComponent } from '../shared/ui/region-selection/region-selection.component';
 import { PaymentMethodStripeComponent } from '../shared/ui/payment-method-stripe/payment-method-stripe.component';
@@ -21,44 +23,43 @@ import { FooterComponent } from '../shared/ui/footer/footer.component';
 import { CheckoutDialogComponent } from '../shared/ui/checkout-dialog/checkout-dialog.component';
 import { NavComponent } from '../shared/ui/nav/nav.component';
 
-import { PerksListComponent } from '../homepage/ui/perks-list/perks-list.component';
-import { HeroComponent } from '../homepage/ui/hero/hero.component';
-import { BlueEssencePurchaseStripeComponent } from '../homepage/ui/blue-essence-purchase-stripe/blue-essence-purchase-stripe.component';
-
-import { ReviewsListComponent } from '../reviews/ui/reviews-list/reviews-list.component';
-
-import { AccountPurchaseStripeComponent } from '../accounts/ui/account-purchase-stripe/account-purchase-stripe.component';
-import { AccountFaqComponent } from '../accounts/ui/account-faq/account-faq.component';
-
+import { AccountPurchaseStripeWithPopupComponent } from './../shared/smart-components/account-purchase-stripe-with-popup/account-purchase-stripe-with-popup.component';
+import {AccountPurchaseStripeComponent} from '../shared/ui/account-purchase-stripe/account-purchase-stripe.component'
 
 import {HomepageFeatureComponent} from '../homepage/feature/feature.component';
+import { PerksListComponent } from '../homepage/ui/perks-list/perks-list.component';
+import { HeroComponent } from '../homepage/ui/hero/hero.component';
+
 import {AccountsFeatureComponent} from '../accounts/feature/feature.component';
+import { AccountFaqComponent } from '../accounts/ui/account-faq/account-faq.component';
+
 import {ReviewsFeatureComponent} from '../reviews/feature/feature.component';
+import { ReviewsListComponent } from '../reviews/ui/reviews-list/reviews-list.component';
 
 import { AppEffects } from './state/app.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DataAccessService } from './services/app.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
-
 @NgModule({
   declarations: [    
     MainComponent, 
     AppComponent,
+    AccountPurchaseStripeComponent,
     RegionSelectionComponent,
     PerksListComponent,
     ReviewsFeatureComponent,
+    AccountPurchaseStripeWithPopupComponent,
     AccountsFeatureComponent,
     HeroComponent,
-    BlueEssencePurchaseStripeComponent,
     HomepageFeatureComponent,
     ReviewsListComponent,
     AccountFaqComponent,
-    AccountPurchaseStripeComponent,
     PaymentMethodStripeComponent,
     FooterComponent,
     CheckoutDialogComponent,
     HomepageFeatureComponent,
+    
     AddReviewFormComponent,
     ReviewsFeatureComponent,
     AccountsFeatureComponent,

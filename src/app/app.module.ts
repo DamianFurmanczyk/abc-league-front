@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromApp from './+ngrx/state/app.reducer';
 import { RouterModule } from '@angular/router';
 import { DataAccessModule } from './+ngrx/ngrx.module';
+import { AccountPurchaseStripeWithPopupComponent } from './shared/smart-components/account-purchase-stripe-with-popup/account-purchase-stripe-with-popup.component';
 
 @NgModule({
   declarations: [],

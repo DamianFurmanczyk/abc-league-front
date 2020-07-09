@@ -8,9 +8,7 @@
   max-width: 100%;
   display: flex;
   align-items: stretch;
-  // justify-content: center;
-  overflow-x: scroll;
-  padding: 2rem 1rem 1rem 1rem;
+  justify-content: center;
 
   &.alternative {
     @include container(1300px);
@@ -24,6 +22,16 @@
   }
 }
 
+@media (max-width: $l) {
+  .account-options-wrapper {
+    padding: 2rem 2rem 1rem 2rem;
+    width: 90%;
+    overflow-y: unset;
+    overflow-x: auto;
+    justify-content: unset;
+  }
+}
+
 .flex-align-bottom-wrapper {
   margin-top: auto;
   width: 100%;
@@ -33,6 +41,8 @@
 }
 
 .account {
+  transition: .4s ease-in-out;
+  cursor: pointer;
   margin-right: 20px;
   flex: 1 0 auto;
   padding: 1.4rem;
@@ -107,13 +117,6 @@
     }
   }
 
-  transition: .4s ease-in-out;
-  cursor: pointer;
-  &:hover {
-    filter: brightness(100%) !important;
-    opacity: 1 !important;
-  }
-
   &.outOfStock {
     filter: brightness(98%);
 
@@ -130,6 +133,11 @@
     font-size: .9rem;
     line-height: 2.2;
   }
+}
+
+div.account:hover {
+  filter: brightness(100%) !important;
+  opacity: 1 !important;
 }
 
 .account_actions {

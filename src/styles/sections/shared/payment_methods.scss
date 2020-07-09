@@ -16,3 +16,9 @@
     height: 40px;
   }
 }
+
+@media (max-width: $m) {
+  .payment-options {
+    display: none;
+  }
+}

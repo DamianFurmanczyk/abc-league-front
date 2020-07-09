@@ -20,7 +20,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
           // console.log(el.previousElementSibling)
           // console.log(targetElement)
           // console.log(el.previousElementSibling == targetElement)
-          targetElement == el || targetElement == el.previousElementSibling ? null : el.classList.remove('active')
+          targetElement == el || (targetElement == el.previousElementSibling && el.previousElementSibling.classList.contains('trigger'))? null : el.classList.remove('active')
         }
       )
     )
