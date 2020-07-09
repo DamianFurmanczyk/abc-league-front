@@ -1,28 +1,22 @@
 import { ReviewsFacade } from './../+ngrx/state/facades/reviews.facade';
-import { Actions, ofType } from '@ngrx/effects';
-import { map, take } from 'rxjs/operators';
-import { Action } from '@ngrx/store';
+import { filter, first, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-import { Resolve } from '@angular/router';
+import { Resolve, Router, NavigationEnd } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { fromAppActions } from '../+ngrx/state/app.actions';
-
+import { Subscription } from 'rxjs';
 @Injectable()
-export class ReviewsResolver implements Resolve<Observable<Action>> {
-  constructor(private facade: ReviewsFacade, private action$: Actions) {}
+export class ReviewsInitiateResolver implements Resolve<Subscription> {
+  constructor(private facade: ReviewsFacade, private router: Router) {}
 
   resolve() {
-
-    this.facade.loadReviews();
-
-    return this.action$.pipe(
-      ofType(fromAppActions.Types.LoadReviewsSuccess, fromAppActions.Types.LoadReviewsFail),
-      map((a: fromAppActions.LoadReviewsSuccess) => a.payload),
-      take(1)
-    );
-  
-  
+    return this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      first(),
+      tap(e => {
+        if(this.router.url == '/reviews') return;
+    
+        this.facade.loadReviews();
+      })).subscribe();
   }
 }

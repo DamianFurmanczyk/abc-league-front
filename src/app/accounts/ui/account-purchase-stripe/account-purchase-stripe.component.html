@@ -10,7 +10,7 @@
       <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
 
       <div class="account_cost">
-        <small>{{acc.name}}</small> <br>
+        <small>{{acc.name | uppercase}}</small> <br>
         <small>30 lvl instant delivery</small> <br>
         {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
       </div>
@@ -43,8 +43,8 @@
 
       <div 
       *ngFor="let acc of accountsSet; let i = index" 
-      class="account account--bestseller alternative"
-      [ngClass]="{outOfStock: acc.count == 0}"
+      class="account alternative"
+      [ngClass]="{outOfStock: acc.count == 0,  'account--bestseller': i == 1}"
       >
         <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
   

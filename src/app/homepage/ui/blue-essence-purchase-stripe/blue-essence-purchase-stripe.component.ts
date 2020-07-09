@@ -16,8 +16,7 @@ export class BlueEssencePurchaseStripeComponent implements OnInit {
   }
 
   navigateToAccounts() {
-    this.router.navigate(['/accounts']);
-    this.scrollS.navigateAndScrollToElem('.account-options');
+    this.scrollS.navigateAndScrollToElem('.account-options', '/accounts');
   }
 
 }

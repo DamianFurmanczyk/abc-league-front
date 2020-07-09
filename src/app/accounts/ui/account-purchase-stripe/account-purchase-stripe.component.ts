@@ -32,10 +32,10 @@ export class AccountPurchaseStripeComponent {
     this.accountsSet = accounts_with_count;
   }
   accountAlternativeDescriptionMap = {
-    Basic: '30000 <br> <small>blue essence</small>',
-    Standard: '40000 <br> <small>blue essence</small>',
-    Premium: '50000 <br> <small>blue essence</small>',
-    Epic: '60000 <br> <small>blue essence</small>',
+    Basic: '40000 <br> <small>blue essence</small>',
+    Standard: '50000 <br> <small>blue essence</small>',
+    Premium: '60000 <br> <small>blue essence</small>',
+    Epic: '70000 <br> <small>blue essence</small>',
     Legendary: '100000 <br> <small>blue essence</small>'
   }
   accountsSet: AccountWithCountAndOrderQty[] = [];
@@ -45,8 +45,7 @@ export class AccountPurchaseStripeComponent {
   }
 
   navigateToAccounts() {
-    this.router.navigate(['/accounts']);
-    this.scrollS.navigateAndScrollToElem('.account-options');
+    this.scrollS.navigateAndScrollToElem('.account-options', '/accounts');
   }
 
   onChangeSelectedAccount(acc: AccountWithCountAndOrderQty) {

@@ -1,28 +1,23 @@
+import { filter, first, tap } from 'rxjs/operators';
 import { AppFacade } from './../+ngrx/state/facades/app.facade';
-import { Actions, ofType } from '@ngrx/effects';
-import {  map, take } from 'rxjs/operators';
-import {  Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 
-import { Resolve } from '@angular/router';
+import { Resolve, Router, NavigationEnd } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
-import { fromAppActions } from '../+ngrx/state/app.actions';
+import { Subscription } from 'rxjs';
 
 @Injectable()
-export class RegionsResolver implements Resolve<Observable<Action>> {
-  constructor(private facade: AppFacade, private action$:  Actions) {}
+export class RegionsInitiateResolver implements Resolve<Subscription> {
+  constructor(private facade: AppFacade, private router: Router) {}
 
   resolve() {
-
-    this.facade.loadRegions();
-
-    return this.action$.pipe(
-      ofType(fromAppActions.Types.LoadRegionsSuccess, fromAppActions.Types.LoadRegionsFail),
-      map((a: fromAppActions.LoadRegionsSuccess) => a.payload),
-      take(1)
-    );
-  
-  
+    return this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      first(),
+      tap(e => {
+        if(this.router.url == '/accounts' || this.router.url == '/') return;
+    
+        this.facade.loadRegions();
+      })).subscribe();
   }
 }

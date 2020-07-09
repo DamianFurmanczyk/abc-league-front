@@ -38,6 +38,11 @@ export class ScrollService {
     }
 
     navigateAndScrollToElem(elSel: string, destination: string) {
+        // if this dest
+        if(this.router.url == destination) {
+            return this.scrollToElem(elSel)
+        }
+        
         this.router.navigate([destination]);
         this.pingWhenNavigated().subscribe(e => {
             this.scrollToTop();

@@ -29,7 +29,7 @@ export const getReviewsLoading = createSelector(
 
 export const getRegions = createSelector(
   getAppState,
-  (state: AppStateInterface) => state.reviewsLoading
+  (state: AppStateInterface) => state.regions
 );
 
 export const getRegionsLoading = createSelector(

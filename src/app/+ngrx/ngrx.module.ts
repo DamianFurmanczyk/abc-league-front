@@ -1,13 +1,16 @@
+import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheConditioned.resolver';
+import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
+import { ReviewsCacheConditionedResolver } from './../resolvers/reviewsCacheConditioned.resolver';
 
 import { NavTrackScroll } from './../../directives/nav_activation_tracker';
 import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';
-import { RegionsResolver } from './../resolvers/regions.resolver';
+import { RegionsInitiateResolver } from './../resolvers/regions.resolver';
 import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
 import { ReviewsFacade } from './state/facades/reviews.facade';
-import { ReviewsResolver } from '../resolvers/reviews.resolver';
+import { ReviewsInitiateResolver } from '../resolvers/reviews.resolver';
 import { NgModule } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -40,7 +43,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
 
 @NgModule({
-  declarations: [    MainComponent, AppComponent,
+  declarations: [    
+    MainComponent, 
+    AppComponent,
     RegionSelectionComponent,
     PerksListComponent,
     ReviewsFeatureComponent,
@@ -72,10 +77,13 @@ import { AppComponent } from '../app.component';
   ],
   providers: [
     DataAccessService,
-    ReviewsResolver,
+    ReviewsInitiateResolver,
     ReviewsFacade,
-    RegionsResolver,
-    CurrencyResolver
+    RegionsInitiateResolver,
+    CurrencyResolver,
+    ReviewsCacheConditionedResolver,
+    AccountsCacheConditionedResolver,
+    RegionsCacheConditionedResolver
   ]
 })
 export class DataAccessModule {}

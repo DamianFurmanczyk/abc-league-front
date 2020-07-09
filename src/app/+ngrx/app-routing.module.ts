@@ -1,9 +1,12 @@
+import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
+import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheConditioned.resolver';
+import { ReviewsCacheConditionedResolver } from './../resolvers/reviewsCacheConditioned.resolver';
 import { TermsAndConditionsComponent } from './../components/terms-and-conditions/terms-and-conditions.component';
 import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';
-import { AccountsResolver } from './../resolvers/accounts.resolver';
-import { RegionsResolver } from './../resolvers/regions.resolver';
-import { ReviewsResolver } from './../resolvers/reviews.resolver';
+import { AccountsInitiateResolver } from './../resolvers/accounts.resolver';
+import { RegionsInitiateResolver } from './../resolvers/regions.resolver';
+import { ReviewsInitiateResolver } from './../resolvers/reviews.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomepageFeatureComponent } from '../homepage/feature/feature.component';
@@ -14,7 +17,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent, 
-    resolve: {regions: RegionsResolver, accounts: AccountsResolver, currency: CurrencyResolver,reviews: ReviewsResolver},
+    resolve: {regions: RegionsInitiateResolver, accounts: AccountsInitiateResolver, currency: CurrencyResolver, reviews: ReviewsInitiateResolver},
     children: [
       {
         path: 'account-purchase',
@@ -22,13 +25,16 @@ const routes: Routes = [
       },
     {
       path: '',
-      component: HomepageFeatureComponent
+      component: HomepageFeatureComponent,
+      resolve: {regions: RegionsCacheConditionedResolver, accounts: AccountsCacheConditionedResolver}
     }, {
       path: 'reviews',
-      component: ReviewsFeatureComponent
+      component: ReviewsFeatureComponent,
+      resolve: {reviews: ReviewsCacheConditionedResolver},
     }, {
       path: 'accounts',
-      component: AccountsFeatureComponent
+      component: AccountsFeatureComponent,
+      resolve: {regions: RegionsCacheConditionedResolver, accounts: AccountsCacheConditionedResolver}
     }, {
       path: 'terms-and-conditions',
       component: TermsAndConditionsComponent
