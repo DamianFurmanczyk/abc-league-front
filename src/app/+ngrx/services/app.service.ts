@@ -18,6 +18,8 @@ export class DataAccessService {
     this.facade.selectedRegion$.pipe(
       tap(res => this.selectedRegion = res)
     ).subscribe();
+
+    this.http.get("http://api.abcleague.webup-dev.pl/getIP").subscribe(console.log)
   }
 
   selectedRegion: any = {};

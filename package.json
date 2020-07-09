@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.11",
+    "@angular/cdk": "^10.0.1",
     "@angular/common": "~9.1.11",
     "@angular/compiler": "~9.1.11",
     "@angular/core": "~9.1.11",
@@ -26,6 +27,7 @@
     "@ngrx/store-devtools": "^9.2.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.27.0",
+    "ngx-scrollbar": "^7.2.3",
     "rxjs": "~6.5.4",
     "same-height": "^1.0.0",
     "tslib": "^1.10.0",

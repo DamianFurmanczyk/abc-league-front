@@ -2,7 +2,6 @@ import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheCond
 import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
 import { ReviewsCacheConditionedResolver } from './../resolvers/reviewsCacheConditioned.resolver';
 
-import { NavTrackScroll } from './../../directives/nav_activation_tracker';
 import { CurrencyResolver } from './../resolvers/currency.resolver';
 import { MainComponent } from './../main/main.component';
 import { RegionsInitiateResolver } from './../resolvers/regions.resolver';

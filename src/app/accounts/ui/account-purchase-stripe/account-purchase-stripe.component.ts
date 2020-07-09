@@ -2,10 +2,9 @@ import { Router } from '@angular/router';
 import { ScrollService } from './../../../shared/utils/scrolls.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { currencyData } from './../../../models/currencyData.interface';
-import { HttpClient } from '@angular/common/http';
 
 import { Account } from './../../../models/account.interface';
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output,  } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 
@@ -15,7 +14,7 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./account-purchase-stripe.component.scss']
 })
 
-export class AccountPurchaseStripeComponent {
+export class AccountPurchaseStripeComponent   {
   @Input() alternativeStyles?: boolean;
   @Input() currency: currencyData;
   @Output() checkoutToggle = new EventEmitter();
@@ -31,6 +30,7 @@ export class AccountPurchaseStripeComponent {
     
     this.accountsSet = accounts_with_count;
   }
+
   accountAlternativeDescriptionMap = {
     Basic: '40000 <br> <small>blue essence</small>',
     Standard: '50000 <br> <small>blue essence</small>',

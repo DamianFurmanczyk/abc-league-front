@@ -1,6 +1,6 @@
 <section class="account-options">
 
-  <div *ngIf="!alternativeStyles;else alternative" class="account-options-wrapper">
+  <div *ngIf="!alternativeStyles;else alternative" ss-container class="account-options-wrapper">
 
     <div 
     *ngFor="let acc of accountsSet; let i = index" 
@@ -39,7 +39,8 @@
   </div>
 
   <ng-template #alternative>
-    <div class="account-options-wrapper alternative">
+    
+    <div ss-container class="account-options-wrapper alternative">
 
       <div 
       *ngFor="let acc of accountsSet; let i = index" 
