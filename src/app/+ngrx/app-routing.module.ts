@@ -20,7 +20,7 @@ const routes: Routes = [
     resolve: {regions: RegionsInitiateResolver, accounts: AccountsInitiateResolver, currency: CurrencyResolver, reviews: ReviewsInitiateResolver},
     children: [
       {
-        path: 'payment',
+        path: 'payment/:paymentId',
         loadChildren: () => import('./../modules/payment-verification/payment-verification.module').then(m => m.PaymentVerificationModule)
       },
     {

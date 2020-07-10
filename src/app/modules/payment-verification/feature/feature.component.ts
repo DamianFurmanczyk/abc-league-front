@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feature.component.scss']
 })
 export class FeatureComponent implements OnInit {
+  id: string;
 
   constructor(private route: ActivatedRoute) { }
 
@@ -14,6 +15,8 @@ export class FeatureComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       console.log(params);
   });
+
+  this.id = this.route.snapshot.paramMap.get('paymentId');
   }
 
 }
