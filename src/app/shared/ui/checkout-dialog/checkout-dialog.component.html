@@ -11,13 +11,13 @@
       <div class="checkout-dialog_products-list_li-top">
         <div>
           <img src="assets/img/3d.svg" alt="box">
-          <b>Legendary BE Pack</b>
+          <b>{{selAccount.name | uppercase}} {{regionsIdToNameMap[selAccount.region_id]}} PACK </b>
         </div>
 
         <div class="account_quantity-times">
-          <button>-</button>
-          1
-          <button>+</button>
+          <button [ngClass]="[selAccount.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, -1)'>-</button>
+          {{selAccount.orderQty}}
+        <button [ngClass]="[selAccount.count == selAccount.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, -1)'>+</button>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
 
   <div class="checkout-dialog_order-summary">
 
-    <div class="total-text">Total <b>200zł</b></div>
+    <div class="total-text">Total <b>{{price}} {{currency.name}}</b></div>
 
     <div class="checkout-dialog_order-summary-bottom">
 

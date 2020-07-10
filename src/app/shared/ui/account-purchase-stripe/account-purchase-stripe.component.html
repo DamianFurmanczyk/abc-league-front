@@ -1,9 +1,10 @@
 <section class="account-options">
+  do remaku, zastanowic sie czy nie lepiej if elsy w templatce zamiast 2
   
   <div *ngIf="!alternativeStyles;else alternative" ss-container class="account-options-wrapper">
 
     <div 
-    *ngFor="let acc of accountsSet; let i = index" 
+    *ngFor="let acc of accounts; let i = index" 
     class="account account--bestseller" 
     [ngClass]="{outOfStock: acc.count == 0}"
     >
@@ -23,9 +24,9 @@
           <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
 
           <ng-template #btnsWrapper>
-            <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='changeOrderQuantity(-1, i)'>-</button>
+            <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, i)'>-</button>
               {{acc.orderQty}}
-            <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='changeOrderQuantity(1, i)'>+</button>
+            <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, i)'>+</button>
           </ng-template>
         </div>
 
@@ -43,7 +44,7 @@
     <div ss-container class="account-options-wrapper alternative">
 
       <div 
-      *ngFor="let acc of accountsSet; let i = index" 
+      *ngFor="let acc of accounts; let i = index" 
       class="account alternative"
       [ngClass]="{outOfStock: acc.count == 0,  'account--bestseller': i == 1}"
       >
@@ -62,9 +63,9 @@
             <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
   
             <ng-template #btnsWrapper>
-              <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='changeOrderQuantity(-1, i)'>-</button>
+              <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, i)'>-</button>
                 {{acc.orderQty}}
-              <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='changeOrderQuantity(1, i)'>+</button>
+              <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, i)'>+</button>
             </ng-template>
           </div>
 

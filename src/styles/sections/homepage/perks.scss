@@ -7,13 +7,8 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  &:first-of-type {
-    padding-top: 5.5%;
-    margin-bottom: 3.5%;
-  }
-  &:last-of-type {
-    padding-bottom: 5.5%;
-  }
+  padding-top: 5.5%;
+  margin-bottom: 3.5%;
 }
 
 .perk {
@@ -69,6 +64,10 @@
     &-separator {
       display: none;
     }
+  }
+
+  .perks-wrapper {
+    margin-bottom: 9%;
   }
 }
 

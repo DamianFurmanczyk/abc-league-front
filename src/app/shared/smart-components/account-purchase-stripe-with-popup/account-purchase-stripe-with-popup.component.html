@@ -3,10 +3,12 @@
 (checkoutToggle)="onToggleCheckoutFlag()"  
 [currency]='currency | async' 
 [alternativeStyles]='altStyles'
+(changeOrderQuantity)="onChangeOrderQuantity($event)"
 [accounts]='accountsExtended$ | async'></app-account-purchase-stripe>
 
 <app-checkout-dialog 
 [selectedAccount]='selectedAccount'
+(changeOrderQuantity)="onChangeOrderQuantity($event)"
 *ngIf="showCheckoutFlag"
 [currency]='currency | async' 
 (checkoutToggle)='onToggleCheckoutFlag()'></app-checkout-dialog>

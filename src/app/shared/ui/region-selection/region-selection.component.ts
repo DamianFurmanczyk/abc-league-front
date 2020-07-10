@@ -41,8 +41,8 @@ export class RegionSelectionComponent implements OnInit, OnDestroy {
     this.route.data.pipe(tap(console.log))
     .subscribe((data) => {
       // this.regions = data.regions.pipe();
-      console.log(this.regions)
-      console.log(data)
+      // console.log(this.regions)
+      // console.log(data)
     });
 
   }

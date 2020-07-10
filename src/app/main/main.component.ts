@@ -13,13 +13,18 @@ import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
 export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   @HostListener('window:click', ['$event.target'])
   onClick(targetElement: HTMLElement) {
+    if(targetElement.classList.contains('hamburger__inner')) {
+      this.nav_ul.classList.toggle('active');
+      targetElement.parentElement.classList.toggle('hamburger--open');
+    }
+    if(targetElement.classList.contains('hamburger')) {
+      this.nav_ul.classList.toggle('active');
+      targetElement.classList.toggle('hamburger--open');
+    }
 
     this.elementsThatNeedToDeactivateOnWindowClick.forEach(
       elArr=> elArr.forEach(
         (el: HTMLElement) => {
-          // console.log(el.previousElementSibling)
-          // console.log(targetElement)
-          // console.log(el.previousElementSibling == targetElement)
           targetElement == el || (targetElement == el.previousElementSibling && el.previousElementSibling.classList.contains('trigger'))? null : el.classList.remove('active')
         }
       )
@@ -44,9 +49,11 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   currency$: Observable<currencyData>;
   homepageUrl: boolean = true;
   scrollStyles: boolean = false;
+  nav_ul: HTMLElement;
 
   ngAfterViewInit() {
     console.log('view init')
+    this.nav_ul = document.querySelector('#nav_ul');
     this.elementsThatNeedToDeactivateOnWindowClick = this.getElementsThatNeedToDeactivateOnWindowClick();
   }
 

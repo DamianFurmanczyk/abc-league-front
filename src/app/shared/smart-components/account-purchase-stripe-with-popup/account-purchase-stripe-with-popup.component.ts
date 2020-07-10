@@ -13,17 +13,23 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 })
 export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestroy {
   @Input() altStyles?: boolean = false;
-  accountsExtended$: BehaviorSubject<{acc: Account[], count: number[]}> = new BehaviorSubject({acc: [], count: []});
+  accountsExtended$: BehaviorSubject<AccountWithCountAndOrderQty[]> = new BehaviorSubject([]);
   destroyed$: Subject<boolean> = new Subject();
   currency: Observable<currencyData> = this.facade.currency$;
   selectedAccount: AccountWithCountAndOrderQty;
+  set accountsSetter(accData: {acc: Account[], count: number[]}) {
+    if(!accData.acc) return;
 
+    const accounts_with_count = accData.acc.map((el, i) => { 
+      return { ...el, count: accData.count[i], orderQty: 1 }
+    });
+
+    this.accounts = accounts_with_count;
+
+    this.accountsExtended$.next(accounts_with_count);
+  };
+  accounts: AccountWithCountAndOrderQty[] = [];
   showCheckoutFlag: boolean = false;
-
-  accounts$ = this.facade.accounts$.pipe(
-    tap(res => this.accountsExtended$.next(res)),
-    takeUntil(this.destroyed$)
-  ).subscribe();
 
   onToggleCheckoutFlag() {
     this.showCheckoutFlag = !this.showCheckoutFlag;
@@ -33,9 +39,26 @@ export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestro
     this.selectedAccount = acc;
   }
 
+  onChangeOrderQuantity(accData: {q: number, id: number, selectedAccIsTarget: boolean}) {
+    if(accData.selectedAccIsTarget) {
+      accData.id = this.accounts.indexOf(this.selectedAccount);
+    }
+    let targetedAccountOrderQty = this.accounts[accData.id].orderQty;
+    if( (accData.q == -1 && targetedAccountOrderQty - 1 < 1) || (accData.q == 1 && targetedAccountOrderQty + 1 > this.accounts[accData.id].count)) return;
+    this.accounts[accData.id].orderQty +=  accData.q;
+
+    this.accountsExtended$.next(this.accounts);
+  }
+
   constructor(private facade: AppFacade) {}
 
   ngOnInit(): void {
+    this.facade.accounts$.pipe(
+    tap(res => {
+      this.accountsSetter = res;
+    }),
+    takeUntil(this.destroyed$)
+  ).subscribe();
   }
 
   ngOnDestroy(): void {

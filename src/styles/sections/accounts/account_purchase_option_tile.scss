@@ -173,15 +173,16 @@ div.account:hover {
   font-size: 1.8rem;
 }
 
+.account_quantity-times, .account_quantity-times--alt {
+  button.deactivated {
+    background: lighten($lightGray2, 2%) !important;
+    color: lighten($darkGray, 20%) !important;
+  }
+}
 
 .account_quantity-times {
   @include qtity_btns;
   margin: .9rem 0 1.3rem 0;
-
-  button.deactivated {
-    background: lighten($lightGray2, 2%);
-    color: lighten($darkGray, 20%);
-  }
 
   p {
     font-size: 1.1rem;

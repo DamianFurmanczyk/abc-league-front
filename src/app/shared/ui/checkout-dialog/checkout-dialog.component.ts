@@ -13,27 +13,51 @@ import { EventEmitter } from '@angular/core';
 export class CheckoutDialogComponent implements OnInit, AfterViewInit {
   @ViewChild('popup') popup: ElementRef;
   @Output() checkoutToggle = new EventEmitter();
-  showCouponInputFlag: boolean = false;
-  @Input() selectedAccount: AccountWithCountAndOrderQty;
+  @Input() set selectedAccount(acc: AccountWithCountAndOrderQty) {
+    this.selAccount = acc;
+    this.price = acc.priceAfterConversion * acc.orderQty;
+  };
   @Input() currency: currencyData;
+  @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
+
+  selAccount: AccountWithCountAndOrderQty;
+  price: number;
+  showCouponInputFlag: boolean = false;
+  regionsIdToNameMap = {
+    1: 'EUNE',
+    2: 'NA',
+    3: 'EUW',
+    4: 'TR',
+    5: 'RU',
+    6: 'BR',
+    7: 'LAN',
+    8: 'LAS',
+    9: 'OCE',
+    10: 'JP'
+  }
 
   constructor(private DataAccessService: DataAccessService) { }
 
   ngOnInit(): void {
-    console.log(this.selectedAccount);
     this.onInitiatePayment();
   }
 
   onInitiatePayment() {
-    const selAcc = this.selectedAccount;
-    this.DataAccessService.initiatePayment(selAcc.description, 'damianfurmanczykgm@gmail.com', 
+    const selAcc = this.selAccount;
+    this.DataAccessService.initiatePayment(selAcc.description, 'arek@gmail.com', 
       selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, 1).then(res => {
-        console.log(res);
         window.open(
         res,
-        '_blank' // <- This is what makes it open in a new window.
+        '_blank'
       );
     })
+  }
+
+  onChangeOrderQuantity(q: number, id: number) {
+    this.changeOrderQuantity.emit({q, id, selectedAccIsTarget: true});
+    
+    this.price = this.selAccount.priceAfterConversion * this.selAccount.orderQty;
+    if(this.selAccount.orderQty > 1) this.price = +((this.price * .9).toFixed(2));
   }
   
   hideFormAndToggleDisplayAfter() {

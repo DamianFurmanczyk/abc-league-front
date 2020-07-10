@@ -19,17 +19,8 @@ export class AccountPurchaseStripeComponent   {
   @Input() currency: currencyData;
   @Output() checkoutToggle = new EventEmitter();
   @Output() changeSelectedAccount: EventEmitter<AccountWithCountAndOrderQty> = new EventEmitter();
-  @Input() set accounts(accountsData: { acc: Account[], count: number[] }) {
-    
-    if(!accountsData.acc) return;
-
-    const accounts_with_count = accountsData.acc.map((el, i) => { 
-        return { ...el, count: accountsData.count[i], orderQty: 1 }
-      }
-    );
-    
-    this.accountsSet = accounts_with_count;
-  }
+  @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
+  @Input() accounts: AccountWithCountAndOrderQty[] = [];
 
   accountAlternativeDescriptionMap = {
     Basic: '40000 <br> <small>blue essence</small>',
@@ -38,7 +29,6 @@ export class AccountPurchaseStripeComponent   {
     Epic: '70000 <br> <small>blue essence</small>',
     Legendary: '100000 <br> <small>blue essence</small>'
   }
-  accountsSet: AccountWithCountAndOrderQty[] = [];
 
   onCheckoutToggle() {
     this.checkoutToggle.emit();
@@ -52,11 +42,10 @@ export class AccountPurchaseStripeComponent   {
     this.changeSelectedAccount.emit(acc);
   }
 
-  changeOrderQuantity(q: number, id: number) {
-    let targetedAccountOrderQty = this.accountsSet[id].orderQty;
-    if( (q == -1 && targetedAccountOrderQty - 1 < 1) || (q == 1 && targetedAccountOrderQty + 1 > this.accountsSet[id].count)) return;
-    this.accountsSet[id].orderQty +=  q;
+  onChangeOrderQuantity(q: number, id: number) {
+    this.changeOrderQuantity.emit({q, id, selectedAccIsTarget: false});
   }
+
   constructor(private scrollS: ScrollService, private router: Router) { 
     console.log('to rem')
     // const headers = new HttpHeaders({

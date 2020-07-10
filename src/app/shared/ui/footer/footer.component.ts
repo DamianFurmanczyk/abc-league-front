@@ -37,15 +37,15 @@ export class FooterComponent implements AfterViewInit {
 
     function  toggleSiblingActiveClass() {
       const siblAlreadyActiveFlag = <HTMLElement>this.nextSibling.classList.contains('active');
-      console.log(this.firstChild);
+      // console.log(this.firstChild);
       FooterComponent.dds.forEach(el => el.classList.remove('active'));
 
       if(!siblAlreadyActiveFlag) <HTMLElement>this.nextSibling.classList.add('active');
     }
 
     function toggleChildrenActiveClass() {
-      console.log(this.childNodes)
-      console.log(this)
+      // console.log(this.childNodes)
+      // console.log(this)
       const childAlreadyActiveFlag = <HTMLElement>this.classList.contains('active');
 
       FooterComponent.explendableUlsTriggers.forEach(el => el.classList.remove('active'));

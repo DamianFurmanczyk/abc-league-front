@@ -12,9 +12,6 @@ export class FeatureComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      console.log(params);
-  });
 
   this.id = this.route.snapshot.paramMap.get('paymentId');
   }
