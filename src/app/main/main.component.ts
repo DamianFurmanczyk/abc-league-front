@@ -4,7 +4,6 @@ import { Observable, Subject, fromEvent } from 'rxjs';
 import { AppFacade } from './../+ngrx/state/facades/app.facade';
 import { Component, OnInit, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -35,21 +34,12 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   elementsThatNeedToDeactivateOnWindowClick;
   destroyed$: Subject<boolean> = new Subject();
 
-  onScrollObs = fromEvent(window, 'scroll').pipe(
-    throttleTime(10, undefined, {leading: true, trailing: true}),
-    tap(e => {
-      // console.log(e);
-      this.scrollStyles = window.pageYOffset > 0;
-      // console.log(this.scrollStyles)
-      // console.log(window.pageYOffset)
-    }),
-    takeUntil(this.destroyed$)
-  ).subscribe();
-
   currency$: Observable<currencyData>;
   homepageUrl: boolean = true;
   scrollStyles: boolean = false;
   nav_ul: HTMLElement;
+
+  scrollActiveNavNoMatterWhat;
 
   ngAfterViewInit() {
     console.log('view init')
@@ -59,6 +49,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private facade: AppFacade, router: Router) { 
     this.currency$ = this.facade.currency$;
+    this.scrollActiveNavNoMatterWhat = window.innerWidth < 981;
 
     router.events.pipe(filter(event => event instanceof ActivationEnd),
     tap((e: ActivationEnd) => {
@@ -67,6 +58,25 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
       this.homepageUrl = e.snapshot['_routerState'].url == '/';
     }),
     takeUntil(this.destroyed$)
+    ).subscribe();
+
+    fromEvent(window, 'scroll').pipe(
+      throttleTime(50, undefined, {leading: true, trailing: true}),
+      tap(() => {
+        // console.log(e);
+        this.scrollStyles = window.pageYOffset > 0;
+        // console.log(this.scrollStyles)
+        // console.log(window.pageYOffset)
+      }),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+
+    fromEvent(window, 'resize').pipe(
+      throttleTime(200, undefined, {leading: true, trailing: true}),
+      tap(() => {
+        this.scrollActiveNavNoMatterWhat = window.innerWidth < 981;
+      }),
+      takeUntil(this.destroyed$)
     ).subscribe();
 }
 

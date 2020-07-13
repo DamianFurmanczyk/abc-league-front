@@ -1,8 +1,11 @@
 <app-nav 
     [activeClass]='homepageUrl'
+    [scrollActiveNavNoMatterWhat]='scrollActiveNavNoMatterWhat'
     [activeClassScroll]='scrollStyles'
     (currencyChange)='onCurrencyChange($event)' 
-    [currencySetHandler]="currency$ | async"></app-nav>
+    [currencySetHandler]="currency$ | async">
+
+</app-nav>
 <router-outlet></router-outlet>
 <app-payment-method-stripe></app-payment-method-stripe>
 <app-footer></app-footer>

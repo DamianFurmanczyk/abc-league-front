@@ -146,12 +146,11 @@
     padding: 0;
   }
   div.links-lists-column {
-    margin-top: 1.5rem;
-    margin-right: -3rem;
+    height: 240px;
+    margin: 1.5rem 0 -2rem 8rem;
     &>ul:first-of-type {
         margin-right: 5rem;
       }
-    margin-left: 4rem;
   }
 
   .faq-column { 
@@ -167,16 +166,23 @@
   }
 }
 
-@media (max-width: $s) {
+@media (max-width: $xs) {
   .footer-content-wrapper {
     margin-top: 1rem;
     flex-direction: column-reverse;
     align-items: center;
   }
   div.links-lists-column {
-    margin-right: 0;
+    margin: 6.5rem 0;
     width: 100%;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    &>ul {
+      margin: 0 !important;
+      text-align: center;
+    }
+
     ul {
       margin: 0;
 

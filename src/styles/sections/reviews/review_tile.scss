@@ -50,8 +50,15 @@
   }
 }
 
-@media (max-width: $xs) {
+@media (max-width: $m) {
   .review {
     width: calc(100%/2 - 3rem);
+  }
+}
+
+@media (max-width: $xs) {
+  .review {
+    width: 100%;
+    margin-right: 0;
   }
 }

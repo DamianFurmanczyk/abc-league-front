@@ -13,6 +13,9 @@ export class NavComponent implements OnInit {
   @Input() set activeClass(flag:  boolean) {
     this.activeClassSet = flag;
   }
+  @Input() set scrollActiveNavNoMatterWhat(flag:  boolean) {
+    this.scrollActiveNavAnyways = flag;
+  }
   @Input() set activeClassScroll(flag:  boolean) {
     this.activeClassScrollSet = flag;
   }
@@ -22,7 +25,8 @@ export class NavComponent implements OnInit {
   }
 
   @Output() currencyChange = new EventEmitter();
-  
+
+  scrollActiveNavAnyways: boolean;
   activeClassScrollSet: boolean
   activeClassSet: boolean;
   dropOpen = [false, false];

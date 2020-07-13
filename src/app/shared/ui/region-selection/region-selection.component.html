@@ -1,16 +1,18 @@
 
     <section class="regions">
       <h2>Choose your region</h2>
-      <div class="regions-wrapper">
-          
-        <ng-container *ngFor="let region of regions">
-            <figure (click)="selectRegion(region)" [ngClass]="['region', selectedRegionSet.id == region.id ? ' active' : '']">
-                <div class="region_caption">{{region.full_name}}</div>
-                <div class="region_img-wrapper">
-                    <img [src]="'assets/img/' + region.name + '.png'" alt="region_img">
-                </div>
-            </figure>
-        </ng-container>
+      <perfect-scrollbar>
+        <div class="regions-wrapper">
+            
+            <ng-container >
+                <figure *ngFor="let region of regions" (click)="selectRegion(region)" [ngClass]="['region', selectedRegionSet.id == region.id ? ' active' : '']">
+                    <div class="region_caption">{{region.full_name}}</div>
+                    <div class="region_img-wrapper">
+                        <img [src]="'assets/img/' + region.name + '.png'" alt="region_img">
+                    </div>
+                </figure>
+            </ng-container>
 
       </div>
+    </perfect-scrollbar>
   </section>

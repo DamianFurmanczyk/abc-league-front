@@ -1,10 +1,15 @@
-
-import { MainComponent } from './../main/main.component';
-import { ReviewsFacade } from './state/facades/reviews.facade';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {};
+
+import { MainComponent } from './../main/main.component';
 
 import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheConditioned.resolver';
 import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
@@ -16,6 +21,7 @@ import { ReviewsInitiateResolver } from '../resolvers/reviews.resolver';
 import * as fromApp from './state/app.reducer';
 
 import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
+import { ReviewsFacade } from './state/facades/reviews.facade';
 
 import { RegionSelectionComponent } from '../shared/ui/region-selection/region-selection.component';
 import { PaymentMethodStripeComponent } from '../shared/ui/payment-method-stripe/payment-method-stripe.component';
@@ -59,23 +65,28 @@ import { AppComponent } from '../app.component';
     FooterComponent,
     CheckoutDialogComponent,
     HomepageFeatureComponent,
-    
     AddReviewFormComponent,
     ReviewsFeatureComponent,
     AccountsFeatureComponent,
     NavComponent
   ],
   imports: [
+    PerfectScrollbarModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forFeature(
       fromApp.APP_FEATURE_KEY,
       fromApp.reducer
     ),
     EffectsModule.forFeature([AppEffects])
   ],
-  providers: [
+  providers: [    {
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  },
     DataAccessService,
     ReviewsInitiateResolver,
     ReviewsFacade,

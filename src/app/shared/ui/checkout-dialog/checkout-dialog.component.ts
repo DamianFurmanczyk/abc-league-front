@@ -1,3 +1,4 @@
+import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../+ngrx/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
@@ -13,6 +14,7 @@ import { EventEmitter } from '@angular/core';
 export class CheckoutDialogComponent implements OnInit, AfterViewInit {
   @ViewChild('popup') popup: ElementRef;
   @Output() checkoutToggle = new EventEmitter();
+  @Input() selRegion: Region;
   @Input() set selectedAccount(acc: AccountWithCountAndOrderQty) {
     this.selAccount = acc;
     this.price = acc.priceAfterConversion * acc.orderQty;

@@ -1,18 +1,25 @@
+import { AddReviewFormPresenterService } from './add-review-form.presenter';
+import { ReviewToAdd } from './../../../models/reviewToAdd.interface';
 import { Component, OnInit, Output, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-add-review-form',
   templateUrl: './add-review-form.component.html',
-  styleUrls: ['./add-review-form.component.scss']
+  styleUrls: ['./add-review-form.component.scss'],
+  providers: [AddReviewFormPresenterService]
 })
 export class AddReviewFormComponent implements OnInit, AfterViewInit {
   @ViewChild('form') form: ElementRef;
   @Output() toggleAddReviewForm = new EventEmitter<void>();
-  stars = Array.from(Array(5));
+  @Output() addReview = new EventEmitter<ReviewToAdd>();
+  reviewForm: FormGroup;
 
-  constructor() { 
-    // console.log(this.stars)
+  get f() { return this.reviewForm.controls}
+
+  constructor(public presenter: AddReviewFormPresenterService) { 
+    this.reviewForm = this.presenter.reviewForm;
   }
 
   hideFormAndToggleDisplayAfter() {
@@ -23,21 +30,11 @@ export class AddReviewFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // console.log(this.form)
-    // console.log(this.form.nativeElement.classList)
     setTimeout(() => {
       this.form.nativeElement.classList.add('active');
     }, 10);
   }
 
-  onStarClick(i: number) {
-    const activeStarsArr = 'active '.repeat(i + 1).split(' ');
-    activeStarsArr.pop()
-    this.stars = [...activeStarsArr, ...Array(4-i)];
-
-    // console.log(activeStarsArr)
-    // console.log(this.stars)
-  }
 
   ngOnInit(): void {
   }

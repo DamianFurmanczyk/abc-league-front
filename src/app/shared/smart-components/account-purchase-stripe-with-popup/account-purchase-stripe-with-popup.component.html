@@ -1,7 +1,7 @@
 <app-account-purchase-stripe 
 (changeSelectedAccount)="onChangeSelectedAccount($event)"
 (checkoutToggle)="onToggleCheckoutFlag()"  
-[currency]='currency | async' 
+[currency]='currency$ | async' 
 [alternativeStyles]='altStyles'
 (changeOrderQuantity)="onChangeOrderQuantity($event)"
 [accounts]='accountsExtended$ | async'></app-account-purchase-stripe>
@@ -9,6 +9,7 @@
 <app-checkout-dialog 
 [selectedAccount]='selectedAccount'
 (changeOrderQuantity)="onChangeOrderQuantity($event)"
+[selRegion]='selRegion$ | async' 
 *ngIf="showCheckoutFlag"
-[currency]='currency | async' 
+[currency]='currency$ | async' 
 (checkoutToggle)='onToggleCheckoutFlag()'></app-checkout-dialog>

@@ -1,3 +1,4 @@
+import { Region } from './../../../models/region.interface';
 import { Account } from './../../../models/account.interface';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
@@ -15,7 +16,8 @@ export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestro
   @Input() altStyles?: boolean = false;
   accountsExtended$: BehaviorSubject<AccountWithCountAndOrderQty[]> = new BehaviorSubject([]);
   destroyed$: Subject<boolean> = new Subject();
-  currency: Observable<currencyData> = this.facade.currency$;
+  currency$: Observable<currencyData> = this.facade.currency$;
+  selRegion$: Observable<Region> = this.facade.selectedRegion$;
   selectedAccount: AccountWithCountAndOrderQty;
   set accountsSetter(accData: {acc: Account[], count: number[]}) {
     if(!accData.acc) return;

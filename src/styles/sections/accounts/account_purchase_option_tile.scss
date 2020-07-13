@@ -1,14 +1,17 @@
 .account-options {
   background: $lightGray;
   padding: 4% 0;
+
 }
 
 .account-options-wrapper {
   @include container(1400px);
-  max-width: 100%;
+  width: 100%;
   display: flex;
   align-items: stretch;
-  justify-content: center;
+  justify-content: center;    
+  padding: 2rem 2rem 1rem 2rem;
+  width: 90%;
 
   &.alternative {
     @include container(1300px);
@@ -19,16 +22,6 @@
       filter: brightness(98%);
       opacity: .8;
     }
-  }
-}
-
-@media (max-width: $l) {
-  .account-options-wrapper {
-    padding: 2rem 2rem 1rem 2rem;
-    width: 90%;
-    overflow-y: unset;
-    overflow-x: auto;
-    justify-content: unset;
   }
 }
 
@@ -207,5 +200,22 @@ div.account:hover {
     box-shadow: 0 0 20px -5px $blue;
     transform: translateY(-40%);
     left: -10px;
+  }
+}
+
+@media (max-width: $xm2) {
+
+  .account-options-wrapper:not(.alternative) {
+    justify-content: unset;
+  }
+}
+
+@media (max-width: 1400px) {
+  .account-options-wrapper.alternative {
+    .ps-content-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    justify-content: unset;
   }
 }

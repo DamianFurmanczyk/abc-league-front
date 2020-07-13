@@ -1,26 +1,28 @@
 <div class="popup-overlay"></div>
 
-<form class="add-review-form" #form>
+<form class="add-review-form" [formGroup]="reviewForm" #form (submit)="presenter.submitAddReviewForm($event)">
     <h2> Add review
         <span (click)='hideFormAndToggleDisplayAfter()' class="fa fa-times"></span>
     </h2>
 
     <div class="rating-display">
         <small>Rating</small>
-        <span *ngFor="let item of stars; let i = index" (click)="onStarClick(i)" [ngClass]="['fa fa-star', item == 'active' ? 'active' : '']"></span>
+        <span *ngFor="let item of presenter.stars; let i = index" (click)="presenter.onStarClick(i)" [ngClass]="['fa fa-star', item == 'active' ? 'active' : '']"></span>
     </div>
 
     <div class="add-review-form_input-wrapper">
         <label for="name">Name</label>
-        <input type="text" id="name">
+        <input type="text" id="name" formControlName="author">
+        <span class="add-review-form_input-wrapper_error-msg" *ngIf="f.author.touched && f.author.hasError('required')">Invalid</span>
     </div>
-
+    
     <div class="add-review-form_input-wrapper">
         <label for="review">Review</label>
-        <textarea id="review" cols="20" rows="8" placeholder="Type your review here"></textarea>
+        <textarea formControlName="tekst" id="review" cols="20" rows="8" placeholder="Type your review here"></textarea>
+        <span class="add-review-form_input-wrapper_error-msg" *ngIf="f.tekst.touched && f.tekst.hasError('required')">Invalid</span>
     </div>
 
-    <button>
+    <button [disabled]="reviewForm.invalid || !presenter.starsTouched">
         POST REVIEW
     </button>
 </form>

@@ -1,6 +1,8 @@
-<nav  [ngClass]="[activeClassSet ? 'active' : '', activeClassScrollSet && !activeClassSet ? 'scrollActive' : '']" class="hero_nav nav">
+
+<nav  [ngClass]="{'active':activeClassSet, 'scrollActive': activeClassScrollSet && !activeClassSet || scrollActiveNavAnyways && activeClassScrollSet}" class="hero_nav nav">
   <figure routerLink="/" (click)="scrollTopOnNavigate('/')" routerLinkActive="active" class="nav_li nav_li--icon">
       <img src="assets/img/navIcon.png" alt="icon" />
+      <!-- dorobic box shadow na home page -->
   </figure>
   <ul id="nav_ul" class="nav_ul">
       <div class="nav_ul-left-side-wrapper">

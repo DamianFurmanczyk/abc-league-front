@@ -48,7 +48,8 @@ export class DataAccessService {
   }
 
   sendReview(review) {
-    return this.http.post(this.apiUrl + 'reviews/add', { ...review, tekst: review.tekst.trim() });
+    console.log(review);
+    return this.http.get(this.apiUrl + 'reviews/add', { ...review, tekst: review.tekst.trim() });
   }
 
   initiatePayment(description: string, email: string, price: number | string, currency: string, quantity: number) {
