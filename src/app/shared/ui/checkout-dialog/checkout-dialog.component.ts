@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../+ngrx/services/app.service';
@@ -15,6 +16,9 @@ export class CheckoutDialogComponent implements OnInit, AfterViewInit {
   @ViewChild('popup') popup: ElementRef;
   @Output() checkoutToggle = new EventEmitter();
   @Input() selRegion: Region;
+  @Input() set regions(regions: Region[]) {
+    regions.forEach((el: Region) => this.regionsIdToNameMap[el.id] = el.name);
+  }
   @Input() set selectedAccount(acc: AccountWithCountAndOrderQty) {
     this.selAccount = acc;
     this.price = acc.priceAfterConversion * acc.orderQty;
@@ -25,23 +29,25 @@ export class CheckoutDialogComponent implements OnInit, AfterViewInit {
   selAccount: AccountWithCountAndOrderQty;
   price: number;
   showCouponInputFlag: boolean = false;
-  regionsIdToNameMap = {
-    1: 'EUNE',
-    2: 'NA',
-    3: 'EUW',
-    4: 'TR',
-    5: 'RU',
-    6: 'BR',
-    7: 'LAN',
-    8: 'LAS',
-    9: 'OCE',
-    10: 'JP'
-  }
+  regionsIdToNameMap = {};
+  displayEmailField = false;
+  emailForm: FormGroup;
+  email = '';
 
-  constructor(private DataAccessService: DataAccessService) { }
+  constructor(private DataAccessService: DataAccessService, private fb: FormBuilder) {
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.email, Validators.required]]
+    });
+    this.emailForm.valueChanges.subscribe(console.log)
+    this.emailForm.controls.email.valueChanges.subscribe((val: string) => this.email = val.trim());
+   }
 
   ngOnInit(): void {
-    this.onInitiatePayment();
+    // this.onInitiatePayment();
+  }
+
+  changeEmailFormDisplay(flag: boolean) {
+    this.displayEmailField = flag;
   }
 
   onInitiatePayment() {

@@ -20,7 +20,7 @@ export class RegionSelectionComponent implements OnInit, OnDestroy {
   regions: Region[];
   selectedRegionSet: Region;
   
-  constructor(private route: ActivatedRoute, private facade: AppFacade) { }
+  constructor(private facade: AppFacade) { }
 
   selectRegion(regionId: number) {
     this.facade.SelectRegion(regionId);
@@ -37,13 +37,6 @@ export class RegionSelectionComponent implements OnInit, OnDestroy {
       tap(res => this.regions = res),
       takeUntil(this.destroyed$)
     ).subscribe();
-
-    this.route.data.pipe(tap(console.log))
-    .subscribe((data) => {
-      // this.regions = data.regions.pipe();
-      // console.log(this.regions)
-      // console.log(data)
-    });
 
   }
 

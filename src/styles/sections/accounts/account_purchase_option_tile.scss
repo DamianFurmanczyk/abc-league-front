@@ -6,7 +6,6 @@
 
 .account-options-wrapper {
   @include container(1400px);
-  width: 100%;
   display: flex;
   align-items: stretch;
   justify-content: center;    
@@ -206,16 +205,16 @@ div.account:hover {
 @media (max-width: $xm2) {
 
   .account-options-wrapper:not(.alternative) {
+    width: 100%;
+    margin: 0;
     justify-content: unset;
   }
 }
 
 @media (max-width: 1400px) {
   .account-options-wrapper.alternative {
-    .ps-content-wrapper {
-      display: flex;
-      flex-wrap: nowrap;
-    }
+    width: 100%;
+    margin: 0;
     justify-content: unset;
   }
 }

@@ -1,3 +1,4 @@
+import { ReviewToAdd } from './../../../models/reviewToAdd.interface';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
@@ -16,6 +17,12 @@ export class ReviewsFacade {
   loadReviews(): void {
     this.store.dispatch(
       new fromAppActions.LoadReviews()
+    );
+  }
+
+  addReview(newReview: ReviewToAdd): void {
+    this.store.dispatch(
+      new fromAppActions.AddReview(newReview)
     );
   }
 }

@@ -1,10 +1,10 @@
 <app-reviews-list 
-(toggleAddReviewForm)='onToggleAddReviewForm()' 
-[reviews]='reviews$ | async'>
+    (toggleAddReviewForm)='onToggleAddReviewForm()' 
+    [reviews]='reviews$ | async'>
 </app-reviews-list>
 
 <app-add-review-form 
-*ngIf="showAddReviewFormFlag" 
-(toggleAddReviewForm)='onToggleAddReviewForm()'>
-(addReview)='onAddReview($event)'
+    *ngIf="showAddReviewFormFlag" 
+    (toggleAddReviewForm)='onToggleAddReviewForm()'>
+    (addReview)='onAddReview($event)'
 </app-add-review-form>

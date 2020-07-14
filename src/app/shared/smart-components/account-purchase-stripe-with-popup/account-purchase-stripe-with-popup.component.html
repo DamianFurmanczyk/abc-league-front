@@ -8,6 +8,7 @@
 
 <app-checkout-dialog 
 [selectedAccount]='selectedAccount'
+[regions]='regions$ | async'
 (changeOrderQuantity)="onChangeOrderQuantity($event)"
 [selRegion]='selRegion$ | async' 
 *ngIf="showCheckoutFlag"

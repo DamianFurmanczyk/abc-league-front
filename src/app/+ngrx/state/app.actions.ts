@@ -1,5 +1,5 @@
+import { ReviewToAdd } from './../../models/reviewToAdd.interface';
 import { Action } from '@ngrx/store';
-import { HttpErrorResponse } from '@angular/common/http';
 
 export namespace fromAppActions {
   export enum Types {
@@ -47,6 +47,22 @@ export namespace fromAppActions {
   }
   export class LoadAccountsFail implements Action {
     readonly type = Types.LoadAccountsFail;
+
+    constructor(public payload) {}
+  }
+  
+  export class AddReview implements Action {
+    readonly type = Types.AddReview;
+
+    constructor(public payload: ReviewToAdd) {}
+  }
+  export class AddReviewSuccess implements Action {
+    readonly type = Types.AddReviewSuccess;
+
+    constructor(public payload) {}
+  }
+  export class AddReviewFail implements Action {
+    readonly type = Types.AddReviewFail;
 
     constructor(public payload) {}
   }
@@ -131,4 +147,7 @@ export namespace fromAppActions {
     | LoadCurrencySuccess
     | LoadCurrencyFail
     | SelectRegion
+    | AddReview
+    | AddReviewSuccess
+    | AddReviewFail
 }

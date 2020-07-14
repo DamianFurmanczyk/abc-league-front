@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { ReviewToAdd } from './../../models/reviewToAdd.interface';
 import { DataAccessService } from './../../+ngrx/services/app.service';
 import { Observable } from 'rxjs';
@@ -21,11 +22,11 @@ export class ReviewsFeatureComponent implements OnInit {
   constructor(private facade: ReviewsFacade, private daService: DataAccessService) { }
 
   ngOnInit(): void {
-    this.reviews$ = this.facade.reviews$;
+    this.reviews$ = this.facade.reviews$.pipe();
   }
 
   onAddReview(review: ReviewToAdd) {
-    this.daService.sendReview(review);
+    this.daService.addReview(review);
   }
 
 }

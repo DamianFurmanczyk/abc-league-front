@@ -1,3 +1,4 @@
+import { ReviewsFacade } from './../../../+ngrx/state/facades/reviews.facade';
 import { ReviewToAdd } from './../../../models/reviewToAdd.interface';
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -9,7 +10,7 @@ export class AddReviewFormPresenterService {
     stars = Array.from(Array(5));
     starsTouched = false;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private facade: ReviewsFacade) {
       this.reviewForm = this.formBuilder.group({
         author: ['', Validators.required],
         tekst: ['', Validators.required]
@@ -23,19 +24,16 @@ export class AddReviewFormPresenterService {
       this.starsTouched = true;
     }
 
-    getReviewDataQueryString() {
-        const reviewToAdd = <ReviewToAdd>{author: this.reviewForm.value.author, tekst: this.reviewForm.value.tekst, stars: this.stars.length};
-
-        return Object.keys(reviewToAdd).map(function(el) {
-          return encodeURIComponent(el) + "=" + encodeURIComponent(reviewToAdd[el]);
-        }).join('&');
+    getReviewToAdd() {
+      return <ReviewToAdd>{author: this.reviewForm.value.author.trim(), tekst: this.reviewForm.value.tekst.trim(), stars: this.stars.length};
     }
 
     submitAddReviewForm(e: Event) {
       e.preventDefault();
       
       if(this.reviewForm.invalid && this.stars.length == 0) return;
-      console.log(this.getReviewDataQueryString())
+      console.log(this.getReviewToAdd())
+      this.facade.addReview(this.getReviewToAdd());
     }
     
 }

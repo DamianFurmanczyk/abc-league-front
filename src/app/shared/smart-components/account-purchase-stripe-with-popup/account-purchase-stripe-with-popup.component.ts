@@ -18,6 +18,7 @@ export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestro
   destroyed$: Subject<boolean> = new Subject();
   currency$: Observable<currencyData> = this.facade.currency$;
   selRegion$: Observable<Region> = this.facade.selectedRegion$;
+  regions$: Observable<Region[]> = this.facade.regions$;
   selectedAccount: AccountWithCountAndOrderQty;
   set accountsSetter(accData: {acc: Account[], count: number[]}) {
     if(!accData.acc) return;

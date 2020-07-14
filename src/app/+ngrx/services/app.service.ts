@@ -47,9 +47,9 @@ export class DataAccessService {
     return this.http.get(this.apiUrl + 'regions');
   }
 
-  sendReview(review) {
+  addReview(review) {
     console.log(review);
-    return this.http.get(this.apiUrl + 'reviews/add', { ...review, tekst: review.tekst.trim() });
+    return this.http.get(this.apiUrl + 'reviews/add/sadsda/sdsad/5');
   }
 
   initiatePayment(description: string, email: string, price: number | string, currency: string, quantity: number) {

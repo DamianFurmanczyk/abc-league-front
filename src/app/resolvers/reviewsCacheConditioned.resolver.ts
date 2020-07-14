@@ -8,6 +8,7 @@ import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { fromAppActions } from '../+ngrx/state/app.actions';
 import { Review } from '../models/reviews.interface';
+import { reviewsAdapter } from '../+ngrx/state/app.reducer';
 
 @Injectable()
 export class ReviewsCacheConditionedResolver implements Resolve<Observable<Review[]>> {
@@ -17,8 +18,8 @@ export class ReviewsCacheConditionedResolver implements Resolve<Observable<Revie
 
     return this.facade.reviews$.pipe(
         first(),
-        mergeMap((reviews: Review[] | null) => {
-            if(reviews == null) {
+        mergeMap((reviews: Review[]) => {
+            if(reviews.length == 0) {
                 this.facade.loadReviews();
 
                 return this.action$.pipe(

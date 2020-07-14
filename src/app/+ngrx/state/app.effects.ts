@@ -66,10 +66,25 @@ export class AppEffects {
     ofType(fromAppActions.Types.LoadReviews),
     mergeMap((action: fromAppActions.LoadReviews) =>
       this.dataAccessService.getReviews().pipe(
-        map(resp => new fromAppActions.LoadReviewsSuccess(resp)),
+        map(resp =>{
+          console.log(resp)
+          return new fromAppActions.LoadReviewsSuccess(resp)
+        }),
         catchError(err => of(new fromAppActions.LoadReviewsFail(err)))
       )
     )
+  );
+
+  @Effect()
+  addReview$ = this.actions$.pipe(
+    ofType(fromAppActions.Types.AddReview),
+    mergeMap((action: fromAppActions.AddReview) => {
+      console.log(action);
+      return this.dataAccessService.addReview('sd').pipe(
+        map(() => new fromAppActions.AddReviewSuccess(action.type)),
+        catchError(err => of(new fromAppActions.AddReviewFail(err)))
+      )
+    })
   );
 
   @Effect()

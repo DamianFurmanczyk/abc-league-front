@@ -50,18 +50,42 @@
 
   <div class="checkout-dialog_hr"></div>
 
-  <div class="checkout-dialog_info">
+  <div class="checkout-dialog_info-or-email-field">
 
-    <aside>
-      <img src="assets/img/3d.svg" alt="box">
-      <p>Account details will be shown instantly after payment</p>
-    </aside>
+    <ng-container *ngIf="!displayEmailField; else emailFieldTemplate">
+      <aside>
+        <img src="assets/img/3d.svg" alt="box">
+        <p>Account details will be shown instantly after payment</p>
+      </aside>
 
-    <aside>
-      <img src="assets/img/lock.svg" alt="lock">
-      <p>Account details will be shown instantly after payment</p>
-    </aside>
+      <aside>
+        <img src="assets/img/lock.svg" alt="lock">
+        <p>Account details will be shown instantly after payment</p>
+      </aside>
+    </ng-container>
 
+    <ng-template #emailFieldTemplate>
+
+      <form class="email-form" [formGroup]="emailForm">
+
+        <div>
+          <span class="fa fa-times" (click)="changeEmailFormDisplay(false)"></span>
+          <p>Please enter your email to proceed</p>
+        </div>
+
+        <div>
+          <input  [ngClass]="{'valid':  emailForm.valid, 'invalid':  emailForm.invalid && emailForm.touched}" formControlName="email" type="text">
+          <br>
+
+          <small  [ngClass]="{'active':  emailForm.valid}"> next
+            <span class="fa fa-chevron-right"></span>
+          </small>
+        </div>
+
+      </form>
+
+    </ng-template>
+    
   </div>
 
   <div class="checkout-dialog_hr"></div>
@@ -82,7 +106,7 @@
       </div>
 
       <div class="payment-tile payment-tile--single-payment">
-        <img src="assets/img/bitcoinTransp.svg" alt="paymentOption">
+        <img src="assets/img/bitcoinTransp.svg" (click)="changeEmailFormDisplay(true)" alt="paymentOption">
       </div>
 
       <div class="payment-tile">

@@ -1,7 +1,7 @@
 import { Account } from './../../models/account.interface';
 import { currencyData } from './../../models/currencyData.interface';
 import { Review } from './../../models/reviews.interface';
-import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { fromAppActions } from './app.actions';
 export const APP_FEATURE_KEY = 'app';
@@ -28,15 +28,17 @@ export interface AppDetailsInterface {
 
 };
 
-export const appAdapter: EntityAdapter<
-  AppDetailsInterface
-> = createEntityAdapter<AppDetailsInterface>({
+export const reviewsAdapter: EntityAdapter<
+  Review
+> = createEntityAdapter<Review>({
   // selectId: model => model.name
 });
 
+interface ReviewsEntitiesState extends EntityState<Review> {}
+
 export interface AppStateInterface {
   currency: currencyData | null,
-  reviews: Review[] | null,
+  reviews: ReviewsEntitiesState,
   reviewsLoading: boolean,
   currencyLoading: boolean,
   regions: any[] | null,
@@ -52,7 +54,7 @@ export interface AppStateInterface {
 
 export const initialState: AppStateInterface = {
   currency: null,
-  reviews: null,
+  reviews: reviewsAdapter.getInitialState(),
   reviewsLoading: false,
   reviewsLoadingErr: false,
   currencyLoading: false,
@@ -177,8 +179,8 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadCurrencySuccess: {
-console.log(action.payload);
-console.log(state.accounts);
+// console.log(action.payload);
+// console.log(state.accounts);
       state = {
         ...state,
         currencyLoading: false,
@@ -211,16 +213,17 @@ console.log(state.accounts);
     }
 
     case fromAppActions.Types.LoadReviewsSuccess: {
-      console.log(action.payload.map)
-      let reviewsCopy = JSON.parse(JSON.stringify(action.payload));
-      state = {
-        ...state,
-        reviews: reviewsCopy.map(el => {
+      const reviewsCopy = JSON.parse(JSON.stringify(action.payload)),
+      loadedReviewsAltered = reviewsCopy.map(el => {
           if(!el.updated_at) return el;
           return  {
           ...el, updated_at: el.updated_at.split('T')[0]
         }}
-        ),
+      );
+
+      state = {
+        ...state,
+        reviews: reviewsAdapter.setAll(loadedReviewsAltered, state.reviews),
         reviewsLoading: false
       };
 
@@ -265,6 +268,16 @@ console.log(state.accounts);
         ...state,
         accountsLoadingErr: true,
         accountsLoading: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.AddReviewSuccess: {
+      console.log(action.payload);
+      state = {
+        ...state,
+        reviews: reviewsAdapter.addOne(action.payload, state.reviews)
       };
 
       break;

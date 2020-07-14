@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   APP_FEATURE_KEY,
-  appAdapter,
+  reviewsAdapter,
   AppPartialState,
   AppStateInterface
 } from './app.reducer';
@@ -11,7 +11,8 @@ export const getAppState = createFeatureSelector<
   AppStateInterface
 >(APP_FEATURE_KEY);
 
-const { selectAll } = appAdapter.getSelectors();
+const { selectAll } = reviewsAdapter.getSelectors();
+
 export const getCurrency = createSelector(
   getAppState,
   (state: AppStateInterface) => state.currency
@@ -19,7 +20,7 @@ export const getCurrency = createSelector(
 
 export const getReviews = createSelector(
   getAppState,
-  (state: AppStateInterface) => state.reviews
+  (state: AppStateInterface) => selectAll(state.reviews)
 );
 
 export const getReviewsLoading = createSelector(

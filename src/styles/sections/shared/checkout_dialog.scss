@@ -92,10 +92,56 @@
   }
 }
 
-.checkout-dialog_info {
+.checkout-dialog_info-or-email-field {
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
+
+  .email-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .fa-times {
+      float: right;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    
+    p {
+      color: $blackish;
+      font-size: .9rem;
+      margin-bottom: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    input {
+      padding: 9px 12px;
+      border: 1px solid $blackish;
+      border-radius: 4px;
+
+      &.valid {
+        border-color: $blue;
+      }
+
+      &.invalid {
+        border-color: #C54C5D;
+      }
+    }
+
+    small {
+      font-size: .8rem;
+      color: $gray;
+      float: right;
+      display: block;
+      margin-top: 1rem;
+      &.active {
+        cursor: pointer;
+        color: $blue;
+      }
+    }
+  }
 
   img {
     height: 50px;
@@ -171,9 +217,8 @@
     margin-right: 0;
   }
 
-  
-
   img {
+    cursor: pointer;
     height: 32px;
     filter: grayscale(0%);
   }
