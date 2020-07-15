@@ -13,26 +13,20 @@
 }
 
 .logo-column {
-  width: 13rem;
+  width: 20rem;
   margin-right: 4rem;
 
   img {
-    margin-bottom: 1.5rem;
+    margin-bottom: .7rem;
     width: 90px;
   }
 
   figcaption {
-    font-size: .9rem;
-    font-weight: bold;
-    margin-bottom: .9rem;
-  }
-
-  p {
     color: $darkGray2;
     letter-spacing: .05rem;
     font-size: .7rem;
-    line-height: 2;
-   }
+    line-height: 1.5;
+  }
 }
 
 .columns-wrapper {
@@ -84,12 +78,47 @@
       margin-bottom: -1.4rem;
     }
   }
+
+  li {
+    margin-right: 1rem;
+  }
+
+  li:nth-of-type(1) {
+    dd.active {
+      height: 35px;
+    }
+  }
+
+  li:nth-of-type(2) {
+    dd.active {
+      height: 30px;
+    }
+  }
+
+  li:nth-of-type(3) {
+    dd.active {
+      height: 50px;
+    }
+  }
+
+  li:nth-of-type(4) {
+    dd.active {
+      height: 50px;
+    }
+  }
+
+  li:nth-of-type(5) {
+    dd.active {
+      height: 30px;
+    }
+  }
+
   dd {
     line-height: 1.1;    
     margin-top: -.3rem;
+    padding-right: 3rem;
     
     &.active {
-      height: 30px;
       pointer-events: all;
       opacity: 1;
     }
@@ -121,8 +150,8 @@
 
   &>ul {
     &:first-of-type {
-      margin-right: 6rem;
-      margin-left: -6rem;
+      margin-right: 3rem;
+      margin-left: -8rem;
     }
     &:last-of-type {
       margin-right: 1rem;
@@ -158,7 +187,7 @@
   }
 
   .logo-column {
-    margin-right: 7rem;
+    margin-right: 4rem;
   }
 
   .footer-content-wrapper {

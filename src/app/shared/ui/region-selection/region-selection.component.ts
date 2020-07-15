@@ -1,6 +1,6 @@
 import { Region } from './../../../models/region.interface';
 import { tap, takeUntil } from 'rxjs/operators';
-import { AppFacade } from './../../../+ngrx/state/facades/app.facade';
+import { AppFacade } from './../../../core/state/facades/app.facade';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';

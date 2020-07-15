@@ -1,5 +1,5 @@
 import { Region } from './../models/region.interface';
-import { AppFacade } from './../+ngrx/state/facades/app.facade';
+import { AppFacade } from './../core/state/facades/app.facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { map, take, first, mergeMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
 import { of, Subscription } from 'rxjs';
-import { fromAppActions } from '../+ngrx/state/app.actions';
+import { fromAppActions } from '../core/state/app.actions';
 
 @Injectable()
 export class RegionsCacheConditionedResolver implements Resolve<Region[]> {

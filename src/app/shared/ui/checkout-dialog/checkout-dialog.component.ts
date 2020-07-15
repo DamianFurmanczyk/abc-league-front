@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
-import { DataAccessService } from './../../../+ngrx/services/app.service';
+import { DataAccessService } from './../../../core/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { Component, OnInit, Output, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';

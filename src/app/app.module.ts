@@ -9,10 +9,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
-import * as fromApp from './+ngrx/state/app.reducer';
+import * as fromApp from './core/state/app.reducer';
 import { RouterModule } from '@angular/router';
-import { DataAccessModule } from './+ngrx/ngrx.module';
-import { AccountPurchaseStripeWithPopupComponent } from './shared/smart-components/account-purchase-stripe-with-popup/account-purchase-stripe-with-popup.component';
+import { DataAccessModule } from './core/core.module';
 
 @NgModule({
   declarations: [],

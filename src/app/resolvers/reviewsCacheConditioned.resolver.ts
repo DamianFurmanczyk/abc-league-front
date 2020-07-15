@@ -1,4 +1,4 @@
-import { ReviewsFacade } from '../+ngrx/state/facades/reviews.facade';
+import { ReviewsFacade } from '../core/state/facades/reviews.facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { map, take, mergeMap, first } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
-import { fromAppActions } from '../+ngrx/state/app.actions';
+import { fromAppActions } from '../core/state/app.actions';
 import { Review } from '../models/reviews.interface';
-import { reviewsAdapter } from '../+ngrx/state/app.reducer';
+import { reviewsAdapter } from '../core/state/app.reducer';
 
 @Injectable()
 export class ReviewsCacheConditionedResolver implements Resolve<Observable<Review[]>> {

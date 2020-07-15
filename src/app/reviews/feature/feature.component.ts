@@ -1,9 +1,9 @@
 import { tap } from 'rxjs/operators';
 import { ReviewToAdd } from './../../models/reviewToAdd.interface';
-import { DataAccessService } from './../../+ngrx/services/app.service';
+import { DataAccessService } from './../../core/services/app.service';
 import { Observable } from 'rxjs';
 import { Review } from './../../models/reviews.interface';
-import { ReviewsFacade } from './../../+ngrx/state/facades/reviews.facade';
+import { ReviewsFacade } from './../../core/state/facades/reviews.facade';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

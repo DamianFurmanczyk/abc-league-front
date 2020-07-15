@@ -1,6 +1,5 @@
 import { ScrollService } from './../../utils/scrolls.service';
-import { Router } from '@angular/router';
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -10,6 +9,8 @@ import { EventEmitter } from '@angular/core';
 })
 
 export class NavComponent implements OnInit {
+  @ViewChild('navUl') navUl: ElementRef;
+  @ViewChild('hamburger') hamburger: ElementRef;
   @Input() set activeClass(flag:  boolean) {
     this.activeClassSet = flag;
   }
@@ -41,8 +42,14 @@ export class NavComponent implements OnInit {
 
   constructor(private scrollSer: ScrollService) { }
 
-  scrollTopOnNavigate(path: string) {
+  scrollTopOnNavigateAndDismiss() {
+    this.hideNavUl();
     this.scrollSer.scrollToTopOnNavigate();
+  }
+
+  hideNavUl() {
+    this.navUl.nativeElement.classList.contains('active') && this.navUl.nativeElement.classList.remove('active');
+    this.hamburger.nativeElement.classList.contains('hamburger--open') && this.hamburger.nativeElement.classList.remove('hamburger--open');
   }
 
   toggleDrop(i: number) {

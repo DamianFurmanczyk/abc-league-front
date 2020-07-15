@@ -4,7 +4,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { currencyData } from './../../../models/currencyData.interface';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
-import { AppFacade } from './../../../+ngrx/state/facades/app.facade';
+import { AppFacade } from './../../../core/state/facades/app.facade';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 @Component({

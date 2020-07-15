@@ -1,21 +1,20 @@
 
 <nav  [ngClass]="{'active':activeClassSet, 'scrollActive': activeClassScrollSet && !activeClassSet || scrollActiveNavAnyways && activeClassScrollSet}" class="hero_nav nav">
-  <figure routerLink="/" (click)="scrollTopOnNavigate('/')" routerLinkActive="active" class="nav_li nav_li--icon">
+  <figure routerLink="/" (click)="scrollTopOnNavigateAndDismiss()" routerLinkActive="active" class="nav_li nav_li--icon">
       <img src="assets/img/navIcon.png" alt="icon" />
-      <!-- dorobic box shadow na home page -->
   </figure>
-  <ul id="nav_ul" class="nav_ul">
+  <ul #navUl id="nav_ul" class="nav_ul">
       <div class="nav_ul-left-side-wrapper">
-          <li routerLink="/accounts" routerLinkActive="active" (click)="scrollTopOnNavigate('/accounts')" class="nav_li">Accounts</li>
-          <li routerLink="/reviews" routerLinkActive="active" (click)="scrollTopOnNavigate('/reviews')" class="nav_li">Reviews</li>
+          <li routerLink="/accounts" routerLinkActive="active" (click)="scrollTopOnNavigateAndDismiss()" class="nav_li">Accounts</li>
+          <li routerLink="/reviews" routerLinkActive="active" (click)="scrollTopOnNavigateAndDismiss()" class="nav_li">Reviews</li>
           <li class="nav_li nav_li--dropdown" [class]="'nav_li nav_li--dropdown ' + (dropOpen[0] ? 'active' : '')"
           (click)='toggleDrop(0)'>
             More 
             <span class="fa fa-chevron-down"></span>
             <ul>
-              <li routerLink="/" (click)="scrollTopOnNavigate('/')">TOS</li>
-              <li routerLink="/terms-and-conditions" (click)="scrollTopOnNavigate('/terms-and-conditions')">Privacy policy</li>
-              <li routerLink="/" (click)="scrollTopOnNavigate('/')">Strona główna</li>
+              <li routerLink="/" (click)="scrollTopOnNavigateAndDismiss()">TOS</li>
+              <li routerLink="/terms-and-conditions" (click)="scrollTopOnNavigateAndDismiss()">Privacy policy</li>
+              <li routerLink="/" (click)="scrollTopOnNavigateAndDismiss()">Strona główna</li>
           </ul>
           </li>
       </div>
@@ -32,7 +31,7 @@
       </li>
   </ul>
   
-  <span class="hamburger" href="#">
+  <span #hamburger class="hamburger" href="#">
     <div class="hamburger__inner"></div>
   </span>  
 </nav>

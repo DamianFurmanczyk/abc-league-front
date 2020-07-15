@@ -1,7 +1,7 @@
 import { Router, ActivationEnd } from '@angular/router';
 import { currencyData } from './../models/currencyData.interface';
 import { Observable, Subject, fromEvent } from 'rxjs';
-import { AppFacade } from './../+ngrx/state/facades/app.facade';
+import { AppFacade } from './../core/state/facades/app.facade';
 import { Component, OnInit, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
 @Component({
@@ -38,6 +38,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   homepageUrl: boolean = true;
   scrollStyles: boolean = false;
   nav_ul: HTMLElement;
+
+  showCookiesBar = true;
 
   scrollActiveNavNoMatterWhat;
 

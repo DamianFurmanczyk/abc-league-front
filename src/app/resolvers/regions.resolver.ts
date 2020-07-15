@@ -1,5 +1,5 @@
 import { filter, first, tap } from 'rxjs/operators';
-import { AppFacade } from './../+ngrx/state/facades/app.facade';
+import { AppFacade } from './../core/state/facades/app.facade';
 import { Injectable } from '@angular/core';
 
 import { Resolve, Router, NavigationEnd } from '@angular/router';

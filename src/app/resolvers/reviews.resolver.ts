@@ -1,4 +1,4 @@
-import { ReviewsFacade } from './../+ngrx/state/facades/reviews.facade';
+import { ReviewsFacade } from './../core/state/facades/reviews.facade';
 import { filter, first, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
