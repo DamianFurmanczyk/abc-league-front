@@ -2,14 +2,14 @@ import { Router, ActivationEnd } from '@angular/router';
 import { currencyData } from './../models/currencyData.interface';
 import { Observable, Subject, fromEvent } from 'rxjs';
 import { AppFacade } from './../core/state/facades/app.facade';
-import { Component, OnInit, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
+export class MainComponent implements OnDestroy, AfterViewInit {
   @HostListener('window:click', ['$event.target'])
   onClick(targetElement: HTMLElement) {
     if(targetElement.classList.contains('hamburger__inner')) {
@@ -44,7 +44,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   scrollActiveNavNoMatterWhat;
 
   ngAfterViewInit() {
-    console.log('view init')
     this.nav_ul = document.querySelector('#nav_ul');
     this.elementsThatNeedToDeactivateOnWindowClick = this.getElementsThatNeedToDeactivateOnWindowClick();
   }
@@ -65,10 +64,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     fromEvent(window, 'scroll').pipe(
       throttleTime(50, undefined, {leading: true, trailing: true}),
       tap(() => {
-        // console.log(e);
         this.scrollStyles = window.pageYOffset > 0;
-        // console.log(this.scrollStyles)
-        // console.log(window.pageYOffset)
       }),
       takeUntil(this.destroyed$)
     ).subscribe();
@@ -92,9 +88,6 @@ getElementsThatNeedToDeactivateOnWindowClick() {
 
   onCurrencyChange(currency: string) {
     this.facade.LoadCurrency(currency);
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

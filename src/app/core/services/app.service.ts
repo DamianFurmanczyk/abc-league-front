@@ -48,7 +48,6 @@ export class DataAccessService {
   }
 
   addReview(review) {
-    console.log(review);
     return this.http.get(this.apiUrl + 'reviews/add/sadsda/sdsad/5');
   }
 

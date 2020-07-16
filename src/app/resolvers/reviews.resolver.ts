@@ -13,8 +13,7 @@ export class ReviewsInitiateResolver implements Resolve<Subscription> {
     return this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       first(),
-      tap(e => {
-        console.log('siema')
+      tap(() => {
         if(this.router.url == '/reviews') return;
     
         this.facade.loadReviews();

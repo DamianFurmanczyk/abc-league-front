@@ -9,15 +9,9 @@ export const APP_FEATURE_KEY = 'app';
 function getAccountsWithAppropCurrency(currency: currencyData, accArr: Account[]) {
   let accountsAccCopy = JSON.parse(JSON.stringify(accArr));
 
-  console.log(accArr)
-
   accountsAccCopy = accountsAccCopy.map(el => {
-    // console.log(+el.price_usd + ' ' + currency.exchangeRateToDollar, ' ' , +el.price_usd * currency.exchangeRateToDollar)
-    // console.log(String((+el.price_usd.split(' ')[0] * currency.exchangeRateToDollar).toFixed(2)))
-    // console.log(currency.exchangeRateToDollar);
     const newPrice =+el.price_usd * currency.exchangeRateToDollar
     el.priceAfterConversion = (newPrice).toFixed(2)
-    // console.log(el);
     return el;
   });
   
@@ -179,8 +173,6 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadCurrencySuccess: {
-// console.log(action.payload);
-// console.log(state.accounts);
       state = {
         ...state,
         currencyLoading: false,
@@ -274,7 +266,6 @@ export function reducer(
     }
 
     case fromAppActions.Types.AddReviewSuccess: {
-      console.log(action.payload);
       state = {
         ...state,
         reviews: reviewsAdapter.addOne(action.payload, state.reviews)

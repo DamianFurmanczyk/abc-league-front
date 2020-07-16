@@ -28,7 +28,6 @@ export class AppEffects {
     mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
         mergeMap(resp => {
-          console.log(resp)
           return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp['0']), of(resp['0'])])
         }),
         map(resp => new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0]})),
@@ -67,7 +66,6 @@ export class AppEffects {
     mergeMap((action: fromAppActions.LoadReviews) =>
       this.dataAccessService.getReviews().pipe(
         map(resp =>{
-          console.log(resp)
           return new fromAppActions.LoadReviewsSuccess(resp)
         }),
         catchError(err => of(new fromAppActions.LoadReviewsFail(err)))
@@ -79,7 +77,6 @@ export class AppEffects {
   addReview$ = this.actions$.pipe(
     ofType(fromAppActions.Types.AddReview),
     mergeMap((action: fromAppActions.AddReview) => {
-      console.log(action);
       return this.dataAccessService.addReview('sd').pipe(
         map(() => new fromAppActions.AddReviewSuccess(action.type)),
         catchError(err => of(new fromAppActions.AddReviewFail(err)))
@@ -109,80 +106,9 @@ export class AppEffects {
     )
   );
 
-  // @Effect()
-  // loadCurrencies$ = this.actions$.pipe(
-  //   ofType(fromAppActions.Types.loadCurrencyBasedOnLocation),
-  //   mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
-  //     this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
-  //       map(resp => {
-  //         console.log('asd123');
-  //         return new fromAppActions.loadCurrencyBasedOnLocationSuccess(resp);
-  //       }),
-  //       catchError((err, caught) => {
-  //         console.log('asd');
-  //         return of(new fromAppActions.loadCurrencyBasedOnLocationFail(err));
-  //       })
-  //     )
-  //   )
-  // );
-
   constructor(
     private actions$: Actions,
     private dataAccessService: DataAccessService,
     private store$: Store<AppPartialState>
-    // private store$: Store<PlanetsPartialState>
   ) {}
 }
-
-// @Effect()
-// loadPlanets$ = this.actions$.pipe(
-//   ofType(fromPlanetsActions.Types.LoadPlanets),
-//   switchMap((action: fromPlanetsActions.LoadPlanets) =>
-//     this.dataAccessService.getPlanets(action.payload).pipe(
-//       map(planets => new fromPlanetsActions.LoadPlanetsSuccess(planets)),
-//       catchError(error => of(new fromPlanetsActions.LoadPlanetsFail(error)))
-//     )
-//   )
-// );
-
-// @Effect()
-// loadPlanetsDetails$ = this.actions$.pipe(
-//   ofType(fromPlanetsActions.Types.LoadPlanetDetails),
-//   mergeMap((action: fromPlanetsActions.LoadPlanetDetails) =>
-//     this.dataAccessService.getPlanetsDetails(action.payload).pipe(
-//       map(
-//         planetsDetails =>
-//           new fromPlanetsActions.LoadPlanetDetailsSuccess(planetsDetails)
-//       ),
-//       catchError(err =>
-//         of(new fromPlanetsActions.LoadPlanetDetailsFailure(err))
-//       )
-//     )
-//   )
-// );
-
-// @Effect({
-//   dispatch: false
-// })
-// saveFaveToLocalStorage$ = this.actions$.pipe(
-//   ofType(fromPlanetsActions.Types.TogglePlanetsFavouriteStatus),
-//   // withLatestFrom(this.store$.select(getFavouritePlanetsArray)),
-//   tap(([action, faves]) =>
-//     this.dataAccessService.updateFavesLocalStorage(faves)
-//   )
-// );
-
-// @Effect()
-// loadFavesFromLocalStorage$ = this.actions$.pipe(
-//   ofType(fromPlanetsActions.Types.LoadPlanetsFavourites),
-//   mergeMap(() =>
-//     this.dataAccessService
-//       .loadFavesLocalStorage()
-//       .pipe(
-//         map(
-//           // (faves: PlanetDetailsInterface[]) =>
-//           //   new fromPlanetsActions.LoadPlanetsFavouritesSuccess(faves)
-//         )
-//       )
-//   )
-// );

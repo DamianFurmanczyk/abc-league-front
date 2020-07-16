@@ -1,10 +1,9 @@
-import { tap } from 'rxjs/operators';
 import { ReviewToAdd } from './../../models/reviewToAdd.interface';
 import { DataAccessService } from './../../core/services/app.service';
 import { Observable } from 'rxjs';
 import { Review } from './../../models/reviews.interface';
 import { ReviewsFacade } from './../../core/state/facades/reviews.facade';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-feature',

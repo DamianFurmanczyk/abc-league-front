@@ -1,14 +1,15 @@
 import { ScrollService } from './../../utils/scrolls.service';
-import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class NavComponent implements OnInit {
+export class NavComponent  {
   @ViewChild('navUl') navUl: ElementRef;
   @ViewChild('hamburger') hamburger: ElementRef;
   @Input() set activeClass(flag:  boolean) {
@@ -22,7 +23,7 @@ export class NavComponent implements OnInit {
   }
   @Input() set currencySetHandler(excludeCurr: { name: string, exchangeRateToDollar: number }) {
     this.activeCurrency = excludeCurr.name;
-    this.currencyOptions = [...this.currencyOptions.filter(el => el != excludeCurr.name), this.activeCurrency]
+    this.currencyOptions = this.allAvailableCurrencies.filter(el => el != excludeCurr.name);
   }
 
   @Output() currencyChange = new EventEmitter();
@@ -31,8 +32,9 @@ export class NavComponent implements OnInit {
   activeClassScrollSet: boolean
   activeClassSet: boolean;
   dropOpen = [false, false];
-  activeCurrency: string = '';
-  currencyOptions: string[] = ['PLN', 'EUR', 'GBP', 'USD'];
+  activeCurrency = 'PLN';
+  allAvailableCurrencies = ['EUR', 'GBP', 'USD', 'PLN'];
+  currencyOptions: string[] = [];
   currencySymbolMap = {
     'PLN': 'zł',
     'EUR': '€',
@@ -58,9 +60,6 @@ export class NavComponent implements OnInit {
 
   onCurrencyChange(currency: string) {
     this.currencyChange.emit(currency)
-  }
-
-  ngOnInit(): void {
   }
 
 }

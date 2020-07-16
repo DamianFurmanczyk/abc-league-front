@@ -3,16 +3,17 @@ import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../core/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
-import { Component, OnInit, Output, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-checkout-dialog',
   templateUrl: './checkout-dialog.component.html',
-  styleUrls: ['./checkout-dialog.component.scss']
+  styleUrls: ['./checkout-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CheckoutDialogComponent implements OnInit, AfterViewInit {
+export class CheckoutDialogComponent implements AfterViewInit {
   @ViewChild('popup') popup: ElementRef;
   @Output() checkoutToggle = new EventEmitter();
   @Input() selRegion: Region;
@@ -41,10 +42,6 @@ export class CheckoutDialogComponent implements OnInit, AfterViewInit {
     this.emailForm.valueChanges.subscribe(console.log)
     this.emailForm.controls.email.valueChanges.subscribe((val: string) => this.email = val.trim());
    }
-
-  ngOnInit(): void {
-    // this.onInitiatePayment();
-  }
 
   changeEmailFormDisplay(flag: boolean) {
     this.displayEmailField = flag;
@@ -76,8 +73,6 @@ export class CheckoutDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // console.log(this.form)
-    // console.log(this.form.nativeElement.classList)
     setTimeout(() => {
       this.popup.nativeElement.classList.add('active');
     }, 10);

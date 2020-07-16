@@ -1,6 +1,6 @@
 import { AddReviewFormPresenterService } from './add-review-form.presenter';
 import { ReviewToAdd } from './../../../models/reviewToAdd.interface';
-import { Component, OnInit, Output, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Output, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -8,9 +8,10 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-add-review-form',
   templateUrl: './add-review-form.component.html',
   styleUrls: ['./add-review-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [AddReviewFormPresenterService]
 })
-export class AddReviewFormComponent implements OnInit, AfterViewInit {
+export class AddReviewFormComponent implements AfterViewInit {
   @ViewChild('form') form: ElementRef;
   @Output() toggleAddReviewForm = new EventEmitter<void>();
   @Output() addReview = new EventEmitter<ReviewToAdd>();
@@ -33,10 +34,6 @@ export class AddReviewFormComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.form.nativeElement.classList.add('active');
     }, 10);
-  }
-
-
-  ngOnInit(): void {
   }
 
 }

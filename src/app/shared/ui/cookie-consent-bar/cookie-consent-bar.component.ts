@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-cookie-consent-bar',
   templateUrl: './cookie-consent-bar.component.html',
   styleUrls: ['./cookie-consent-bar.component.scss']
 })
-export class CookieConsentBarComponent implements OnInit {
+export class CookieConsentBarComponent {
   @Output() dismissCookiesBar = new EventEmitter();
   triggerTransition;
 
@@ -16,9 +16,6 @@ export class CookieConsentBarComponent implements OnInit {
     setTimeout(() => {
       this.dismissCookiesBar.emit();
     }, 400);
-  }
-
-  ngOnInit(): void {
   }
 
 }

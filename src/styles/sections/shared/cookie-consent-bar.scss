@@ -32,8 +32,8 @@ $transp_blackish: transparentize($color: $blackish, $amount: .5);
     }
 
     &_accept-btn {
-        color: transparentize($color: #fff, $amount: .2);
-        border-color: transparentize($color: #fff, $amount: .2);
+        color: transparentize($color: #fff, $amount: .1);
+        border-color: transparentize($color: #fff, $amount: .1);
         border: 2px solid;
         border-radius: 6px;
         background: transparent;

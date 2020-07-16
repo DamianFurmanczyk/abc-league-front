@@ -12,12 +12,6 @@ export class ReviewsListPresenterService {
     sortByDate(reviews: Review[], asc: boolean = true) {
         const reviewsCopy = [...reviews];
         const sortedArrayDesc  = reviewsCopy.sort((a,b) =>  {
-            // console.log(new Date(a.created_at).getMilliseconds())
-            // console.log(new Date(a.created_at))
-            // console.log(a.created_at)
-            // console.log(Moment(b.created_at).format())
-            // console.log(Moment(b.created_at).millisecond())
-            // console.log(Moment(a.created_at).millisecond())
             return Moment(a.updated_at ||a.created_at).valueOf() - Moment(b.updated_at || b.created_at).valueOf() ;
         });
 

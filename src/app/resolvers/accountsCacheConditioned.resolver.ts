@@ -20,7 +20,6 @@ export class AccountsCacheConditionedResolver implements Resolve<Observable<{acc
         mergeMap((accounts: {acc: Account[], count: number[]} | null) => {
             if(JSON.stringify(accounts) == JSON.stringify({acc: [], count: []})) {
                 this.facade.LoadAccounts();
-                console.log(accounts)
 
                 return this.action$.pipe(
                   ofType(fromAppActions.Types.LoadAccountsSuccess, fromAppActions.Types.LoadAccountsFail),

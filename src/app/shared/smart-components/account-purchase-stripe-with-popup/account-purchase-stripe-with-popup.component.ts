@@ -5,12 +5,13 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { currencyData } from './../../../models/currencyData.interface';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { AppFacade } from './../../../core/state/facades/app.facade';
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-account-purchase-stripe-with-popup',
   templateUrl: './account-purchase-stripe-with-popup.component.html',
-  styleUrls: ['./account-purchase-stripe-with-popup.component.scss']
+  styleUrls: ['./account-purchase-stripe-with-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestroy {
   @Input() altStyles?: boolean = false;

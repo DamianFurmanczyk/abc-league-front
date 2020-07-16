@@ -32,7 +32,6 @@ export class AddReviewFormPresenterService {
       e.preventDefault();
       
       if(this.reviewForm.invalid && this.stars.length == 0) return;
-      console.log(this.getReviewToAdd())
       this.facade.addReview(this.getReviewToAdd());
     }
     
