@@ -8,8 +8,8 @@
 
   <div class="hero_reviews">
       <div (click)="navigateAndScrollToReviews()">
-        <span *ngFor="let item of [1,1,1,1,1]" class="fa fa-star"></span>
-        <span class="reviews_count">123 reviews</span>
+        <span [innerHTML]="stars"></span>
+        <span class="reviews_count">{{reviewsNum}} reviews</span>
       </div>
   </div>
 </header>

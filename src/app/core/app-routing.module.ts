@@ -35,7 +35,7 @@ const routes: Routes = [
     {
       path: '',
       component: HomepageFeatureComponent,
-      resolve: {RegionsCacheConditionedResolver, AccountsCacheConditionedResolver}
+      resolve: {ReviewsRatingAvgCacheConditionedResolver, RegionsCacheConditionedResolver, AccountsCacheConditionedResolver}
     }, {
       path: 'reviews',
       component: ReviewsFeatureComponent,

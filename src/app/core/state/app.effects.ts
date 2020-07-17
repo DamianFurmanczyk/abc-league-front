@@ -100,8 +100,18 @@ loadReviewsRatingAvg$ = this.actions$.pipe(
   addReview$ = this.actions$.pipe(
     ofType(fromAppActions.Types.AddReview),
     mergeMap((action: fromAppActions.AddReview) => {
-      return this.dataAccessService.addReview('sd').pipe(
-        map(() => new fromAppActions.AddReviewSuccess(action.type)),
+      console.log('siema')
+      console.log('siema')
+      console.log('siema')
+      return this.dataAccessService.addReview(action.payload).pipe(
+        map(resp => {
+          console.log(resp);
+          console.log(resp[0]);
+          console.log('siema2')
+          console.log('siema2')
+          console.log('siema2')
+          return new fromAppActions.AddReviewSuccess(resp[0])
+        }),
         catchError(err => of(new fromAppActions.AddReviewFail(err)))
       )
     })

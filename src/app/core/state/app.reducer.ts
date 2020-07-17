@@ -10,8 +10,10 @@ export const APP_FEATURE_KEY = 'app';
 function getAccountsWithAppropCurrency(currency: currencyData, accArr: Account[]) {
   let accountsAccCopy = JSON.parse(JSON.stringify(accArr));
 
+  console.log(accountsAccCopy);
   accountsAccCopy = accountsAccCopy.map(el => {
-    const newPrice =+el.price_usd * currency.exchangeRateToDollar
+    const newPrice =+el.price_usd * currency.exchangeRateToDollar;
+    console.log(newPrice);
     el.priceAfterConversion = (newPrice).toFixed(2)
     return el;
   });
@@ -45,7 +47,7 @@ export interface AppStateInterface {
   accounts: {acc: Account[], count: number[]},
   accountsLoading: boolean,
   accountsLoadingErr: boolean,
-  coupons: string[],
+  coupons: [string[], {}],
   couponsErr: HttpErrorResponse,
   couponsLoading: boolean,
   reviewsAvgRating: number,
@@ -67,7 +69,7 @@ export const initialState: AppStateInterface = {
   accounts: {acc: [], count: []},
   accountsLoading: false,
   accountsLoadingErr: false,
-  coupons: [],
+  coupons: [[], {}],
   couponsErr: null,
   couponsLoading: false,
   reviewsAvgRating: null,
@@ -120,11 +122,16 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadCouponsSuccess: {
+      let couponsFormatted: [string[], {}] = [[], {}];
 
+      action.payload.forEach(el => {
+        couponsFormatted[0].push(el.coupon.toLowerCase());
+        couponsFormatted[1][el.coupon.toLowerCase()] = el.discount;
+      })
       state = {
         ...state,
         couponsLoading: false,
-        coupons: action.payload.map(el => el.coupon)
+        coupons: couponsFormatted
       };
 
       break;

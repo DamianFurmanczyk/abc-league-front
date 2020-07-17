@@ -11,14 +11,14 @@ import { EffectsModule } from '@ngrx/effects';
 
 import * as fromApp from './core/state/app.reducer';
 import { RouterModule } from '@angular/router';
-import { DataAccessModule } from './core/core.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [],
   imports: [
     HttpClientModule,
     BrowserModule,
-    DataAccessModule,
+    CoreModule,
     RouterModule.forRoot([]),
     StoreModule.forRoot(fromApp.reducer, {
       metaReducers: [],

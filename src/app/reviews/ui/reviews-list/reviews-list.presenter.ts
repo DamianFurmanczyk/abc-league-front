@@ -14,7 +14,6 @@ export class ReviewsListPresenterService {
         const sortedArrayDesc  = reviewsCopy.sort((a,b) =>  {
             return Moment(a.updated_at ||a.created_at).valueOf() - Moment(b.updated_at || b.created_at).valueOf() ;
         });
-
         this.sortedReviewsList.next(asc ? sortedArrayDesc.reverse() : sortedArrayDesc);
     }
 

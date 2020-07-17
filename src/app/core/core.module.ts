@@ -107,4 +107,4 @@ import { AppComponent } from '../app.component';
     RegionsCacheConditionedResolver
   ]
 })
-export class DataAccessModule {}
+export class CoreModule {}

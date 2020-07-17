@@ -195,7 +195,10 @@
   }
 
   small {
-    color: $blue;
+    &.active {
+      color: $blue;
+    }
+    color: $gray;
     font-size: .85rem;
     position: absolute;
     top: 105%;

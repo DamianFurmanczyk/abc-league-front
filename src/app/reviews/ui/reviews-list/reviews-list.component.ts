@@ -24,8 +24,12 @@ let starsArrMap = {
 
 export class ReviewsListComponent implements OnInit, OnDestroy {
   @Output() toggleAddReviewForm = new EventEmitter<void>();
-  @Input() reviews: Review[];
+  @Input() set reviewsList(reviews: Review[]) {
+    this.reviews = reviews;
+    this.sort(this.activeSortingOption);
+  };
   sortedReviews: Review[] = [];
+  reviews: Review[];
 
   activeSortingOption = 'Newest first';
 
@@ -63,7 +67,6 @@ export class ReviewsListComponent implements OnInit, OnDestroy {
   constructor(private presenter: ReviewsListPresenterService) { }
 
   ngOnInit(): void {
-    this.presenter.sortByDate(this.reviews, true);
     this.sortedReviewsListSub = this.presenter.sortedReviewsList.subscribe(res => this.sortedReviews = res);
   }
 

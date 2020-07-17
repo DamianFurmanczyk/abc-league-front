@@ -1,3 +1,4 @@
+import { ReviewToAdd } from './../../models/reviewToAdd.interface';
 import { AppFacade } from './../state/facades/app.facade';
 import { Review } from './../../models/reviews.interface';
 import { Injectable } from '@angular/core';
@@ -49,8 +50,8 @@ export class DataAccessService {
     return this.http.get(this.apiUrl + 'regions');
   }
 
-  addReview(review) {
-    return this.http.get(this.apiUrl + 'reviews/add/sadsda/sdsad/5');
+  addReview(review: ReviewToAdd) {
+    return this.http.get(this.apiUrl + `reviews/add/${review.tekst}/${review.author}/${review.stars}`);
   }
 
   initiatePayment(description: string, email: string, price: number | string, currency: string, quantity: number) {

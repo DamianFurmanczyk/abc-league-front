@@ -42,8 +42,10 @@
     </div>
 
     <div [ngClass]="[showCouponInputFlag ? 'active' : '']" class="checkout_code-field">
-      <input type="text" placeholder="Your coupon">
-      <small>Active</small>
+      <form [formGroup]='couponForm'>
+        <input type="text" placeholder="Your coupon"  formControlName="coupon">
+        <small [ngClass]='{"active": discount > 0}'>Active</small>
+      </form>
     </div>
 
   </div>

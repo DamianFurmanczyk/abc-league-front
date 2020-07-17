@@ -244,6 +244,10 @@
     .fa {
         margin-right: .5rem;
         color: $yellow;
+
+        &.gray {
+            color: $gray;
+        }
     }
 }
 

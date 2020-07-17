@@ -33,6 +33,7 @@ export class AddReviewFormPresenterService {
       
       if(this.reviewForm.invalid && this.stars.length == 0) return;
       this.facade.addReview(this.getReviewToAdd());
+      this.reviewForm.reset();
     }
     
 }

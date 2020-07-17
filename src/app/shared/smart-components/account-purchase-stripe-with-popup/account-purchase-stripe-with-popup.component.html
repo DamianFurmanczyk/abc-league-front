@@ -7,6 +7,7 @@
 [accounts]='accountsExtended$ | async'></app-account-purchase-stripe>
 
 <app-checkout-dialog 
+[coupons]='coupons$ | async'
 [selectedAccount]='selectedAccount'
 [regions]='regions$ | async'
 (changeOrderQuantity)="onChangeOrderQuantity($event)"

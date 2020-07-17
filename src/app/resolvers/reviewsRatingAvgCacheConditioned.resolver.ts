@@ -18,7 +18,7 @@ export class ReviewsRatingAvgCacheConditionedResolver implements Resolve<Region[
     return this.facade.reviewsRatingAvg$.pipe(
         first(),
         mergeMap((reviewsRatingAvg: any ) => {
-          if(reviewsRatingAvg.length == 0) {
+          if(reviewsRatingAvg == null) {
             this.facade.loadReviewsRatingAvg();
 
                 return this.action$.pipe(

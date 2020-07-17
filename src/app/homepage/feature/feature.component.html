@@ -1,6 +1,4 @@
-<app-hero></app-hero>
-
+<app-hero [reviewsRatingAvg]='reviewsRatingAvg$ | async'></app-hero>
 <app-region-selection></app-region-selection>
-
 <app-account-purchase-stripe-with-popup [altStyles]='true'></app-account-purchase-stripe-with-popup>
 <app-perks-list></app-perks-list>

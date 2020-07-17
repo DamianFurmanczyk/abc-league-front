@@ -1,4 +1,4 @@
-
+import { AppFacade } from './../../core/state/facades/app.facade';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './feature.component.html',
   styleUrls: ['./feature.component.scss']
 })
-export class HomepageFeatureComponent {}
+export class HomepageFeatureComponent {
+  reviewsRatingAvg$ = this.facade.reviewsRatingAvg$;
+
+  constructor(private facade: AppFacade) {}
+}

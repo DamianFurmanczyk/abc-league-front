@@ -22,24 +22,39 @@ export class CheckoutDialogComponent implements AfterViewInit {
   }
   @Input() set selectedAccount(acc: AccountWithCountAndOrderQty) {
     this.selAccount = acc;
-    this.price = acc.priceAfterConversion * acc.orderQty;
+    this.pricePer1acc = acc.priceAfterConversion;
+    this.evaluatePrice();
+    // this.price = acc.priceAfterConversion * acc.orderQty;
+    console.log(acc.priceAfterConversion)
   };
   @Input() currency: currencyData;
+  @Input() coupons: [string[], {}];
   @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
 
   selAccount: AccountWithCountAndOrderQty;
-  price: number;
   showCouponInputFlag: boolean = false;
   regionsIdToNameMap = {};
   displayEmailField = false;
   emailForm: FormGroup;
+  couponForm: FormGroup;
   email = '';
+  discount = 0;
+  pricePer1acc: number;
+  price: number;
+  priceAfterDiscount: number;
 
   constructor(private DataAccessService: DataAccessService, private fb: FormBuilder) {
     this.emailForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]]
     });
+    this.couponForm = this.fb.group({
+      coupon: ['']
+    });
     this.emailForm.controls.email.valueChanges.subscribe((val: string) => this.email = val.trim());
+    this.couponForm.controls.coupon.valueChanges.subscribe((val: string) => {
+      this.discount = this.coupons[1][val.trim().toLowerCase()] || 0;
+      this.evaluatePrice();
+    });
    }
 
   changeEmailFormDisplay(flag: boolean) {
@@ -57,11 +72,16 @@ export class CheckoutDialogComponent implements AfterViewInit {
     })
   }
 
+  evaluatePrice() {
+    var newPrice = this.pricePer1acc * this.selAccount.orderQty  * (this.selAccount.orderQty > 1 ? .9 : 1);
+    newPrice = this.discount == 0 ? newPrice : newPrice - newPrice * (this.discount/100);
+    this.price = +(newPrice.toFixed(2));
+  }
+
   onChangeOrderQuantity(q: number, id: number) {
     this.changeOrderQuantity.emit({q, id, selectedAccIsTarget: true});
-    
-    this.price = this.selAccount.priceAfterConversion * this.selAccount.orderQty;
-    if(this.selAccount.orderQty > 1) this.price = +((this.price * .9).toFixed(2));
+
+    this.evaluatePrice();
   }
   
   hideFormAndToggleDisplayAfter() {
@@ -72,13 +92,14 @@ export class CheckoutDialogComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.onInitiatePayment();
     setTimeout(() => {
       this.popup.nativeElement.classList.add('active');
     }, 10);
   }
 
   toggleCouponInputDisplay() {
+    this.discount = 0;
+    this.evaluatePrice();
     this.showCouponInputFlag = !this.showCouponInputFlag;
   }
 
