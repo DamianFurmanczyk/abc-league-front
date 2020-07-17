@@ -1,5 +1,5 @@
 export const CountryToCurrencyAbbrevMap = {
-    CHF: 'Szwajcaria',
+    CHF: 'CHE',
     AUD: 'Australia',
     BGN: 'Bułgaria',
     CAD: 'Kanada',

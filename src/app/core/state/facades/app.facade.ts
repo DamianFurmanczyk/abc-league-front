@@ -15,6 +15,8 @@ export class AppFacade {
   selectedRegion$ = this.store.pipe(select(selectors.getSelectedRegion));
   accounts$ = this.store.pipe(select(selectors.getAccounts));
   currency$ = this.store.pipe(select(selectors.getCurrency));
+  coupons$ = this.store.pipe(select(selectors.getCoupons));
+  reviewsRatingAvg$ = this.store.pipe(select(selectors.getReviewsRatingAvg));
   
 
   constructor(private store: Store<fromApp.AppPartialState>) {}
@@ -22,6 +24,18 @@ export class AppFacade {
   loadRegions(): void {
     this.store.dispatch(
       new fromAppActions.LoadRegions()
+    );
+  }
+
+  loadCoupons(): void {
+    this.store.dispatch(
+      new fromAppActions.LoadCoupons()
+    );
+  }
+
+  loadReviewsRatingAvg(): void {
+    this.store.dispatch(
+      new fromAppActions.LoadReviewsRatingAvg()
     );
   }
 

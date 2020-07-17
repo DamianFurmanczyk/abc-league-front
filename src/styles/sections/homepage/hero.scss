@@ -35,6 +35,7 @@
     width: 120px;
 
     &.nav_li--currency {
+        transition: max-height .4s ease-in-out;
         position: absolute;
         right: 0;
         top: 1.3rem;            
@@ -91,8 +92,8 @@
         opacity: 0;
         height: 100px;
         transition: 0.4s ease-in-out;
-        transform: translateY(-20%);
-        top: 0;            
+        transform: translateY(-10%);
+        top: 100%;            
         b {
             margin-right: 0.5rem;
         }

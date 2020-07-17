@@ -168,7 +168,7 @@
 }
 
 
-@media (max-width: $m2) {
+@media (max-width: $xm) {
   .homepage-footer {
     margin-top: 2%;
     margin-bottom: 3%;
@@ -195,7 +195,7 @@
   }
 }
 
-@media (max-width: $xxs) {
+@media (max-width: 1130px) {
   .footer-content-wrapper {
     margin-top: 1rem;
     flex-direction: column-reverse;

@@ -1,3 +1,12 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomepageFeatureComponent } from '../homepage/feature/feature.component';
+import { AccountsFeatureComponent } from '../accounts/feature/feature.component';
+import { ReviewsFeatureComponent } from '../reviews/feature/feature.component';
+
+import { CouponsInitiateResolver } from './../resolvers/coupons.resolver';
+import { ReviewsRatingAvgCacheConditionedResolver } from './../resolvers/reviewsRatingAvgCacheConditioned.resolver';
+import { ReviewsRatingAvgInitiateResolver } from './../resolvers/reviewsAvgRating.resolver';
 import { AccountsCacheConditionedResolver } from './../resolvers/accountsCacheConditioned.resolver';
 import { RegionsCacheConditionedResolver } from './../resolvers/regionsCacheConditioned.resolver';
 import { ReviewsCacheConditionedResolver } from './../resolvers/reviewsCacheConditioned.resolver';
@@ -7,17 +16,17 @@ import { MainComponent } from './../main/main.component';
 import { AccountsInitiateResolver } from './../resolvers/accounts.resolver';
 import { RegionsInitiateResolver } from './../resolvers/regions.resolver';
 import { ReviewsInitiateResolver } from './../resolvers/reviews.resolver';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomepageFeatureComponent } from '../homepage/feature/feature.component';
-import { AccountsFeatureComponent } from '../accounts/feature/feature.component';
-import { ReviewsFeatureComponent } from '../reviews/feature/feature.component';
+
+ReviewsRatingAvgInitiateResolver
+ReviewsRatingAvgCacheConditionedResolver
+CouponsInitiateResolver
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent, 
-    resolve: {regions: RegionsInitiateResolver, accounts: AccountsInitiateResolver, currency: CurrencyResolver, reviews: ReviewsInitiateResolver},
+    resolve: {ReviewsRatingAvgInitiateResolver, CouponsInitiateResolver, RegionsInitiateResolver, 
+      AccountsInitiateResolver, CurrencyResolver, ReviewsInitiateResolver},
     children: [
       {
         path: 'payment/:paymentId',
@@ -26,15 +35,15 @@ const routes: Routes = [
     {
       path: '',
       component: HomepageFeatureComponent,
-      resolve: {regions: RegionsCacheConditionedResolver, accounts: AccountsCacheConditionedResolver}
+      resolve: {RegionsCacheConditionedResolver, AccountsCacheConditionedResolver}
     }, {
       path: 'reviews',
       component: ReviewsFeatureComponent,
-      resolve: {reviews: ReviewsCacheConditionedResolver},
+      resolve: {ReviewsCacheConditionedResolver},
     }, {
       path: 'accounts',
       component: AccountsFeatureComponent,
-      resolve: {regions: RegionsCacheConditionedResolver, accounts: AccountsCacheConditionedResolver}
+      resolve: {RegionsCacheConditionedResolver, AccountsCacheConditionedResolver}
     }, {
       path: 'terms-and-conditions',
       component: TermsAndConditionsComponent

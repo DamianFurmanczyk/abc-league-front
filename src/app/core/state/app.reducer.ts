@@ -4,6 +4,7 @@ import { Review } from './../../models/reviews.interface';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { fromAppActions } from './app.actions';
+import { HttpErrorResponse } from '@angular/common/http';
 export const APP_FEATURE_KEY = 'app';
 
 function getAccountsWithAppropCurrency(currency: currencyData, accArr: Account[]) {
@@ -43,7 +44,13 @@ export interface AppStateInterface {
   regionsLoadingErr: boolean,
   accounts: {acc: Account[], count: number[]},
   accountsLoading: boolean,
-  accountsLoadingErr: boolean
+  accountsLoadingErr: boolean,
+  coupons: string[],
+  couponsErr: HttpErrorResponse,
+  couponsLoading: boolean,
+  reviewsAvgRating: number,
+  reviewsAvgRatingLoading: boolean,
+  reviewsAvgRatingError: HttpErrorResponse,
 }
 
 export const initialState: AppStateInterface = {
@@ -59,7 +66,13 @@ export const initialState: AppStateInterface = {
   selectedRegion: {id: '1', name: 'EUNE'},
   accounts: {acc: [], count: []},
   accountsLoading: false,
-  accountsLoadingErr: false
+  accountsLoadingErr: false,
+  coupons: [],
+  couponsErr: null,
+  couponsLoading: false,
+  reviewsAvgRating: null,
+  reviewsAvgRatingLoading: false,
+  reviewsAvgRatingError: null
 };
 
 export interface AppPartialState {
@@ -91,6 +104,47 @@ export function reducer(
         ...state,
         regionsLoading: false,
         regions: action.payload
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadCoupons: {
+
+      state = {
+        ...state,
+        couponsLoading: true
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadCouponsSuccess: {
+
+      state = {
+        ...state,
+        couponsLoading: false,
+        coupons: action.payload.map(el => el.coupon)
+      };
+
+      break;
+    }
+    case fromAppActions.Types.LoadReviewsRatingAvg: {
+
+      state = {
+        ...state,
+        reviewsAvgRatingLoading: true
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadReviewsRatingAvgSuccess: {
+
+      state = {
+        ...state,
+        reviewsAvgRatingLoading: false,
+        reviewsAvgRating: action.payload
       };
 
       break;
@@ -277,21 +331,3 @@ export function reducer(
 }
 return state;
 }
-
-// export function reducer(
-//   state = {ku:'ku'},
-//   action
-// ) {
-//   switch (action.type) {
-
-//     default: return state;
-//   }
-// }
-
-// state = {
-//   ...state,
-//   favouritePlanets: appAdapter.addAll(
-//     action.payload,
-//     ...state.favs
-//   )
-// };

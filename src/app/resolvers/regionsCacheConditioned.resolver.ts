@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 import { Resolve } from '@angular/router';
 
-import { of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { fromAppActions } from '../core/state/app.actions';
 
 @Injectable()

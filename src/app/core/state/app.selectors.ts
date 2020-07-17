@@ -18,6 +18,16 @@ export const getCurrency = createSelector(
   (state: AppStateInterface) => state.currency
 );
 
+export const getCoupons = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.coupons
+);
+
+export const getReviewsRatingAvg = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsAvgRating
+);
+
 export const getReviews = createSelector(
   getAppState,
   (state: AppStateInterface) => selectAll(state.reviews)

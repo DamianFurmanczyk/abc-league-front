@@ -40,6 +40,11 @@ export class NavComponent  {
     'EUR': '€',
     'GBP': '£',
     'USD': '$'
+  };
+  displayedCurrencySymbolMap = {
+    'EUR': '€',
+    'GBP': '£',
+    'USD': '$'
   }
 
   constructor(private scrollSer: ScrollService) { }

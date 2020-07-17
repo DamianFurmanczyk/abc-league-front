@@ -1,4 +1,3 @@
-import { CookieConsentBarComponent } from './../shared/ui/cookie-consent-bar/cookie-consent-bar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
@@ -23,12 +22,18 @@ import * as fromApp from './state/app.reducer';
 
 import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
 import { ReviewsFacade } from './state/facades/reviews.facade';
+import { ReviewsRatingAvgCacheConditionedResolver } from './../resolvers/reviewsRatingAvgCacheConditioned.resolver';
+import { ReviewsRatingAvgInitiateResolver } from './../resolvers/reviewsAvgRating.resolver';
 
 import { RegionSelectionComponent } from '../shared/ui/region-selection/region-selection.component';
 import { PaymentMethodStripeComponent } from '../shared/ui/payment-method-stripe/payment-method-stripe.component';
 import { FooterComponent } from '../shared/ui/footer/footer.component';
 import { CheckoutDialogComponent } from '../shared/ui/checkout-dialog/checkout-dialog.component';
 import { NavComponent } from '../shared/ui/nav/nav.component';
+
+import { CouponsInitiateResolver } from './../resolvers/coupons.resolver';
+
+import { CookieConsentBarComponent } from './../shared/ui/cookie-consent-bar/cookie-consent-bar.component';
 
 import { AccountPurchaseStripeWithPopupComponent } from '../shared/smart-components/account-purchase-stripe-with-popup/account-purchase-stripe-with-popup.component';
 import {AccountPurchaseStripeComponent} from '../shared/ui/account-purchase-stripe/account-purchase-stripe.component'
@@ -94,6 +99,9 @@ import { AppComponent } from '../app.component';
     ReviewsFacade,
     RegionsInitiateResolver,
     CurrencyResolver,
+    CouponsInitiateResolver,
+    ReviewsRatingAvgInitiateResolver,
+    ReviewsRatingAvgCacheConditionedResolver,
     ReviewsCacheConditionedResolver,
     AccountsCacheConditionedResolver,
     RegionsCacheConditionedResolver

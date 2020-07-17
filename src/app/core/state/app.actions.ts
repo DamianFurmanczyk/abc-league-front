@@ -23,6 +23,14 @@ export namespace fromAppActions {
     LoadRegionsSuccess =  'Load Regions Success',
     LoadRegionsFail =  'Load Regions Fail',
 
+    LoadReviewsRatingAvg =  'Load Reviews Rating Avg',
+    LoadReviewsRatingAvgSuccess =  'Load Reviews Rating Avg Success',
+    LoadReviewsRatingAvgFail =  'Load Reviews Rating Avg Fail',
+
+    LoadCoupons =  'Load Coupons',
+    LoadCouponsSuccess =  'Load Coupons Success',
+    LoadCouponsFail =  'Load Coupons Fail',
+
     LoadAccounts =  'Load Accounts',
     LoadAccountsSuccess =  'Load Accounts Success',
     LoadAccountsFail =  'Load Accounts Fail',
@@ -47,6 +55,36 @@ export namespace fromAppActions {
   }
   export class LoadAccountsFail implements Action {
     readonly type = Types.LoadAccountsFail;
+
+    constructor(public payload) {}
+  }
+  export class LoadCoupons implements Action {
+    readonly type = Types.LoadCoupons;
+
+    constructor() {}
+  }
+  export class LoadCouponsSuccess implements Action {
+    readonly type = Types.LoadCouponsSuccess;
+
+    constructor(public payload) {}
+  }
+  export class LoadCouponsFail implements Action {
+    readonly type = Types.LoadCouponsFail;
+
+    constructor(public payload) {}
+  }
+  export class LoadReviewsRatingAvg implements Action {
+    readonly type = Types.LoadReviewsRatingAvg;
+
+    constructor() {}
+  }
+  export class LoadReviewsRatingAvgSuccess implements Action {
+    readonly type = Types.LoadReviewsRatingAvgSuccess;
+
+    constructor(public payload) {}
+  }
+  export class LoadReviewsRatingAvgFail implements Action {
+    readonly type = Types.LoadReviewsRatingAvgFail;
 
     constructor(public payload) {}
   }
@@ -143,6 +181,12 @@ export namespace fromAppActions {
     | LoadAccounts
     | LoadAccountsSuccess
     | LoadAccountsFail
+    | LoadCoupons
+    | LoadCouponsSuccess
+    | LoadCouponsFail
+    | LoadReviewsRatingAvg
+    | LoadReviewsRatingAvgSuccess
+    | LoadReviewsRatingAvgFail
     | LoadCurrency
     | LoadCurrencySuccess
     | LoadCurrencyFail

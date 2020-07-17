@@ -3,7 +3,7 @@ import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../core/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
-import { Component, OnInit, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -39,7 +39,6 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.emailForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]]
     });
-    this.emailForm.valueChanges.subscribe(console.log)
     this.emailForm.controls.email.valueChanges.subscribe((val: string) => this.email = val.trim());
    }
 
@@ -73,6 +72,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.onInitiatePayment();
     setTimeout(() => {
       this.popup.nativeElement.classList.add('active');
     }, 10);
