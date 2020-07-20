@@ -1,2 +1,24 @@
-<p>feature works!</p>
-<p>{{id}}</p>
+<section class="order-verification">
+    <h2>Order information:</h2>
+
+    <p>
+        {{orderInfo['description']}} account bought by
+        {{orderInfo['firstname']}}
+        {{orderInfo['lastname']}}
+        through
+        {{orderInfo['payment']}}
+        in amount of
+        {{orderInfo['quantity']}}
+        has been
+        <b>{{orderInfo['status']}}</b>
+    </p>
+
+    <br>
+    Here is
+    <!-- are -->
+     your code:
+    <!-- {{orderInfo['code'].length > 1 ? 's' : ''}} -->
+    <!-- code{{orderInfo['code'].length > 1 ? 's' : ''}} to your account{{orderInfo['code'].length > 1 ? 's' : ''}} 
+    {{orderInfo['code'].length > 1 ? 'are' : 'is'}} : <ng-container *ngFor="let code of orderInfo['code']">code</ng-container> -->
+
+</section>

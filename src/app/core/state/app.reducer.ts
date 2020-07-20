@@ -5,15 +5,15 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { fromAppActions } from './app.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import  {mapCurrencyRegionToInitialRegionSelected } from '../../data/RegionOrCountryToServerMap';
+
 export const APP_FEATURE_KEY = 'app';
 
 function getAccountsWithAppropCurrency(currency: currencyData, accArr: Account[]) {
   let accountsAccCopy = JSON.parse(JSON.stringify(accArr));
 
-  console.log(accountsAccCopy);
   accountsAccCopy = accountsAccCopy.map(el => {
     const newPrice =+el.price_usd * currency.exchangeRateToDollar;
-    console.log(newPrice);
     el.priceAfterConversion = (newPrice).toFixed(2)
     return el;
   });
@@ -169,6 +169,8 @@ export function reducer(
 
     case fromAppActions.Types.loadCurrencyBasedOnLocation: {
 
+      mapCurrencyRegionToInitialRegionSelected
+
       state = {
         ...state,
         currencyLoading: true,
@@ -179,9 +181,14 @@ export function reducer(
     }
 
     case fromAppActions.Types.loadCurrencyBasedOnLocationSuccess: {
-
+      console.log(action.payload);
+      console.log(state.regions);
+      const name = mapCurrencyRegionToInitialRegionSelected[action.payload.name] || 
+        mapCurrencyRegionToInitialRegionSelected[action.payload.regionName] || state.selectedRegion.name;
+        console.log(name);
       state = {
         ...state,
+        selectedRegion: {id: 1, name},
         currencyLoading: false,
         currency: action.payload,
         accounts: { acc: state.accounts.acc.length == 0 ? [] : getAccountsWithAppropCurrency(action.payload, state.accounts.acc), count: state.accounts.count }
@@ -202,7 +209,7 @@ export function reducer(
     }
 
     case fromAppActions.Types.SelectRegion: {
-      
+      console.log(action.payload); 
       state = {
         ...state,
         selectedRegion: action.payload
@@ -234,6 +241,10 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadCurrencySuccess: {
+      console.log(action.payload);
+      mapCurrencyRegionToInitialRegionSelected[action.payload]
+      console.log(mapCurrencyRegionToInitialRegionSelected)
+      console.log(!!mapCurrencyRegionToInitialRegionSelected)
       state = {
         ...state,
         currencyLoading: false,
@@ -273,6 +284,9 @@ export function reducer(
           ...el, updated_at: el.updated_at.split('T')[0]
         }}
       );
+
+      
+console.log('to rem')
 
       state = {
         ...state,
@@ -327,9 +341,12 @@ export function reducer(
     }
 
     case fromAppActions.Types.AddReviewSuccess: {
+      const reviewCopy = JSON.parse(JSON.stringify(action.payload))
+      const addedReviewAltered = {...reviewCopy, updated_at: reviewCopy.updated_at.split('T')[0]};
+console.log('to rem')
       state = {
         ...state,
-        reviews: reviewsAdapter.addOne(action.payload, state.reviews)
+        reviews: reviewsAdapter.addOne(addedReviewAltered, state.reviews)
       };
 
       break;

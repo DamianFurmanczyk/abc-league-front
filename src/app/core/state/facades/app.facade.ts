@@ -5,7 +5,6 @@ import { select, Store } from '@ngrx/store';
 import * as fromApp from '../app.reducer';
 import * as selectors from '../app.selectors';
 import { fromAppActions } from '../app.actions';
-import { fromEventPattern } from 'rxjs';
 
 
 @Injectable({providedIn: 'root'})
@@ -17,7 +16,6 @@ export class AppFacade {
   currency$ = this.store.pipe(select(selectors.getCurrency));
   coupons$ = this.store.pipe(select(selectors.getCoupons));
   reviewsRatingAvg$ = this.store.pipe(select(selectors.getReviewsRatingAvg));
-  
 
   constructor(private store: Store<fromApp.AppPartialState>) {}
 

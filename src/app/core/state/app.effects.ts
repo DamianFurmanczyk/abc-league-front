@@ -28,14 +28,14 @@ export class AppEffects {
     mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
         mergeMap(resp => {
-          // console.log(resp);
+          console.log(resp);
           // console.log(resp[0]);
           // console.log(resp[1]);
-          return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp[0]['0']), of(resp[0]['0'])])
+          return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp[0]['0']), of(resp[0]['0']), of(resp[1]['0'])])
         }),
         map(resp =>{
-          // console.log(resp);
-          return  new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0]})
+          console.log(resp);
+          return  new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0], regionName: resp[2]})
         }),
         catchError(err => of(new fromAppActions.loadCurrencyBasedOnLocationFail(err)))
       )
@@ -100,18 +100,8 @@ loadReviewsRatingAvg$ = this.actions$.pipe(
   addReview$ = this.actions$.pipe(
     ofType(fromAppActions.Types.AddReview),
     mergeMap((action: fromAppActions.AddReview) => {
-      console.log('siema')
-      console.log('siema')
-      console.log('siema')
       return this.dataAccessService.addReview(action.payload).pipe(
-        map(resp => {
-          console.log(resp);
-          console.log(resp[0]);
-          console.log('siema2')
-          console.log('siema2')
-          console.log('siema2')
-          return new fromAppActions.AddReviewSuccess(resp[0])
-        }),
+        map(resp => new fromAppActions.AddReviewSuccess(resp[0])),
         catchError(err => of(new fromAppActions.AddReviewFail(err)))
       )
     })

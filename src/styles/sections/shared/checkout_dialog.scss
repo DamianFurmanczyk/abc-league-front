@@ -1,6 +1,7 @@
 .checkout-dialog {
   transform: translate(-50%, -200%);
   transition: .4s;
+  width: 424px; 
 
   position: fixed;
   z-index: 100;
@@ -177,7 +178,7 @@
     opacity: 1;
 
     small {
-      opacity: 1;
+      opacity: .8;
       top: 55%;
     }
   }
@@ -196,6 +197,7 @@
 
   small {
     &.active {
+      opacity: 1;
       color: $blue;
     }
     color: $gray;

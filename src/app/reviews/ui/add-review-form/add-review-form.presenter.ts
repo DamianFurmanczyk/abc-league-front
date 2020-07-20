@@ -9,6 +9,7 @@ export class AddReviewFormPresenterService {
     reviewForm: FormGroup;
     stars = Array.from(Array(5));
     starsTouched = false;
+    starsActiveNum: number;
 
     constructor(private formBuilder: FormBuilder, private facade: ReviewsFacade) {
       this.reviewForm = this.formBuilder.group({
@@ -18,14 +19,15 @@ export class AddReviewFormPresenterService {
     }
 
     onStarClick(i: number) {
-      const activeStarsArr = 'active '.repeat(i + 1).split(' ');
+      this.starsActiveNum = i + 1;
+      const activeStarsArr = 'active '.repeat(this.starsActiveNum).split(' ');
       activeStarsArr.pop()
       this.stars = [...activeStarsArr, ...Array(4-i)];
       this.starsTouched = true;
     }
 
     getReviewToAdd() {
-      return <ReviewToAdd>{author: this.reviewForm.value.author.trim(), tekst: this.reviewForm.value.tekst.trim(), stars: this.stars.length};
+      return <ReviewToAdd>{author: this.reviewForm.value.author.trim(), tekst: this.reviewForm.value.tekst.trim(), stars: this.starsActiveNum};
     }
 
     submitAddReviewForm(e: Event) {

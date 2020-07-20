@@ -5,7 +5,7 @@
         <div class="regions-wrapper">
             
             <ng-container >
-                <figure *ngFor="let region of regions" (click)="selectRegion(region)" [ngClass]="['region', selectedRegionSet.id == region.id ? ' active' : '']">
+                <figure *ngFor="let region of regions" (click)="selectRegion(region)" [ngClass]="['region', selectedRegionSet.name == region.name ? ' active' : '']">
                     <div class="region_caption">{{region.name}}</div>
                     <div class="region_img-wrapper">
                         <img [src]="'assets/img/' + region.name + '.png'" alt="region_img">

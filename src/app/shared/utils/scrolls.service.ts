@@ -20,7 +20,7 @@ export class ScrollService {
         const elY = window.document.querySelector(elSel).getBoundingClientRect().y + + document.documentElement.scrollTop;
         
         window.scrollTo({
-            top: elY,
+            top: elY + 70,
             behavior: 'smooth',
           });
           

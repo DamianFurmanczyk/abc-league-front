@@ -23,7 +23,14 @@ export class DataAccessService {
   apiUrl = 'http://api.abcleague.webup-dev.pl/';
 
   getCurrencyAdequateToUsersCountry() {
-    return this.http.get<string>(this.apiUrl + 'currency').pipe(tap(console.log));
+    return this.http.get<string>(this.apiUrl + 'currency').pipe(tap(res => {
+      console.log('res')
+      console.log(res)
+    }));
+  }
+
+  verifyOrder(id: string) {
+    return this.http.get(this.apiUrl + `verify/${id}`).pipe(tap(console.log));
   }
 
   getExchangeRateToDollar(currency: string) {

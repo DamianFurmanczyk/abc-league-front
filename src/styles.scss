@@ -10,6 +10,14 @@ body {
     font-family: 'Poppins';
     color: #000;
     padding-top: 95px;
+
+    app-main {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: calc(100vh - 95px);
+      justify-content: space-between;
+    }
 }
 
 button {
@@ -42,3 +50,5 @@ b {
 @import 'src/styles/sections/accounts';
 
 @import 'src/styles/sections/reviews';
+
+@import 'src/styles/sections/order-verification';
