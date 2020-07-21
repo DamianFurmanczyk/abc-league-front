@@ -1,6 +1,7 @@
 <div class="popup-overlay"></div>
 
 <div #popup class="checkout-dialog">
+
   <p class="checkout-dialog_top-text">Check out 
     <span (click)="hideFormAndToggleDisplayAfter()" class="fa fa-times"></span>
   </p>
@@ -52,9 +53,9 @@
 
   <div class="checkout-dialog_hr"></div>
 
-  <div class="checkout-dialog_info-or-email-field">
+  <div class="checkout-dialog_dynamic-section">
 
-    <ng-container *ngIf="!displayEmailField; else emailFieldTemplate">
+    <ng-container *ngIf="dynamicSectionActiveView == 'info'">
       <aside>
         <img src="assets/img/3d.svg" alt="box">
         <p>Account details will be shown instantly after payment</p>
@@ -66,12 +67,25 @@
       </aside>
     </ng-container>
 
-    <ng-template #emailFieldTemplate>
+    <div class="checkout-dialog_stripe" [ngStyle]="{display: dynamicSectionActiveView == 'stripe' ? 'block' : 'none'}">
+        <stripe-card
+          #stripeCard
+          (catch) = "onStripeError($event)"
+          [(invalid)] = "invalidError"
+          (cardMounted) = "cardReady = true"
+          (tokenChange) = "setStripeToken($event)"
+          (sourceChange) = "setStripeSource($event)"
+      ></stripe-card>
+      
+      <button type="button" (click)="stripeCard.createSource()">createSource</button>
+    </div>
+
+    <ng-container *ngIf="dynamicSectionActiveView == 'paypal'">
 
       <form class="email-form" [formGroup]="emailForm">
 
         <div>
-          <span class="fa fa-times" (click)="changeEmailFormDisplay(false)"></span>
+          <span class="fa fa-times" (click)="dynamicSectionActiveView = 'info'"></span>
           <p>Please enter your email to proceed</p>
         </div>
 
@@ -86,7 +100,7 @@
 
       </form>
 
-    </ng-template>
+    </ng-container>
     
   </div>
 
@@ -108,11 +122,11 @@
       </div>
 
       <div class="payment-tile payment-tile--single-payment">
-        <img src="assets/img/bitcoinTransp.svg" (click)="changeEmailFormDisplay(true)" alt="paymentOption">
+        <img src="assets/img/bitcoinTransp.svg" (click)="dynamicSectionActiveView = 'paypal'" alt="paymentOption">
       </div>
 
-      <div class="payment-tile">
-        <img src="assets/img/paypal2.svg" alt="paymentOption">
+      <div class="payment-tile payment-tile--paypal">
+        <img src="assets/img/paypal2.svg" (click)="dynamicSectionActiveView = 'stripe'" alt="paymentOption">
       </div>
 
     </div>

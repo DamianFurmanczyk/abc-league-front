@@ -13,13 +13,11 @@
     <div class="add-review-form_input-wrapper">
         <label for="name">Name</label>
         <input type="text" id="name" formControlName="author">
-        <span class="add-review-form_input-wrapper_error-msg" *ngIf="f.author.touched && f.author.hasError('required')">Invalid</span>
     </div>
     
     <div class="add-review-form_input-wrapper">
         <label for="review">Review</label>
         <textarea formControlName="tekst" id="review" cols="20" rows="8" placeholder="Type your review here"></textarea>
-        <span class="add-review-form_input-wrapper_error-msg" *ngIf="f.tekst.touched && f.tekst.hasError('required')">Invalid</span>
     </div>
 
     <button [disabled]="reviewForm.invalid || !presenter.starsTouched">

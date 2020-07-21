@@ -9,6 +9,6 @@
 <app-payment-method-stripe></app-payment-method-stripe>
 <app-cookie-consent-bar
     *ngIf="showCookiesBar"
-    (dismissCookiesBar)="showCookiesBar = false;">
+    (dismissCookiesBarAndSetCookie)="setCookiesConsentCookie()">
 </app-cookie-consent-bar>
 <app-footer></app-footer>

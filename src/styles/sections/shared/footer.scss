@@ -16,6 +16,13 @@
   width: 20rem;
   margin-right: 4rem;
 
+  figure {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   img {
     margin-bottom: .7rem;
     width: 90px;

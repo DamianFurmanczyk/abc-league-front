@@ -101,3 +101,14 @@
     }
   }
 }
+
+@media (max-width: 660px) {
+  .btns-wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    button {
+      margin: 0 0 1rem 0;
+    }
+  }
+}

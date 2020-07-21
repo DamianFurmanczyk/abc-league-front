@@ -4,6 +4,7 @@ import { Observable, Subject, fromEvent } from 'rxjs';
 import { AppFacade } from './../core/state/facades/app.facade';
 import { Component, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -48,7 +49,8 @@ export class MainComponent implements OnDestroy, AfterViewInit {
     this.elementsThatNeedToDeactivateOnWindowClick = this.getElementsThatNeedToDeactivateOnWindowClick();
   }
 
-  constructor(private facade: AppFacade, router: Router) { 
+  constructor(private facade: AppFacade, router: Router, private cookieService: CookieService) {
+    this.showCookiesBar = !this.cookieService.check('abcLeagueConsentForCookies');
     this.currency$ = this.facade.currency$;
     this.scrollActiveNavNoMatterWhat = window.innerWidth < 981;
 
@@ -78,13 +80,18 @@ export class MainComponent implements OnDestroy, AfterViewInit {
     ).subscribe();
 }
 
-getElementsThatNeedToDeactivateOnWindowClick() {
-  return  [
-    document.querySelectorAll('.nav_li--dropdown'),
-    document.querySelectorAll(' .faq-column dd'),
-    document.querySelectorAll('.links-lists-column .trigger')
-];
-}
+  setCookiesConsentCookie() {
+    this.cookieService.set( 'abcLeagueConsentForCookies', '1');
+    this.showCookiesBar = false;
+  }
+
+  getElementsThatNeedToDeactivateOnWindowClick() {
+    return  [
+      document.querySelectorAll('.nav_li--dropdown'),
+      document.querySelectorAll(' .faq-column dd'),
+      document.querySelectorAll('.links-lists-column .trigger')
+  ];
+  }
 
   onCurrencyChange(currency: string) {
     this.facade.LoadCurrency(currency);

@@ -9,6 +9,8 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {};
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { MainComponent } from '../main/main.component';
 
 import { RegionsCacheConditionedResolver } from '../resolvers/regionsCacheConditioned.resolver';
@@ -23,7 +25,6 @@ import * as fromApp from './state/app.reducer';
 import { AddReviewFormComponent } from '../reviews/ui/add-review-form/add-review-form.component';
 import { ReviewsFacade } from './state/facades/reviews.facade';
 import { ReviewsRatingAvgCacheConditionedResolver } from './../resolvers/reviewsRatingAvgCacheConditioned.resolver';
-import { ReviewsRatingAvgInitiateResolver } from './../resolvers/reviewsAvgRating.resolver';
 
 import { RegionSelectionComponent } from '../shared/ui/region-selection/region-selection.component';
 import { PaymentMethodStripeComponent } from '../shared/ui/payment-method-stripe/payment-method-stripe.component';
@@ -53,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataAccessService } from './services/app.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
+import { StripeModule } from 'stripe-angular';
 @NgModule({
   declarations: [    
     MainComponent, 
@@ -78,7 +80,8 @@ import { AppComponent } from '../app.component';
     NavComponent
   ],
   imports: [
-    PerfectScrollbarModule,
+    StripeModule.forRoot("pk_live_KpPaLk4CKLhEUlTA5itof0Ub00JyF4MuSL"),
+  PerfectScrollbarModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
@@ -94,13 +97,13 @@ import { AppComponent } from '../app.component';
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   },
+    CookieService,
     DataAccessService,
     ReviewsInitiateResolver,
     ReviewsFacade,
     RegionsInitiateResolver,
     CurrencyResolver,
     CouponsInitiateResolver,
-    ReviewsRatingAvgInitiateResolver,
     ReviewsRatingAvgCacheConditionedResolver,
     ReviewsCacheConditionedResolver,
     AccountsCacheConditionedResolver,

@@ -308,7 +308,7 @@
         left: 50%;
         bottom: 1.6rem;
         transform: translate(calc(-50% + .4rem));
-        top: unset !important;
+        top: 11rem !important;
     }
 
     .hero_nav.nav .nav_ul  {
@@ -355,7 +355,6 @@
                 &.nav_li--currency {
                     background: $yellow !important;
                     &.active {
-                        margin-bottom: -105px;
                         max-height: 125px;
                         color: #000 !important;
                 

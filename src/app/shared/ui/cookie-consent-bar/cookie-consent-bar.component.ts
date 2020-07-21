@@ -6,7 +6,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./cookie-consent-bar.component.scss']
 })
 export class CookieConsentBarComponent {
-  @Output() dismissCookiesBar = new EventEmitter();
+  @Output() dismissCookiesBarAndSetCookie = new EventEmitter();
   triggerTransition;
 
   constructor() { }
@@ -14,7 +14,7 @@ export class CookieConsentBarComponent {
   transitionAndDismiss() {
     this.triggerTransition = true;
     setTimeout(() => {
-      this.dismissCookiesBar.emit();
+      this.dismissCookiesBarAndSetCookie.emit();
     }, 400);
   }
 

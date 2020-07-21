@@ -1,7 +1,6 @@
 .checkout-dialog {
   transform: translate(-50%, -200%);
   transition: .4s;
-  width: 424px; 
 
   position: fixed;
   z-index: 100;
@@ -18,6 +17,17 @@
   background: #fff;
   padding: 2rem;
   border-radius: 1rem;
+
+  &_stripe {
+    width: 100%;
+    padding: 8% 5%;
+
+    button {
+      padding: 5px 10px;
+      float: right;
+      margin-top: .7rem;
+    }
+  }
 }
 
 .checkout-dialog_products-list_li-top {
@@ -93,7 +103,7 @@
   }
 }
 
-.checkout-dialog_info-or-email-field {
+.checkout-dialog_dynamic-section {
   height: 120px;
   display: flex;
   justify-content: space-between;
@@ -242,4 +252,42 @@
 
 .payment-tiles-wrapper {
   display: flex;
+}
+
+@media (max-width: 530px) {
+  .checkout-dialog {
+    width: calc(100% - 90px);
+    min-width: 315px;
+
+    &_payment-methods {
+      .payment-tile {
+
+        &--single-payment:nth-of-type(2) {
+          margin-right: 0;
+        }
+
+        &s-wrapper {
+          flex-wrap: wrap;
+        }
+
+        &--top {
+          justify-content: space-around;
+
+          img:nth-of-type(1), img:nth-of-type(2) {
+            display: none !important;
+          }
+        }
+
+        &--paypal {
+          margin-top: 20px;
+          width: calc(100% - 40px);
+          justify-content: center;
+        }
+      }
+    }
+
+    aside {
+      width: 45%;
+    }
+  }
 }

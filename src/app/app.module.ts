@@ -8,10 +8,10 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-
 import * as fromApp from './core/state/app.reducer';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from './core/core.module';
+import { StripeModule } from "stripe-angular"
 
 @NgModule({
   declarations: [],

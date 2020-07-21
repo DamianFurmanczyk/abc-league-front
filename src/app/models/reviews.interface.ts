@@ -4,5 +4,6 @@ export interface Review {
     id: number,
     stars: number,
     tekst: string,
-    updated_at: string
+    updated_at: string,
+    flag: string
 }

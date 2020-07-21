@@ -1,4 +1,4 @@
-import { FeatureComponent } from './../payment-verification/feature/feature.component';
+import { FeatureComponent } from './feature/feature.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

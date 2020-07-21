@@ -3,9 +3,9 @@ import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../core/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
-import { Component, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 
+import { StripeToken } from "stripe-angular";
 @Component({
   selector: 'app-checkout-dialog',
   templateUrl: './checkout-dialog.component.html',
@@ -30,9 +30,22 @@ export class CheckoutDialogComponent implements AfterViewInit {
   @Input() currency: currencyData;
   @Input() coupons: [string[], {}];
   @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
+  cardReady = false;
+  invalidError = '';
+  extraData = {
+    "name": null,
+    "address_city": null,
+    "address_line1": null,
+    "address_line2": null,
+    "address_state": null,
+    "address_zip": null
+  };
 
   selAccount: AccountWithCountAndOrderQty;
   showCouponInputFlag: boolean = false;
+
+  dynamicSectionActiveView = 'info';
+
   regionsIdToNameMap = {};
   displayEmailField = false;
   emailForm: FormGroup;
@@ -59,6 +72,22 @@ export class CheckoutDialogComponent implements AfterViewInit {
 
   changeEmailFormDisplay(flag: boolean) {
     this.displayEmailField = flag;
+  }
+
+  onStripeInvalid( error:Error ){
+    console.log('Validation Error', error)
+  }
+ 
+  setStripeToken( token:StripeToken ){
+    console.log('Stripe token', token)
+  }
+ 
+  setStripeSource( source ){
+    console.log('Stripe source', source)
+  }
+ 
+  onStripeError( error:Error ){
+    console.error('Stripe error', error)
   }
 
   onInitiatePayment() {

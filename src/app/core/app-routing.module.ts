@@ -32,6 +32,10 @@ const routes: Routes = [
         path: 'payment/:paymentId',
         loadChildren: () => import('./../modules/payment-verification/payment-verification.module').then(m => m.PaymentVerificationModule)
       },
+      {
+        path: 'tos',
+        loadChildren: () => import('./../modules/tos/tos.module').then(m => m.TosModule)
+      },
     {
       path: '',
       component: HomepageFeatureComponent,
@@ -85,6 +89,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class AppRoutingModule { }
