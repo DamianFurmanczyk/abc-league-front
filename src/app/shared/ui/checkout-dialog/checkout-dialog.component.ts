@@ -24,7 +24,6 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.selAccount = acc;
     this.pricePer1acc = acc.priceAfterConversion;
     this.evaluatePrice();
-    // this.price = acc.priceAfterConversion * acc.orderQty;
     console.log(acc.priceAfterConversion)
   };
   @Input() currency: currencyData;
@@ -90,15 +89,16 @@ export class CheckoutDialogComponent implements AfterViewInit {
     console.error('Stripe error', error)
   }
 
-  onInitiatePayment() {
+  onInitiatePaypalPayment() {
     const selAcc = this.selAccount;
-    this.DataAccessService.initiatePayment(selAcc.description, 'arek@gmail.com', 
-      selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, 1).then(res => {
+    console.log(selAcc)
+    this.DataAccessService.initiatePaypalPayment('', 
+      selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, selAcc.orderQty, selAcc.description).then(res => {
         window.open(
         res,
         '_blank'
       );
-    })
+    });
   }
 
   evaluatePrice() {

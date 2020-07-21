@@ -61,7 +61,7 @@ export class DataAccessService {
     return this.http.get(this.apiUrl + `reviews/add/${review.tekst}/${review.author}/${review.stars}`);
   }
 
-  initiatePayment(description: string, email: string, price: number | string, currency: string, quantity: number) {
+  initiatePaypalPayment(email: string, price: number | string, currency: string, quantity: number, description: string,) {
     return fetch(`http://api.abcleague.webup-dev.pl/pay_paypal?description=${description}&email=${email}&price=${price}&currency=${currency}&quantity=${quantity}`, 
     { method: "post" })
       .then(res => res.json());

@@ -80,7 +80,7 @@
       <button type="button" (click)="stripeCard.createSource()">createSource</button>
     </div>
 
-    <ng-container *ngIf="dynamicSectionActiveView == 'paypal'">
+    <ng-container *ngIf="dynamicSectionActiveView == 'bitcoin'">
 
       <form class="email-form" [formGroup]="emailForm">
 
@@ -108,7 +108,7 @@
 
   <div class="checkout-dialog_payment-methods">
 
-    <div class="payment-tile payment-tile--top">
+    <div class="payment-tile payment-tile--top"  (click)="dynamicSectionActiveView = 'stripe'">
       <img src="assets/img/mastercard-2.svg" alt="paymentOption">
       <img src="assets/img/maestro.svg" alt="paymentOption">
       <img src="assets/img/americanExpress.svg" alt="paymentOption">
@@ -122,11 +122,11 @@
       </div>
 
       <div class="payment-tile payment-tile--single-payment">
-        <img src="assets/img/bitcoinTransp.svg" (click)="dynamicSectionActiveView = 'paypal'" alt="paymentOption">
+        <img src="assets/img/bitcoinTransp.svg" (click)="dynamicSectionActiveView = 'bitcoin'" alt="paymentOption">
       </div>
 
       <div class="payment-tile payment-tile--paypal">
-        <img src="assets/img/paypal2.svg" (click)="dynamicSectionActiveView = 'stripe'" alt="paymentOption">
+        <img src="assets/img/paypal2.svg" (click)="onInitiatePaypalPayment()" alt="paymentOption">
       </div>
 
     </div>
