@@ -4,6 +4,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NotificationPopupComponent } from './../shared/ui/notification-popup/notification-popup.component';
+
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -57,7 +59,8 @@ import { AppComponent } from '../app.component';
 import { StripeModule } from 'stripe-angular';
 @NgModule({
   declarations: [    
-    MainComponent, 
+    MainComponent,
+    NotificationPopupComponent,
     AppComponent,
     AccountPurchaseStripeComponent,
     RegionSelectionComponent,
@@ -80,7 +83,7 @@ import { StripeModule } from 'stripe-angular';
     NavComponent
   ],
   imports: [
-    StripeModule.forRoot("pk_live_KpPaLk4CKLhEUlTA5itof0Ub00JyF4MuSL"),
+  StripeModule.forRoot("pk_live_KpPaLk4CKLhEUlTA5itof0Ub00JyF4MuSL"),
   PerfectScrollbarModule,
     AppRoutingModule,
     CommonModule,

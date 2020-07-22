@@ -9,14 +9,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 })
 export class HeroComponent  {
   @Input() set reviewsRatingAvg(ratingData: number) {
-    let ratingAvg = ratingData[0];
-    if(ratingData != null) {
-      ratingAvg = +ratingData[0].toFixed(0);
-    } else {
-      return;
-    }
-
-    this.stars = Array.from(Array(5)).map((el, i) => ratingAvg - 1 < i  ?  '<span class="fa fa-star gray"></span>' :  '<span class="fa fa-star"></span>').join('');
     this.reviewsNum = ratingData[1];
   }
 

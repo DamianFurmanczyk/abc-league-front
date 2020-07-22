@@ -81,7 +81,6 @@
 
     b {
       font-size: 1.4rem;
-      font-weight: bolder;
       float: right;
     }
   }
@@ -210,10 +209,11 @@
       opacity: 1;
       color: $blue;
     }
+    cursor: pointer;
     color: $gray;
-    font-size: .85rem;
+    font-size: .9rem;
     position: absolute;
-    top: 105%;
+    top: 110%;
     right: .9rem;
     opacity: 0;
     transition: .4s;

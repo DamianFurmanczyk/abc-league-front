@@ -1,0 +1,6 @@
+<div *ngIf="showOverlay" class="popup-overlay popup-overlay--notif"></div>
+
+<div class="notification-popup" #popup>
+    <span class="fa fa-times" (click)="onToggleNotificationDisplay()"></span>
+    <p [innerHTML]="content"></p>
+</div>

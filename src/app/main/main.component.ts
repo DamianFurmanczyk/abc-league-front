@@ -5,6 +5,7 @@ import { AppFacade } from './../core/state/facades/app.facade';
 import { Component, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { filter, tap, takeUntil, throttleTime } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { CookiesAppService } from './../core/services/cookies.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -34,25 +35,30 @@ export class MainComponent implements OnDestroy, AfterViewInit {
 
   elementsThatNeedToDeactivateOnWindowClick;
   destroyed$: Subject<boolean> = new Subject();
-
   currency$: Observable<currencyData>;
   homepageUrl: boolean = true;
   scrollStyles: boolean = false;
   nav_ul: HTMLElement;
-
   showCookiesBar = true;
-
   scrollActiveNavNoMatterWhat;
 
   ngAfterViewInit() {
+    console.log('siema')
+    console.log('siema')
+    console.log('siema')
     this.nav_ul = document.querySelector('#nav_ul');
     this.elementsThatNeedToDeactivateOnWindowClick = this.getElementsThatNeedToDeactivateOnWindowClick();
   }
 
-  constructor(private facade: AppFacade, router: Router, private cookieService: CookieService) {
-    this.showCookiesBar = !this.cookieService.check('abcLeagueConsentForCookies');
+  constructor(private facade: AppFacade, router: Router, private cookieService: CookieService, private appCookieService: CookiesAppService) {
+    this.showCookiesBar = this.appCookieService.showConsentCookieBar;
+    console.log(this.appCookieService.showConsentCookieBar)
+    console.log(this.appCookieService.randCookie)
     this.currency$ = this.facade.currency$;
     this.scrollActiveNavNoMatterWhat = window.innerWidth < 981;
+    console.log('siema')
+    console.log('siema')
+    console.log('siema')
 
     router.events.pipe(filter(event => event instanceof ActivationEnd),
     tap((e: ActivationEnd) => {
@@ -81,7 +87,7 @@ export class MainComponent implements OnDestroy, AfterViewInit {
 }
 
   setCookiesConsentCookie() {
-    this.cookieService.set( 'abcLeagueConsentForCookies', '1');
+    this.appCookieService.setShowConsentCookieBar();
     this.showCookiesBar = false;
   }
 

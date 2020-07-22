@@ -24,7 +24,6 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.selAccount = acc;
     this.pricePer1acc = acc.priceAfterConversion;
     this.evaluatePrice();
-    console.log(acc.priceAfterConversion)
   };
   @Input() currency: currencyData;
   @Input() coupons: [string[], {}];
@@ -54,6 +53,9 @@ export class CheckoutDialogComponent implements AfterViewInit {
   pricePer1acc: number;
   price: number;
   priceAfterDiscount: number;
+  showPopup = false;
+  contentForNotif = '';
+  discountCode = '';
 
   constructor(private DataAccessService: DataAccessService, private fb: FormBuilder) {
     this.emailForm = this.fb.group({
@@ -63,21 +65,40 @@ export class CheckoutDialogComponent implements AfterViewInit {
       coupon: ['']
     });
     this.emailForm.controls.email.valueChanges.subscribe((val: string) => this.email = val.trim());
-    this.couponForm.controls.coupon.valueChanges.subscribe((val: string) => {
-      this.discount = this.coupons[1][val.trim().toLowerCase()] || 0;
+    this.couponForm.controls.coupon.valueChanges.subscribe(
+      (val: string) => {
+        if(!val) return;
+        this.discount = this.coupons[1][val.trim().toLowerCase()] || 0;
+        this.discountCode = val;
+      }
+    );
+  }
+
+  attemptToActivateCoupon() {
+    if(+this.discount > 0) {
+      this.contentForNotif = `Claimed coupon <b>'${this.discountCode[0].toUpperCase() + this.discountCode.substr(1)}'</b> for <b>${this.discount}%</b> discount.`;
+      this.showPopup = true;
       this.evaluatePrice();
-    });
-   }
+    } else {
+      this.contentForNotif = `Coupon is invalid.`;
+      this.showPopup = true;
+      this.evaluatePrice();
+    }
+  }
+
+  onToggleNotifDisplay() {
+    this.showPopup = false;
+  }
 
   changeEmailFormDisplay(flag: boolean) {
     this.displayEmailField = flag;
   }
 
-  onStripeInvalid( error:Error ){
+  onStripeInvalid( error: Error ){
     console.log('Validation Error', error)
   }
  
-  setStripeToken( token:StripeToken ){
+  setStripeToken( token: StripeToken ){
     console.log('Stripe token', token)
   }
  
@@ -92,8 +113,8 @@ export class CheckoutDialogComponent implements AfterViewInit {
   onInitiatePaypalPayment() {
     const selAcc = this.selAccount;
     console.log(selAcc)
-    this.DataAccessService.initiatePaypalPayment('', 
-      selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, selAcc.orderQty, selAcc.description).then(res => {
+    this.DataAccessService.initiatePaypalPayment('areksiemka@gmail.com', 
+      selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
         window.open(
         res,
         '_blank'
@@ -130,6 +151,9 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.discount = 0;
     this.evaluatePrice();
     this.showCouponInputFlag = !this.showCouponInputFlag;
+    if(this.showCouponInputFlag == false ) {
+      this.couponForm.controls.coupon.reset();
+    }
   }
 
 }

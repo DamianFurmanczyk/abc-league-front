@@ -1,5 +1,11 @@
 <div class="popup-overlay"></div>
 
+<app-notification-popup  
+  *ngIf="showPopup" 
+  [content]="this.contentForNotif"
+  (toggleNotificationDisplay)="onToggleNotifDisplay()">
+</app-notification-popup>
+
 <div #popup class="checkout-dialog">
 
   <p class="checkout-dialog_top-text">Check out 
@@ -45,7 +51,7 @@
     <div [ngClass]="[showCouponInputFlag ? 'active' : '']" class="checkout_code-field">
       <form [formGroup]='couponForm'>
         <input type="text" placeholder="Your coupon"  formControlName="coupon">
-        <small [ngClass]='{"active": discount > 0}'>Active</small>
+        <small (click)="attemptToActivateCoupon()" [ngClass]='{"active": discount > 0}'>Activate</small>
       </form>
     </div>
 
