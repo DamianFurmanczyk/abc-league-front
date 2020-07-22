@@ -24,8 +24,8 @@
         <ul>
             <li 
             (click)='onCurrencyChange(curr)' 
-            *ngFor="let curr of currencyOptions">
-              <b>{{currencySymbolMap[curr]}}</b> <span>{{curr}}</span>
+            *ngFor="let curr of currencyOptionsToDisplay">
+              <b>{{currencySymbolMap[curr] || curr | slice: 0 :2}}</b> <span>{{curr}}</span>
             </li>
         </ul>
       </li>

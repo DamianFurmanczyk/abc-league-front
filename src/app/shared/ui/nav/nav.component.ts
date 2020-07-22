@@ -22,30 +22,37 @@ export class NavComponent  {
     this.activeClassScrollSet = flag;
   }
   @Input() set currencySetHandler(excludeCurr: { name: string, exchangeRateToDollar: number }) {
+    if(this.initialCurrencyInputSoThatItsBeenLoadedBasedOnIpflag) {
+      this.currencyOptions = [...this.currencyOptions, excludeCurr.name];
+      this.initialCurrencyBasedOnIp = excludeCurr.name;
+      this.initialCurrencyInputSoThatItsBeenLoadedBasedOnIpflag = false;
+    }
     this.activeCurrency = excludeCurr.name;
-    this.currencyOptions = this.allAvailableCurrencies.filter(el => el != excludeCurr.name);
+    this.currencyOptionsToDisplay = this.currencyOptions.filter(el => el != excludeCurr.name);
+    if(this.initialCurrencyOptions.includes(excludeCurr.name) && this.initialCurrencyOptions.includes(this.initialCurrencyBasedOnIp)) {
+      this.currencyOptionsToDisplay = this.initialCurrencyOptions;
+    }
   }
 
   @Output() currencyChange = new EventEmitter();
 
+  initialCurrencyBasedOnIp: string;
+  initialCurrencyInputSoThatItsBeenLoadedBasedOnIpflag = true;
+  initialCurrencyOptions = ['USD', 'GBP', 'EUR'];
   scrollActiveNavAnyways: boolean;
   activeClassScrollSet: boolean
   activeClassSet: boolean;
   dropOpen = [false, false];
-  activeCurrency = 'PLN';
-  allAvailableCurrencies = ['EUR', 'GBP', 'USD', 'PLN'];
-  currencyOptions: string[] = [];
+  activeCurrency = '';
+  currencyOptions = this.initialCurrencyOptions;
+  currencyOptionsToDisplay: string[] = [];
   currencySymbolMap = {
-    'PLN': 'zł',
     'EUR': '€',
     'GBP': '£',
-    'USD': '$'
+    'USD': '$',
+    'RUB': '$',
+    'PLN': 'zł'
   };
-  displayedCurrencySymbolMap = {
-    'EUR': '€',
-    'GBP': '£',
-    'USD': '$'
-  }
 
   constructor(private scrollSer: ScrollService) { }
 
