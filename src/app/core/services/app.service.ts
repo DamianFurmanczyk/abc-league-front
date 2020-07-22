@@ -4,7 +4,9 @@ import { Review } from './../../models/reviews.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { tap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+import { CookiesAppService } from './cookies.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ import { tap } from 'rxjs/operators';
 export class DataAccessService {
   constructor(
     private http: HttpClient,
-    private facade: AppFacade
+    private facade: AppFacade,
+    private cookiesAppService: CookiesAppService
   ) {
     this.facade.selectedRegion$.pipe(
       tap(res => this.selectedRegion = res)
@@ -23,10 +26,7 @@ export class DataAccessService {
   apiUrl = 'http://api.abcleague.webup-dev.pl/';
 
   getCurrencyAdequateToUsersCountry() {
-    return this.http.get<string>(this.apiUrl + 'currency').pipe(tap(res => {
-      console.log('res')
-      console.log(res)
-    }));
+    return this.http.get<string>(this.apiUrl + 'currency');
   }
 
   verifyOrder(id: string) {
@@ -38,7 +38,8 @@ export class DataAccessService {
   }
 
   getReviews() {
-    return this.http.get<Review[]>(this.apiUrl + 'reviews');
+    return forkJoin(this.http.get<Review[]>(this.apiUrl + 'reviews'), 
+    this.http.get<Review[]>(this.apiUrl + 'reviews/' + this.cookiesAppService.randCookie)).pipe(map(res => [...res[0], ...res[1]]));
   }
 
   getCoupons() {
@@ -46,11 +47,15 @@ export class DataAccessService {
   }
 
   getAvgReviewRating() {
-    return this.http.get(this.apiUrl + 'reviews/sum').pipe(tap(console.log));
+    return this.http.get(this.apiUrl + 'reviews/sum').pipe(tap(res=> {
+      console.log(res);
+      console.log('avg');
+    }));
   }
 
   getAccounts() {
-    return this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id);
+    return this.selectedRegion.id ? this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id) : 
+    this.http.get<Account[]>(this.apiUrl + 'accounts/regionname/' + this.selectedRegion.name);
   }
 
   getRegions() {
@@ -58,7 +63,7 @@ export class DataAccessService {
   }
 
   addReview(review: ReviewToAdd) {
-    return this.http.get(this.apiUrl + `reviews/add/${review.tekst}/${review.author}/${review.stars}`);
+    return this.http.get(this.apiUrl + `reviews/add/${review.tekst}/${review.author}/${review.stars}/${this.cookiesAppService.randCookie}`);
   }
 
   initiatePaypalPayment(email: string, price: number | string, currency: string, quantity: number, description: string,) {

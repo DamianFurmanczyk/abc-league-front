@@ -181,11 +181,8 @@ export function reducer(
     }
 
     case fromAppActions.Types.loadCurrencyBasedOnLocationSuccess: {
-      console.log(action.payload);
-      console.log(state.regions);
       const name = mapCurrencyRegionToInitialRegionSelected[action.payload.name] || 
         mapCurrencyRegionToInitialRegionSelected[action.payload.regionName] || state.selectedRegion.name;
-        console.log(name);
       state = {
         ...state,
         selectedRegion: {id: 1, name},
@@ -209,7 +206,6 @@ export function reducer(
     }
 
     case fromAppActions.Types.SelectRegion: {
-      console.log(action.payload); 
       state = {
         ...state,
         selectedRegion: action.payload
@@ -241,10 +237,7 @@ export function reducer(
     }
 
     case fromAppActions.Types.LoadCurrencySuccess: {
-      console.log(action.payload);
       mapCurrencyRegionToInitialRegionSelected[action.payload]
-      console.log(mapCurrencyRegionToInitialRegionSelected)
-      console.log(!!mapCurrencyRegionToInitialRegionSelected)
       state = {
         ...state,
         currencyLoading: false,
@@ -285,8 +278,6 @@ export function reducer(
         }}
       );
 
-      
-console.log('to rem')
 
       state = {
         ...state,
@@ -343,7 +334,6 @@ console.log('to rem')
     case fromAppActions.Types.AddReviewSuccess: {
       const reviewCopy = JSON.parse(JSON.stringify(action.payload))
       const addedReviewAltered = {...reviewCopy, updated_at: reviewCopy.updated_at.split('T')[0]};
-console.log('to rem')
       state = {
         ...state,
         reviews: reviewsAdapter.addOne(addedReviewAltered, state.reviews)

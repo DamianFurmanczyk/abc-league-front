@@ -28,13 +28,9 @@ export class AppEffects {
     mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
         mergeMap(resp => {
-          console.log(resp);
-          // console.log(resp[0]);
-          // console.log(resp[1]);
           return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp[0]['0']), of(resp[0]['0']), of(resp[1]['0'])])
         }),
         map(resp =>{
-          console.log(resp);
           return  new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0], regionName: resp[2]})
         }),
         catchError(err => of(new fromAppActions.loadCurrencyBasedOnLocationFail(err)))
@@ -48,7 +44,6 @@ export class AppEffects {
     mergeMap((action: fromAppActions.LoadCurrency) =>
       this.dataAccessService.getExchangeRateToDollar(action.payload).pipe(
           map(resp => {
-            console.log(resp);
             return new fromAppActions.LoadCurrencySuccess({name: action.payload, exchangeRateToDollar: resp})
           },
           catchError(err => of(new fromAppActions.LoadCurrencyFail(err)))

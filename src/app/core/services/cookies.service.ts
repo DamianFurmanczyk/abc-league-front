@@ -7,10 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CookiesAppService {
   constructor(private cookieService: CookieService) {
-    console.log(this.cookieService.check('abcLeagueConsentForCookies'));
-    console.log('asddasdsa');
     if(this.cookieService.check('abcLeagueConsentForCookies'))  this.showConsentCookieBar = false;
-    console.log(this.cookieService.getAll());
 
     if(!this.cookieService.getAll()['abcLeagueRand']) {
         this.cookieService.set('abcLeagueRand', String(Math.floor(Math.random()*1300) + Date.now()));

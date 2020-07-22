@@ -43,22 +43,14 @@ export class MainComponent implements OnDestroy, AfterViewInit {
   scrollActiveNavNoMatterWhat;
 
   ngAfterViewInit() {
-    console.log('siema')
-    console.log('siema')
-    console.log('siema')
     this.nav_ul = document.querySelector('#nav_ul');
     this.elementsThatNeedToDeactivateOnWindowClick = this.getElementsThatNeedToDeactivateOnWindowClick();
   }
 
   constructor(private facade: AppFacade, router: Router, private cookieService: CookieService, private appCookieService: CookiesAppService) {
     this.showCookiesBar = this.appCookieService.showConsentCookieBar;
-    console.log(this.appCookieService.showConsentCookieBar)
-    console.log(this.appCookieService.randCookie)
     this.currency$ = this.facade.currency$;
     this.scrollActiveNavNoMatterWhat = window.innerWidth < 981;
-    console.log('siema')
-    console.log('siema')
-    console.log('siema')
 
     router.events.pipe(filter(event => event instanceof ActivationEnd),
     tap((e: ActivationEnd) => {
