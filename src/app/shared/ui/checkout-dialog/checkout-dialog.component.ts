@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Region } from './../../../models/region.interface';
 import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../core/services/app.service';

@@ -23,7 +23,7 @@ export class DataAccessService {
   }
 
   selectedRegion: any = {};
-  apiUrl = 'http://api.abcleague.webup-dev.pl/';
+  apiUrl = 'https://api.abcleague.webup-dev.pl/';
 
   getCurrencyAdequateToUsersCountry() {
     return this.http.get<string>(this.apiUrl + 'currency');
@@ -72,7 +72,7 @@ export class DataAccessService {
 
   initiatePaypalPayment(price: number | string, currency: string, quantity: number, description: string,) {
     return fetch(
-      `http://api.abcleague.webup-dev.pl/pay_paypal?region=${this.selectedRegion.name}&description=${description}&price=${price}&currency=${currency}&quantity=${quantity}`,
+      `https://api.abcleague.webup-dev.pl/pay_paypal?region=${this.selectedRegion.name}&description=${description}&price=${price}&currency=${currency}&quantity=${quantity}`,
       { method: "post" })
       .then(res => res.json());
   }
