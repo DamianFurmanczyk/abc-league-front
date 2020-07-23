@@ -52,7 +52,6 @@ export class CheckoutDialogComponent implements AfterViewInit {
   discount = 0;
   pricePer1acc: number;
   price: number;
-  priceAfterDiscount: number;
   showPopup = false;
   contentForNotif = '';
   discountCode = '';
@@ -88,8 +87,8 @@ export class CheckoutDialogComponent implements AfterViewInit {
 
   initiateStripePayment() {
     const selAcc = this.selAccount;
-    this.redirectService.post({name: selAcc.name, currency: this.currency.name, 
-      price: selAcc.priceAfterConversion || selAcc.price_usd, quantity: selAcc.orderQty},
+    this.redirectService.post({region: this.selRegion, name: selAcc.name, currency: this.currency.name, 
+      price: this.price, quantity: selAcc.orderQty},
       'https://stripe.cokolwiek.webup-dev.pl');
   }
 
@@ -99,7 +98,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
 
   onInitiatePaypalPayment() {
     const selAcc = this.selAccount;
-    this.DataAccessService.initiatePaypalPayment(selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
+    this.DataAccessService.initiatePaypalPayment(this.price, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
         window.open(
         res,
         '_blank'

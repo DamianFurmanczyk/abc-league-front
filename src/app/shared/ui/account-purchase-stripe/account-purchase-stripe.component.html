@@ -12,10 +12,10 @@
 
         <div 
         *ngFor="let acc of accounts; let i = index" 
-        class="account account--bestseller" 
-        [ngClass]="{outOfStock: acc.count == 0}"
+        class="account" 
+        [ngClass]="{outOfStock: acc.count == 0,  'account--bestseller': i == 1}"
         >
-          <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
+          <img [src]="'assets/img/' + acc.name + '.svg'" alt="blue_shards">
 
           <div class="account_cost">
             <small>{{acc.name | uppercase}}</small> <br>
@@ -23,7 +23,12 @@
             {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
           </div>
 
-          <p class="account_description" [innerHTML]='acc.description'></p>
+          <p class="account_description">
+            {{accountToDustAmountMap[acc.name]}} blue essence <br>
+            Unranked all seasons <br>
+            Unverified email <br>
+            Lifetime warranty <br>
+          </p>
 
           <div class="flex-align-bottom-wrapper">
             <div class="account_quantity-times">
@@ -43,7 +48,6 @@
           </div>
         </div>
 
-
       </div>
     </perfect-scrollbar>
 
@@ -55,14 +59,16 @@
         class="account alternative"
         [ngClass]="{outOfStock: acc.count == 0,  'account--bestseller': i == 1}"
         >
-          <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
+          <img [src]="'assets/img/' + acc.name + '.svg'" alt="blue_shards">
     
           <div class="account_cost--alt">
             <small>{{acc.name | uppercase}}</small> <br>
             {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
           </div>
     
-          <p class="account_description--alt" [innerHTML]='accountAlternativeDescriptionMap[acc.name]'></p>
+          <p class="account_description--alt">
+            <small>{{accountToDustAmountMap[acc.name]}}  blue essence</small> <br> 
+          </p>
     
           <div class="flex-align-bottom-wrapper">
             <div class="account_quantity-times--alt">

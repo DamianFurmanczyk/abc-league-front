@@ -19,12 +19,12 @@ export class AccountPurchaseStripeComponent   {
   @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
   @Input() accounts: AccountWithCountAndOrderQty[] = [];
 
-  accountAlternativeDescriptionMap = {
-    Basic: '40000 <br> <small>blue essence</small>',
-    Standard: '50000 <br> <small>blue essence</small>',
-    Premium: '60000 <br> <small>blue essence</small>',
-    Epic: '70000 <br> <small>blue essence</small>',
-    Legendary: '100000 <br> <small>blue essence</small>'
+  accountToDustAmountMap = {
+    Basic: 40000,
+    Standard: 50000,
+    Premium: 60000,
+    Epic: 70000,
+    Legendary: 100000
   }
 
   onCheckoutToggle() {

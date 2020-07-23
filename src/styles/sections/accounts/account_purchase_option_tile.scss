@@ -47,9 +47,11 @@
   text-align: center;
   max-width: 280px;
   transition: .4s;
+  min-width: 200px;
 
   &.alternative {
     padding: 1.8rem 1.4rem;
+    min-width: unset;
 
     .account_description--alt {
       margin-bottom: 1rem;
@@ -123,13 +125,14 @@
 
   .account_description {
     font-size: .9rem;
-    line-height: 2.2;
+    line-height: 2;
   }
 }
 
 div.account:hover {
   filter: brightness(100%) !important;
   opacity: 1 !important;
+  box-shadow: 0 0 0 1.3pt $blue;
 }
 
 .account_actions {
