@@ -1,6 +1,7 @@
 import { ScrollService } from './../../utils/scrolls.service';
 import { Component, Input, Output, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import {CountryToCurrencyAbbrevMap} from '../../../data/CountryToCurrencyAbbrevMap';
 
 @Component({
   selector: 'app-nav',
@@ -46,19 +47,18 @@ export class NavComponent  {
   activeCurrency = '';
   currencyOptions = this.initialCurrencyOptions;
   currencyOptionsToDisplay: string[] = [];
-  currencySymbolMap = {
-    'EUR': '€',
-    'GBP': '£',
-    'USD': '$',
-    'RUB': '$',
-    'PLN': 'zł'
-  };
+  currencySymbolMap = CountryToCurrencyAbbrevMap;
 
   constructor(private scrollSer: ScrollService) { }
 
   scrollTopOnNavigateAndDismiss() {
     this.hideNavUl();
     this.scrollSer.scrollToTopOnNavigate();
+  }
+
+  scrollToPrivacyPolicyOnNavigateAndDismiss() {
+    this.hideNavUl();
+    this.scrollSer.navigateAndScrollToElem('.privacy-policy', 'tos');
   }
 
   hideNavUl() {

@@ -1,8 +1,18 @@
 <section class="order-verification">
+
+    <ng-container *ngIf="orderInfoLoading">
+        loading...
+    </ng-container>
+
+    <ng-container *ngIf="!orderInfo && !orderInfoLoading">
+        No order information found.
+    </ng-container>
+    
+    <ng-container *ngIf="!orderInfoLoading && orderInfo">
     <h2>Order information:</h2>
 
     <p>
-        {{orderInfo['description']}} account bought by
+        <b>{{orderInfo['description']}}</b> account bought by
         {{orderInfo['firstname']}}
         {{orderInfo['lastname']}}
         through
@@ -14,11 +24,10 @@
     </p>
 
     <br>
-    Here is
-    <!-- are -->
-     your code:
-    <!-- {{orderInfo['code'].length > 1 ? 's' : ''}} -->
-    <!-- code{{orderInfo['code'].length > 1 ? 's' : ''}} to your account{{orderInfo['code'].length > 1 ? 's' : ''}} 
-    {{orderInfo['code'].length > 1 ? 'are' : 'is'}} : <ng-container *ngFor="let code of orderInfo['code']">code</ng-container> -->
-
+    {{orderInfo['code'].length > 1 ? 'Here are your accounts passes:' : 'Here is your accounts passes:'}}
+    
+        <ul class="order-verification_codes-list">
+            <li *ngFor="let code of orderInfo['code']">Login:  {{code.login}}, password:  {{code.password}}<li>
+        </ul>
+    </ng-container>
 </section>

@@ -4,8 +4,8 @@ import { currencyData } from './../../../models/currencyData.interface';
 import { DataAccessService } from './../../../core/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { Component, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+import { RedirectService } from './../../../core/services/redirect.service';
 
-import { StripeToken } from "stripe-angular";
 @Component({
   selector: 'app-checkout-dialog',
   templateUrl: './checkout-dialog.component.html',
@@ -57,7 +57,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
   contentForNotif = '';
   discountCode = '';
 
-  constructor(private DataAccessService: DataAccessService, private fb: FormBuilder) {
+  constructor(private DataAccessService: DataAccessService, private fb: FormBuilder, private redirectService: RedirectService) {
     this.emailForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]]
     });
@@ -86,35 +86,20 @@ export class CheckoutDialogComponent implements AfterViewInit {
     }
   }
 
+  initiateStripePayment() {
+    const selAcc = this.selAccount;
+    this.redirectService.post({name: selAcc.name, currency: this.currency.name, 
+      price: selAcc.priceAfterConversion || selAcc.price_usd, quantity: selAcc.orderQty},
+      'https://stripe.cokolwiek.webup-dev.pl');
+  }
+
   onToggleNotifDisplay() {
     this.showPopup = false;
   }
 
-  changeEmailFormDisplay(flag: boolean) {
-    this.displayEmailField = flag;
-  }
-
-  onStripeInvalid( error: Error ){
-    console.log('Validation Error', error)
-  }
- 
-  setStripeToken( token: StripeToken ){
-    console.log('Stripe token', token)
-  }
- 
-  setStripeSource( source ){
-    console.log('Stripe source', source)
-  }
- 
-  onStripeError( error:Error ){
-    console.error('Stripe error', error)
-  }
-
   onInitiatePaypalPayment() {
     const selAcc = this.selAccount;
-    console.log(selAcc)
-    this.DataAccessService.initiatePaypalPayment('areksiemka@gmail.com', 
-      selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
+    this.DataAccessService.initiatePaypalPayment(selAcc.priceAfterConversion || selAcc.price_usd, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
         window.open(
         res,
         '_blank'

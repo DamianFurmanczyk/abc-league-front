@@ -9,7 +9,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 })
 export class HeroComponent  {
   @Input() set reviewsRatingAvg(ratingData: number) {
-    console.log(ratingData)
     this.reviewsNum = ratingData[1];
   }
 

@@ -241,6 +241,12 @@
 
   &--single-payment {
     justify-content: center;
+    display: none;
+  }
+
+  &--paypal {
+    width: calc(100% - 40px);
+    justify-content: center;
   }
 
   &--top {

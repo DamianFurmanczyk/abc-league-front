@@ -22,17 +22,27 @@
     </button>
   </div>
 
-  <div class="reviews-wrapper">
-    <div *ngFor="let review of sortedReviews" class="review">
-      <div class="review_header">
-        <img [src]="review.flag" alt="flag">
-        <span class="reviewer-name">{{review.author}}</span>
-        <span class="review-rating" [innerHTML]='starsMap[review.stars]'></span>
+
+  <ng-container *ngIf="!sortedReviews || sortedReviews.length == 0; else elseTemplate">
+    <p class="noInfo">
+      No reviews data retrieved from server.
+    </p>
+  </ng-container>
+  
+  <ng-template #elseTemplate>
+    <div class="reviews-wrapper">
+      <div *ngFor="let review of sortedReviews" class="review">
+        <div class="review_header">
+          <img [src]="review.flag" alt="flag">
+          <span class="reviewer-name">{{review.author}}</span>
+          <span class="review-rating" [innerHTML]='starsMap[review.stars]'></span>
+        </div>
+        <div class="review_content">
+          {{review.tekst}}
+        </div>
+        <small class="review-date-added">{{review.updated_at || review.created_at}}</small>
       </div>
-      <div class="review_content">
-        {{review.tekst}}
-      </div>
-      <small class="review-date-added">{{review.updated_at || review.created_at}}</small>
     </div>
-  </div>
+  </ng-template>
+
 </section>

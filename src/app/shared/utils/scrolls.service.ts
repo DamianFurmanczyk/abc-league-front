@@ -16,11 +16,11 @@ export class ScrollService {
     }
 
     scrollToElem(elSel: string) {
-        
+        const el = window.document.querySelector(elSel);
+        if(!el) return;
         const elY = window.document.querySelector(elSel).getBoundingClientRect().y + + document.documentElement.scrollTop;
-        
         window.scrollTo({
-            top: elY + 70,
+            top: elY+70,
             behavior: 'smooth',
           });
           

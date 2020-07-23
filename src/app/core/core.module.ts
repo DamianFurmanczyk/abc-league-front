@@ -53,10 +53,12 @@ import { ReviewsListComponent } from '../reviews/ui/reviews-list/reviews-list.co
 
 import { AppEffects } from './state/app.effects';
 import { HttpClientModule } from '@angular/common/http';
+
 import { DataAccessService } from './services/app.service';
+import { RedirectService } from './services/redirect.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
-import { StripeModule } from 'stripe-angular';
 @NgModule({
   declarations: [    
     MainComponent,
@@ -83,7 +85,6 @@ import { StripeModule } from 'stripe-angular';
     NavComponent
   ],
   imports: [
-  StripeModule.forRoot("pk_live_KpPaLk4CKLhEUlTA5itof0Ub00JyF4MuSL"),
   PerfectScrollbarModule,
     AppRoutingModule,
     CommonModule,
@@ -100,6 +101,7 @@ import { StripeModule } from 'stripe-angular';
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   },
+    RedirectService,
     CookieService,
     DataAccessService,
     ReviewsInitiateResolver,

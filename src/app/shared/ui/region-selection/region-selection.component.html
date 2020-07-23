@@ -3,15 +3,21 @@
       <h2>Choose your region</h2>
       <perfect-scrollbar>
         <div class="regions-wrapper">
-            
-            <ng-container >
-                <figure *ngFor="let region of regions" (click)="selectRegion(region)" [ngClass]="['region', selectedRegionSet.name == region.name ? ' active' : '']">
-                    <div class="region_caption">{{region.name}}</div>
-                    <div class="region_img-wrapper">
-                        <img [src]="'assets/img/' + region.name + '.png'" alt="region_img">
-                    </div>
-                </figure>
-            </ng-container>
+
+          <ng-container *ngIf="!regions || regions.length == 0; else elseTemplate">
+            <p class="noInfo">
+              No regions data retrieved from server.
+            </p>
+          </ng-container>
+          
+          <ng-template #elseTemplate>
+            <figure *ngFor="let region of regions" (click)="selectRegion(region)" [ngClass]="['region', selectedRegionSet.name == region.name ? ' active' : '']">
+                <div class="region_caption">{{region.name}}</div>
+                <div class="region_img-wrapper">
+                    <img [src]="'assets/img/' + region.name + '.png'" alt="region_img">
+                </div>
+            </figure>
+          </ng-template>
 
       </div>
     </perfect-scrollbar>

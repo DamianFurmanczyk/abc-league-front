@@ -30,32 +30,36 @@ export class DataAccessService {
   }
 
   verifyOrder(id: string) {
-    return this.http.get(this.apiUrl + `verify/${id}`).pipe(tap(console.log));
+    return this.http.get(this.apiUrl + `verify/${id}`);
   }
 
   getExchangeRateToDollar(currency: string) {
-    return this.http.get(this.apiUrl + `convert/1/USD/${currency}`).pipe(tap(console.log));
+    return this.http.get(this.apiUrl + `convert/1/USD/${currency}`);
   }
 
   getReviews() {
-    return forkJoin(this.http.get<Review[]>(this.apiUrl + 'reviews'), 
-    this.http.get<Review[]>(this.apiUrl + 'reviews/' + this.cookiesAppService.randCookie)).pipe(map(res => [...res[0], ...res[1]]));
+    return forkJoin(this.http.get<Review[]>(this.apiUrl + 'reviews'),
+      this.http.get<Review[]>(this.apiUrl + 'reviews/' + this.cookiesAppService.randCookie)).pipe(map(res => [...res[0], ...res[1]]));
   }
 
   getCoupons() {
-    return this.http.get(this.apiUrl + 'coupon').pipe(tap(console.log));
+    return this.http.get(this.apiUrl + 'coupon')
   }
 
   getAvgReviewRating() {
-    return this.http.get(this.apiUrl + 'reviews/sum').pipe(tap(res=> {
-      console.log(res);
-      console.log('avg');
-    }));
+    return forkJoin(this.http.get(this.apiUrl + 'reviews/sum'), 
+      this.http.get(this.apiUrl + 'reviewssum/' + this.cookiesAppService.randCookie)).pipe(map(res => {
+        let newResp = [];
+        // res[x][0] - avg rating, res[x][1] - rating count
+        newResp[0] = ((res[0][0] * res[0][1] + res[1][0] * res[1][1]) / (res[0][1] + res[1][1])).toFixed(2);
+        newResp[1] = res[0][1] + res[1][1];
+        return newResp;
+      }));
   }
 
   getAccounts() {
-    return this.selectedRegion.id ? this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id) : 
-    this.http.get<Account[]>(this.apiUrl + 'accounts/regionname/' + this.selectedRegion.name);
+    return this.selectedRegion.id ? this.http.get<Account[]>(this.apiUrl + 'accounts/region/' + this.selectedRegion.id) :
+      this.http.get<Account[]>(this.apiUrl + 'accounts/regionname/' + this.selectedRegion.name);
   }
 
   getRegions() {
@@ -66,9 +70,10 @@ export class DataAccessService {
     return this.http.get(this.apiUrl + `reviews/add/${review.tekst}/${review.author}/${review.stars}/${this.cookiesAppService.randCookie}`);
   }
 
-  initiatePaypalPayment(email: string, price: number | string, currency: string, quantity: number, description: string,) {
-    return fetch(`http://api.abcleague.webup-dev.pl/pay_paypal?description=${description}&email=${email}&price=${price}&currency=${currency}&quantity=${quantity}`, 
-    { method: "post" })
+  initiatePaypalPayment(price: number | string, currency: string, quantity: number, description: string,) {
+    return fetch(
+      `http://api.abcleague.webup-dev.pl/pay_paypal?description=${description}&price=${price}&currency=${currency}&quantity=${quantity}`,
+      { method: "post" })
       .then(res => res.json());
   }
 }

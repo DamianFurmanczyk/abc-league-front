@@ -19,14 +19,8 @@
 
 @media (max-width: $xm) {
     .regions-wrapper {
-        max-width: 90%;
-        justify-content: unset;
-    }
-}
-
-@media (max-width: $s) {
-    .regions-wrapper {
         max-width: 97%;
+        justify-content: unset;
     }
 }
 

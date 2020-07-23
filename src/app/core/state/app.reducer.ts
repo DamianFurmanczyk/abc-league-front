@@ -50,7 +50,7 @@ export interface AppStateInterface {
   coupons: [string[], {}],
   couponsErr: HttpErrorResponse,
   couponsLoading: boolean,
-  reviewsAvgRating: number,
+  reviewsAvgRating: [number, number],
   reviewsAvgRatingLoading: boolean,
   reviewsAvgRatingError: HttpErrorResponse,
 }
@@ -336,6 +336,7 @@ export function reducer(
       const addedReviewAltered = {...reviewCopy, updated_at: reviewCopy.updated_at.split('T')[0]};
       state = {
         ...state,
+        reviewsAvgRating: [state.reviewsAvgRating[0], state.reviewsAvgRating[1] + 1],
         reviews: reviewsAdapter.addOne(addedReviewAltered, state.reviews)
       };
 

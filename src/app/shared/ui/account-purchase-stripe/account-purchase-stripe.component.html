@@ -1,83 +1,90 @@
 <section class="account-options">
 
-  <perfect-scrollbar>
-    <div *ngIf="!alternativeStyles" ss-container class="account-options-wrapper">
-
-      <div 
-      *ngFor="let acc of accounts; let i = index" 
-      class="account account--bestseller" 
-      [ngClass]="{outOfStock: acc.count == 0}"
-      >
-        <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
-
-        <div class="account_cost">
-          <small>{{acc.name | uppercase}}</small> <br>
-          <small>30 lvl instant delivery</small> <br>
-          {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
-        </div>
-
-        <p class="account_description" [innerHTML]='acc.description'></p>
-
-        <div class="flex-align-bottom-wrapper">
-          <div class="account_quantity-times">
-
-            <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
-
-            <ng-template #btnsWrapper>
-              <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, i)'>-</button>
-                {{acc.orderQty}}
-              <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, i)'>+</button>
-            </ng-template>
-          </div>
-
-        <div class="account_actions">
-          <button [disabled]='acc.count == 0' (click)="onCheckoutToggle(); onChangeSelectedAccount(acc)">BUY NOW</button>
-        </div>
-        </div>
-      </div>
-
-
-    </div>
-  </perfect-scrollbar>
-
+  <ng-container *ngIf="!accounts || accounts.length == 0; else elseTemplate">
+    <p class="noInfo">
+      No account data retrieved from server.
+    </p>
+  </ng-container>
+  <ng-template #elseTemplate>
+  
     <perfect-scrollbar>
-    <div *ngIf="alternativeStyles" class="account-options-wrapper alternative">
+      <div *ngIf="!alternativeStyles" ss-container class="account-options-wrapper">
 
-      <div 
-      *ngFor="let acc of accounts; let i = index" 
-      class="account alternative"
-      [ngClass]="{outOfStock: acc.count == 0,  'account--bestseller': i == 1}"
-      >
-        <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
-  
-        <div class="account_cost--alt">
-          <small>{{acc.name | uppercase}}</small> <br>
-          {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
-        </div>
-  
-        <p class="account_description--alt" [innerHTML]='accountAlternativeDescriptionMap[acc.name]'></p>
-  
-        <div class="flex-align-bottom-wrapper">
-          <div class="account_quantity-times--alt">
-  
-            <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
-  
-            <ng-template #btnsWrapper>
-              <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, i)'>-</button>
-                {{acc.orderQty}}
-              <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, i)'>+</button>
-            </ng-template>
+        <div 
+        *ngFor="let acc of accounts; let i = index" 
+        class="account account--bestseller" 
+        [ngClass]="{outOfStock: acc.count == 0}"
+        >
+          <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
+
+          <div class="account_cost">
+            <small>{{acc.name | uppercase}}</small> <br>
+            <small>30 lvl instant delivery</small> <br>
+            {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
           </div>
 
-          <div class="account_actions--alt">
+          <p class="account_description" [innerHTML]='acc.description'></p>
+
+          <div class="flex-align-bottom-wrapper">
+            <div class="account_quantity-times">
+
+              <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
+
+              <ng-template #btnsWrapper>
+                <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, i)'>-</button>
+                  {{acc.orderQty}}
+                <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, i)'>+</button>
+              </ng-template>
+            </div>
+
+          <div class="account_actions">
             <button [disabled]='acc.count == 0' (click)="onCheckoutToggle(); onChangeSelectedAccount(acc)">BUY NOW</button>
-            <button (click)="navigateToAccounts()">LEARN MORE</button>
+          </div>
           </div>
         </div>
-      </div> 
-  
-    </div>
+
+
+      </div>
     </perfect-scrollbar>
 
+      <perfect-scrollbar>
+      <div *ngIf="alternativeStyles" class="account-options-wrapper alternative">
 
+        <div 
+        *ngFor="let acc of accounts; let i = index" 
+        class="account alternative"
+        [ngClass]="{outOfStock: acc.count == 0,  'account--bestseller': i == 1}"
+        >
+          <img [src]="'assets/img/Blue' + (i+1) + '.svg'" alt="blue_shards">
+    
+          <div class="account_cost--alt">
+            <small>{{acc.name | uppercase}}</small> <br>
+            {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
+          </div>
+    
+          <p class="account_description--alt" [innerHTML]='accountAlternativeDescriptionMap[acc.name]'></p>
+    
+          <div class="flex-align-bottom-wrapper">
+            <div class="account_quantity-times--alt">
+    
+              <p *ngIf="acc.count == 0;else btnsWrapper">Out of stock</p>
+    
+              <ng-template #btnsWrapper>
+                <button [ngClass]="[acc.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, i)'>-</button>
+                  {{acc.orderQty}}
+                <button [ngClass]="[acc.count == acc.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, i)'>+</button>
+              </ng-template>
+            </div>
+
+            <div class="account_actions--alt">
+              <button [disabled]='acc.count == 0' (click)="onCheckoutToggle(); onChangeSelectedAccount(acc)">BUY NOW</button>
+              <button (click)="navigateToAccounts()">LEARN MORE</button>
+            </div>
+          </div>
+        </div> 
+    
+      </div>
+      </perfect-scrollbar>
+
+    </ng-template>
 </section>

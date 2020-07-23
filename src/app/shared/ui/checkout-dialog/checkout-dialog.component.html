@@ -73,19 +73,6 @@
       </aside>
     </ng-container>
 
-    <div class="checkout-dialog_stripe" [ngStyle]="{display: dynamicSectionActiveView == 'stripe' ? 'block' : 'none'}">
-        <stripe-card
-          #stripeCard
-          (catch) = "onStripeError($event)"
-          [(invalid)] = "invalidError"
-          (cardMounted) = "cardReady = true"
-          (tokenChange) = "setStripeToken($event)"
-          (sourceChange) = "setStripeSource($event)"
-      ></stripe-card>
-      
-      <button type="button" (click)="stripeCard.createSource()">createSource</button>
-    </div>
-
     <ng-container *ngIf="dynamicSectionActiveView == 'bitcoin'">
 
       <form class="email-form" [formGroup]="emailForm">
@@ -114,7 +101,7 @@
 
   <div class="checkout-dialog_payment-methods">
 
-    <div class="payment-tile payment-tile--top"  (click)="dynamicSectionActiveView = 'stripe'">
+    <div class="payment-tile payment-tile--top"  (click)="initiateStripePayment()">
       <img src="assets/img/mastercard-2.svg" alt="paymentOption">
       <img src="assets/img/maestro.svg" alt="paymentOption">
       <img src="assets/img/americanExpress.svg" alt="paymentOption">

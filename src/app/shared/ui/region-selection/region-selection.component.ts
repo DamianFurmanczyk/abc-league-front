@@ -22,8 +22,6 @@ export class RegionSelectionComponent implements OnInit, OnDestroy {
   constructor(private facade: AppFacade) { }
 
   selectRegion(region: number) {
-    // this.regions.find(el => el.name = region['name'])
-    console.log(region)
     this.facade.SelectRegion(region);
   }
 
