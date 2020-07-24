@@ -1,7 +1,6 @@
 .checkout-dialog {
   transform: translate(-50%, -200%);
   transition: .4s;
-
   position: fixed;
   z-index: 100;
   left: 50%;
@@ -28,6 +27,10 @@
       margin-top: .7rem;
     }
   }
+}
+
+.discount-text {
+  color: $blue;
 }
 
 .checkout-dialog_products-list_li-top {

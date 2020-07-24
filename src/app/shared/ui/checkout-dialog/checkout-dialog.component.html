@@ -1,14 +1,12 @@
 <div class="popup-overlay"></div>
 
-<app-notification-popup  
-  *ngIf="showPopup" 
-  [content]="this.contentForNotif"
+<app-notification-popup *ngIf="showPopup" [content]="this.contentForNotif"
   (toggleNotificationDisplay)="onToggleNotifDisplay()">
 </app-notification-popup>
 
 <div #popup class="checkout-dialog">
 
-  <p class="checkout-dialog_top-text">Check out 
+  <p class="checkout-dialog_top-text">Check out
     <span (click)="hideFormAndToggleDisplayAfter()" class="fa fa-times"></span>
   </p>
 
@@ -22,9 +20,11 @@
         </div>
 
         <div class="account_quantity-times">
-          <button [ngClass]="[selAccount.orderQty == 1 ? 'deactivated' : '']" (click)='onChangeOrderQuantity(-1, -1)'>-</button>
+          <button [ngClass]="[selAccount.orderQty == 1 ? 'deactivated' : '']"
+            (click)='onChangeOrderQuantity(-1, -1)'>-</button>
           {{selAccount.orderQty}}
-        <button [ngClass]="[selAccount.count == selAccount.orderQty ? 'deactivated' : '']" (click)='onChangeOrderQuantity(1, -1)'>+</button>
+          <button [ngClass]="[selAccount.count == selAccount.orderQty ? 'deactivated' : '']"
+            (click)='onChangeOrderQuantity(1, -1)'>+</button>
         </div>
       </div>
 
@@ -41,16 +41,17 @@
 
     <div class="checkout-dialog_order-summary-bottom">
 
-        1 product
+      1 product
 
-        <button [ngClass]="['couponButton', showCouponInputFlag ? 'active' : '']" (click)="toggleCouponInputDisplay()">
-          {{showCouponInputFlag ? 'Cancel' : 'Add coupon'}}
+      <button *ngIf="!showDiscountText" [ngClass]="['couponButton', showCouponInputFlag ? 'active' : '']" (click)="toggleCouponInputDisplay()">
+        {{showCouponInputFlag ? 'Cancel' : 'Add coupon'}}
       </button>
+      <span *ngIf="showDiscountText" class="discount-text">-{{discount}}%</span>
     </div>
 
-    <div [ngClass]="[showCouponInputFlag ? 'active' : '']" class="checkout_code-field">
+    <div [ngClass]="[showCouponInputFlag && !showDiscountText ? 'active' : '']" class="checkout_code-field">
       <form [formGroup]='couponForm'>
-        <input type="text" placeholder="Your coupon"  formControlName="coupon">
+        <input type="text" placeholder="Your coupon" formControlName="coupon">
         <small (click)="attemptToActivateCoupon()" [ngClass]='{"active": discount > 0}'>Activate</small>
       </form>
     </div>
@@ -69,7 +70,7 @@
 
       <aside>
         <img src="assets/img/lock.svg" alt="lock">
-        <p>Account details will be shown instantly after payment</p>
+        <p>Secure, SSL encrypted payment process. pod klodka</p>
       </aside>
     </ng-container>
 
@@ -83,10 +84,11 @@
         </div>
 
         <div>
-          <input  [ngClass]="{'valid':  emailForm.valid, 'invalid':  emailForm.invalid && emailForm.touched}" formControlName="email" type="text">
+          <input [ngClass]="{'valid':  emailForm.valid, 'invalid':  emailForm.invalid && emailForm.touched}"
+            formControlName="email" type="text">
           <br>
 
-          <small  [ngClass]="{'active':  emailForm.valid}"> next
+          <small [ngClass]="{'active':  emailForm.valid}"> next
             <span class="fa fa-chevron-right"></span>
           </small>
         </div>
@@ -94,14 +96,14 @@
       </form>
 
     </ng-container>
-    
+
   </div>
 
   <div class="checkout-dialog_hr"></div>
 
   <div class="checkout-dialog_payment-methods">
 
-    <div class="payment-tile payment-tile--top"  (click)="initiateStripePayment()">
+    <div class="payment-tile payment-tile--top" (click)="initiateStripePayment()">
       <img src="assets/img/mastercard-2.svg" alt="paymentOption">
       <img src="assets/img/maestro.svg" alt="paymentOption">
       <img src="assets/img/americanExpress.svg" alt="paymentOption">

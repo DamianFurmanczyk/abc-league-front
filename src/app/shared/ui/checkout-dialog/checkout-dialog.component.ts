@@ -27,7 +27,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
   };
   @Input() currency: currencyData;
   @Input() coupons: [string[], {}];
-  @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
+  @Output() changeOrderQuantity: EventEmitter<{ q: number, id: number, selectedAccIsTarget: boolean }> = new EventEmitter();
   cardReady = false;
   invalidError = '';
   extraData = {
@@ -55,6 +55,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
   showPopup = false;
   contentForNotif = '';
   discountCode = '';
+  showDiscountText = false;
 
   constructor(private DataAccessService: DataAccessService, private fb: FormBuilder, private redirectService: RedirectService) {
     this.emailForm = this.fb.group({
@@ -66,7 +67,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.emailForm.controls.email.valueChanges.subscribe((val: string) => this.email = val.trim());
     this.couponForm.controls.coupon.valueChanges.subscribe(
       (val: string) => {
-        if(!val) return;
+        if (!val) return;
         this.discount = this.coupons[1][val.trim().toLowerCase()] || 0;
         this.discountCode = val;
       }
@@ -74,9 +75,10 @@ export class CheckoutDialogComponent implements AfterViewInit {
   }
 
   attemptToActivateCoupon() {
-    if(+this.discount > 0) {
+    if (+this.discount > 0) {
       this.contentForNotif = `Claimed coupon <b>'${this.discountCode[0].toUpperCase() + this.discountCode.substr(1)}'</b> for <b>${this.discount}%</b> discount.`;
       this.showPopup = true;
+      this.showDiscountText = true;
       this.evaluatePrice();
     } else {
       this.contentForNotif = `Coupon is invalid.`;
@@ -87,8 +89,10 @@ export class CheckoutDialogComponent implements AfterViewInit {
 
   initiateStripePayment() {
     const selAcc = this.selAccount;
-    this.redirectService.post({region: this.selRegion, name: selAcc.name, currency: this.currency.name, 
-      price: this.price, quantity: selAcc.orderQty},
+    this.redirectService.post({
+      region: this.selRegion, name: selAcc.name, currency: this.currency.name,
+      price: this.price, quantity: selAcc.orderQty
+    },
       'https://stripe.cokolwiek.webup-dev.pl');
   }
 
@@ -99,7 +103,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
   onInitiatePaypalPayment() {
     const selAcc = this.selAccount;
     this.DataAccessService.initiatePaypalPayment(this.price, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
-        window.open(
+      window.open(
         res,
         '_blank'
       );
@@ -107,17 +111,17 @@ export class CheckoutDialogComponent implements AfterViewInit {
   }
 
   evaluatePrice() {
-    var newPrice = this.pricePer1acc * this.selAccount.orderQty  * (this.selAccount.orderQty > 1 ? .9 : 1);
-    newPrice = this.discount == 0 ? newPrice : newPrice - newPrice * (this.discount/100);
+    var newPrice = this.pricePer1acc * this.selAccount.orderQty * (this.selAccount.orderQty > 1 ? .9 : 1);
+    newPrice = this.discount == 0 ? newPrice : newPrice - newPrice * (this.discount / 100);
     this.price = +(newPrice.toFixed(2));
   }
 
   onChangeOrderQuantity(q: number, id: number) {
-    this.changeOrderQuantity.emit({q, id, selectedAccIsTarget: true});
+    this.changeOrderQuantity.emit({ q, id, selectedAccIsTarget: true });
 
     this.evaluatePrice();
   }
-  
+
   hideFormAndToggleDisplayAfter() {
     this.popup.nativeElement.classList.remove('active');
     setTimeout(() => {
@@ -135,7 +139,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.discount = 0;
     this.evaluatePrice();
     this.showCouponInputFlag = !this.showCouponInputFlag;
-    if(this.showCouponInputFlag == false ) {
+    if (this.showCouponInputFlag == false) {
       this.couponForm.controls.coupon.reset();
     }
   }

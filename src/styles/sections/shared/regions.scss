@@ -5,7 +5,14 @@
         text-align: center;
         font-size: 2rem;
         font-weight: bold;
-        margin: 2rem 0 3.5rem 0;
+        margin: 3rem 0 3.5rem 0;
+    }
+
+    &_selected-region-heading {
+        font-size: 2rem;
+        margin: 2.5rem 0 3.5rem 0;
+        text-align: center;
+        text-shadow: 0 6px 8px transparentize($blue, .5);
     }
 }
 
@@ -25,31 +32,44 @@
 }
 
 .region {
-    align-self: flex-start;
     cursor: pointer;
     filter: brightness(0%);
     transition: .15s ease-in-out;
     opacity: .8;
+    min-width: 100px;
+    padding: 17px 25px;
+    border-radius: 2rem;
+    margin: 40px 0 40px 1.3rem ;
+    background: transparentize($color: #fff, $amount: .98);
+
     &.active {
         filter: brightness(100%);
+        background: transparentize($color: #fff, $amount: .9855);
         opacity: 1;
+        box-shadow: 0 0 0 1pt $blue, 0 0 2rem -.5rem transparentize($blue, .4);
     }
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 1rem;
+    align-items: center;
     &:first-of-type {
-        margin-left: 0;
+        margin-left: 3rem;
     }
     &:last-of-type {
+        margin-right: 3.5rem;
         .region_caption {
-            flex: 1;
-            margin-bottom: 1.2rem;
+            transform: translateY(-1.2rem);
         }
     }
     .region_caption {
         font-weight: bold;
         text-align: center;
         margin-bottom: .6rem;
+    }
+}
+
+@media (max-width: $xm) {
+    .region:first-of-type {
+        margin-left: .3rem;
     }
 }

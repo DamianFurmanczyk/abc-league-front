@@ -9,6 +9,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 })
 export class HeroComponent  {
   @Input() set reviewsRatingAvg(ratingData: number) {
+    if(!ratingData) this.reviewsNum = 0;
     this.reviewsNum = ratingData[1];
   }
 
