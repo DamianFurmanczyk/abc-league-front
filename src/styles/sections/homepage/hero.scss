@@ -152,8 +152,10 @@
         }
     }
     .nav_li--icon {
+        margin-right: 2.5rem;
         img {
-            height: 90px;
+            height: 70px;
+            transform: translateY(3px);
         }
         width: auto;
     }
