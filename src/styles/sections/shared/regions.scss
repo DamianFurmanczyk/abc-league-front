@@ -53,23 +53,20 @@
     justify-content: center;
     align-items: center;
     &:first-of-type {
-        margin-left: 3rem;
+        margin-left: 1rem;
     }
     &:last-of-type {
-        margin-right: 3.5rem;
-        .region_caption {
-            transform: translateY(-1.2rem);
+        position: relative;
+        &::after {
+            position: relative;
+            left: 100%;
+            content: '';
+            padding: 1rem;
         }
     }
     .region_caption {
         font-weight: bold;
         text-align: center;
         margin-bottom: .6rem;
-    }
-}
-
-@media (max-width: $xm) {
-    .region:first-of-type {
-        margin-left: .3rem;
     }
 }
