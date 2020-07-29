@@ -24,13 +24,6 @@
     margin: 3% auto 0 auto;
 }
 
-@media (max-width: $xm) {
-    .regions-wrapper {
-        max-width: 97%;
-        justify-content: unset;
-    }
-}
-
 .region {
     cursor: pointer;
     filter: brightness(0%);
@@ -68,5 +61,27 @@
         font-weight: bold;
         text-align: center;
         margin-bottom: .6rem;
+    }
+}
+
+@media (max-width: $xm) {
+    .regions-wrapper {
+        max-width: 97%;
+        justify-content: unset;
+    }
+
+    .region:first-of-type {
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 1820px) {
+    .regions-wrapper {
+        max-width: 97%;
+        justify-content: unset;
+    }
+
+    .region:first-of-type {
+        margin-left: .9rem;
     }
 }
