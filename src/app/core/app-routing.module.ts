@@ -57,36 +57,6 @@ const routes: Routes = [
   ]
 }
 ];
-
-// const routes: Routes = [
-//   {
-//     path: '',
-//     children: [
-//       {
-//         path: '',
-//         loadChildren: () =>
-//           import(
-//             './homepage/homepage.module'
-//           ).then(m => m.HomepageModule)
-//       },
-//       {
-//         path: 'accounts',
-//         loadChildren: () =>
-//           import(
-//             './accounts/accounts.module'
-//           ).then(m => m.AccountsModule)
-//       },
-//       {
-//         path: 'reviews',
-//         loadChildren: () =>
-//           import(
-//             './reviews/reviews.module'
-//           ).then(m => m.ReviewsModule)
-//       }
-//     ]
-//   }
-// ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
 exports: [RouterModule]

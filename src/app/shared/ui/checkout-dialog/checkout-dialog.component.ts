@@ -90,10 +90,10 @@ export class CheckoutDialogComponent implements AfterViewInit {
   initiateStripePayment() {
     const selAcc = this.selAccount;
     this.redirectService.post({
-      region: this.selRegion, name: selAcc.name, currency: this.currency.name,
+      region: this.selRegion.name, name: selAcc.name, currency: this.currency.name,
       price: this.price, quantity: selAcc.orderQty
     },
-      'https://stripe.cokolwiek.webup-dev.pl');
+      'https://payment.accounts4life.com');
   }
 
   onToggleNotifDisplay() {
