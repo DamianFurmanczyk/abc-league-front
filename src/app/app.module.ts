@@ -11,7 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromApp from './core/state/app.reducer';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from './core/core.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [],
@@ -28,8 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       }
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([]),
-    FontAwesomeModule
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

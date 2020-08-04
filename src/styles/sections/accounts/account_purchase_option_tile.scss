@@ -204,34 +204,21 @@ div.account:hover {
   }
 }
 
-@media (max-width: $xm2) {
-  .account-options-wrapper:not(.alternative) {
-    width: 100%;
-    margin: 0;
-    justify-content: unset;
-  }
-}
-
 @media (max-width: 1400px) {
-  .account-options-wrapper.alternative {
+
+  .account-options-wrapper, .account-options-wrapper.alternative {
     width: 100%;
-    margin: 0;
     justify-content: unset;
   }
-
+  
   div.account {
+    max-width: 230px;
     margin-right: 14px;
-    padding: 0.7rem;
-    img {
-      width: 100px;
-      margin-bottom: .5rem;
-      display: inline-block;
-    }
+    padding: 1.3rem 0.7rem;
+    
     div.account_cost {
       margin-bottom: .5rem;
     }
-
-    max-width: 200px;
   }
 
 }
