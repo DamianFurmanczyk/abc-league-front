@@ -18,6 +18,11 @@ export const getCurrency = createSelector(
   (state: AppStateInterface) => state.currency
 );
 
+export const getCountry = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.country
+);
+
 export const getCoupons = createSelector(
   getAppState,
   (state: AppStateInterface) => state.coupons

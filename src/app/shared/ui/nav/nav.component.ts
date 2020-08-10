@@ -23,10 +23,10 @@ export class NavComponent  {
     this.activeClassScrollSet = flag;
   }
   @Input() set currencySetHandler(excludeCurr: { name: string, exchangeRateToDollar: number }) {
-    if(this.initialCurrencyInputSoThatItsBeenLoadedBasedOnIpflag) {
+    if(!this.hasCurrencyBeenSetBasedOnIpFlag) {
       this.currencyOptions = [...this.currencyOptions, excludeCurr.name];
       this.initialCurrencyBasedOnIp = excludeCurr.name;
-      this.initialCurrencyInputSoThatItsBeenLoadedBasedOnIpflag = false;
+      this.hasCurrencyBeenSetBasedOnIpFlag = true;
     }
     this.activeCurrency = excludeCurr.name;
     this.currencyOptionsToDisplay = this.currencyOptions.filter(el => el != excludeCurr.name);
@@ -38,7 +38,7 @@ export class NavComponent  {
   @Output() currencyChange = new EventEmitter();
 
   initialCurrencyBasedOnIp: string;
-  initialCurrencyInputSoThatItsBeenLoadedBasedOnIpflag = true;
+  hasCurrencyBeenSetBasedOnIpFlag = false;
   initialCurrencyOptions = ['USD', 'GBP', 'EUR'];
   scrollActiveNavAnyways: boolean;
   activeClassScrollSet: boolean

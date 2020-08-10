@@ -5,6 +5,7 @@ import { DataAccessService } from './../../../core/services/app.service';
 import { AccountWithCountAndOrderQty } from './../../../models/accountExtended.interface';
 import { Component, Output, AfterViewInit, ViewChild, ElementRef, Input, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 import { RedirectService } from './../../../core/services/redirect.service';
+import { ToFixedPipe } from './../../../core/pipes/toFixed.pipe';
 
 @Component({
   selector: 'app-checkout-dialog',
@@ -17,6 +18,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
   @ViewChild('popup') popup: ElementRef;
   @Output() checkoutToggle = new EventEmitter();
   @Input() selRegion: Region;
+  @Input() country: string;
   @Input() set regions(regions: Region[]) {
     regions.forEach((el: Region) => this.regionsIdToNameMap[el.id] = el.name);
   }
@@ -91,7 +93,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
     const selAcc = this.selAccount;
     this.redirectService.post({
       region: this.selRegion.name, name: selAcc.name, currency: this.currency.name,
-      price: this.price, quantity: selAcc.orderQty
+      price: this.price, quantity: selAcc.orderQty, country: this.country
     },
       'https://payment.accounts4life.com');
   }

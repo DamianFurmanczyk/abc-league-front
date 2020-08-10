@@ -59,6 +59,8 @@ import { RedirectService } from './services/redirect.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
+
+import { PipesModule } from './pipes/pipes.module';
 @NgModule({
   declarations: [    
     MainComponent,
@@ -90,6 +92,7 @@ import { AppComponent } from '../app.component';
     CommonModule,
     HttpClientModule,
     FormsModule,
+    PipesModule,
     ReactiveFormsModule,
     StoreModule.forFeature(
       fromApp.APP_FEATURE_KEY,
@@ -97,7 +100,8 @@ import { AppComponent } from '../app.component';
     ),
     EffectsModule.forFeature([AppEffects])
   ],
-  providers: [    {
+  providers: [
+    {
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   },

@@ -13,12 +13,6 @@ import { fromAppActions } from './app.actions';
 
 import { DataAccessService } from '../services/app.service'
 
-// import { getFavouritePlanetsArray } from './planets.selectors';
-
-// import { PlanetsPartialState } from './planets.reducer';
-
-// import { PlanetDetailsInterface } from '@swapi-app/swapi/planets-overview/domain';
-
 @Injectable()
 export class AppEffects {
 
@@ -28,10 +22,11 @@ export class AppEffects {
     mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
         mergeMap(resp => {
-          return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp[0]['0']), of(resp[0]['0']), of(resp[1]['0'])])
+          console.log(resp);
+          return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp[0]['0']), of(resp[0]['0']), of(resp[1]['0']), of(resp[2]['0'])])
         }),
         map(resp =>{
-          return  new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0], regionName: resp[2]})
+          return  new fromAppActions.loadCurrencyBasedOnLocationSuccess({name: resp[1], exchangeRateToDollar: resp[0], regionName: resp[2], country: resp[3]})
         }),
         catchError(err => of(new fromAppActions.loadCurrencyBasedOnLocationFail(err)))
       )

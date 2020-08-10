@@ -86,16 +86,6 @@
 
         margin: 1.4rem .5rem;
 
-        &:last-child {
-            
-            .region_caption {
-                transform: translateY(.4rem);
-            }
-            img {
-                transform: translateY(.7rem);
-            }
-        }
-
         img {
             height: 82px;
         }
@@ -115,16 +105,6 @@
         border-radius: 8px;
 
         margin: 1.4rem .7rem;
-
-        &:last-child {
-            
-            .region_caption {
-                transform: translateY(.4rem);
-            }
-            img {
-                transform: translateY(.7rem);
-            }
-        }
 
         img {
             height: 85px;

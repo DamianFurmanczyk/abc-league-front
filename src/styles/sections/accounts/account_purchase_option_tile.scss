@@ -34,6 +34,7 @@
 .account {
   transition: 0.4s ease-in-out;
   cursor: pointer;
+  height: 503px;
   margin-right: 20px;
   flex: 1 0 auto;
   padding: 1.4rem;
@@ -51,6 +52,7 @@
   &.alternative {
     padding: 1.8rem 1.4rem;
     min-width: unset;
+    height: 360px;
 
     .account_description--alt {
       margin-bottom: 1rem;

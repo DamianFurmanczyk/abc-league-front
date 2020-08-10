@@ -38,6 +38,7 @@ export interface AppStateInterface {
   reviews: ReviewsEntitiesState,
   reviewsLoading: boolean,
   currencyLoading: boolean,
+  country: string | null,
   regions: any[] | null,
   regionsLoading: boolean,
   selectedRegion: any,
@@ -74,7 +75,8 @@ export const initialState: AppStateInterface = {
   couponsLoading: false,
   reviewsAvgRating: null,
   reviewsAvgRatingLoading: false,
-  reviewsAvgRatingError: null
+  reviewsAvgRatingError: null,
+  country: null
 };
 
 export interface AppPartialState {
@@ -86,8 +88,6 @@ export function reducer(
   action: fromAppActions.CollectiveType
 ) {
   switch (action.type) {
-
-
 
     case fromAppActions.Types.LoadRegions: {
 
@@ -169,8 +169,6 @@ export function reducer(
 
     case fromAppActions.Types.loadCurrencyBasedOnLocation: {
 
-      mapCurrencyRegionToInitialRegionSelected
-
       state = {
         ...state,
         currencyLoading: true,
@@ -188,6 +186,7 @@ export function reducer(
         selectedRegion: {id: 1, name},
         currencyLoading: false,
         currency: action.payload,
+        country: action.payload.country,
         accounts: { acc: state.accounts.acc.length == 0 ? [] : getAccountsWithAppropCurrency(action.payload, state.accounts.acc), count: state.accounts.count }
       };
 

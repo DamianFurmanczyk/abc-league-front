@@ -16,6 +16,7 @@ export class AppFacade {
   currency$ = this.store.pipe(select(selectors.getCurrency));
   coupons$ = this.store.pipe(select(selectors.getCoupons));
   reviewsRatingAvg$ = this.store.pipe(select(selectors.getReviewsRatingAvg));
+  country$ = this.store.pipe(select(selectors.getCountry));
 
   constructor(private store: Store<fromApp.AppPartialState>) {}
 

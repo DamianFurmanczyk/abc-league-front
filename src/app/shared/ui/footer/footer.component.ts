@@ -13,7 +13,7 @@ export class FooterComponent implements AfterViewInit {
   dds: NodeListOf<HTMLElement>;
   explendableUlsTriggers: NodeListOf<HTMLElement>;
 
-  constructor(private scrollSer: ScrollService, private router: Router) { }
+  constructor(private scrollSer: ScrollService, private router: Router) {}
 
   navigateToRoute(route: string) {
     this.scrollSer.scrollToTopOnNavigate();
