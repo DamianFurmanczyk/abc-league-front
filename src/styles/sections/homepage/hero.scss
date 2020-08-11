@@ -34,6 +34,10 @@
     position: relative;
     width: 120px;
 
+    .icon--dropdown {
+        margin-left: 8px;
+    }
+
     &.nav_li--currency {
         transition: max-height .4s ease-in-out;
         position: absolute;
@@ -48,12 +52,14 @@
             display: inline-block;
         }
 
-        .fa-chevron-down {
+        .icon--dropdown {
+            width: 14px;
             position: absolute;
             right: 20px;
             top: .8rem;
             margin: 0;
         }
+
         span {
             color: $gray;
         }
@@ -73,18 +79,11 @@
             margin-top: .7rem;
         }
 
-        .fa-chevron-down {
+        .icon--dropdown {
             display: inline-block;
-            transform: rotate(180deg);
-            color: #000 !important;
+            transform: rotate(180deg) translateY(2px);
+            filter: none !important;
         }
-    }
-
-    .fa-chevron-down {
-        pointer-events: none;
-        margin-left: .4rem;
-        font-size: .9rem;
-        transition: .4s;
     }
 
     ul {
@@ -173,9 +172,10 @@
 
 
 .hero_nav.nav.active {    
-    .fa-chevron-down {
-        color: #fff;
+    .icon--dropdown {
+        filter: invert(100%) sepia(100%) saturate(215%) hue-rotate(298deg) brightness(117%) contrast(100%);
     }
+    
     .nav_li--dropdown {
 
         &.active {
@@ -186,8 +186,8 @@
             background: #fff !important;
             color: #000 !important;
 
-            .fa-chevron-down {
-                color: $gray;
+            .icon--dropdown {
+                filter: none;
             }
 
         }
@@ -340,17 +340,18 @@
             li.nav_li {
                 color: #000;
             }
-            .fa-chevron-down {
-                color: #fff;
+
+            .icon--dropdown {
+                filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(134deg) brightness(103%) contrast(101%);
             }
 
             li.nav_li--dropdown {
                 color: #000;            
     
-                .fa-chevron-down {
-                    color: #000 !important;
+                .icon--dropdown {
+                    filter: none;
                 }
-    
+
                 &.active {
                     background: transparentize(#fff, .2);
                 }

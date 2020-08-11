@@ -4,7 +4,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, Output, OnDestroy } 
 import { Subscription } from 'rxjs';
 import { EventEmitter } from '@angular/core';
 
-const starImg = '<span class="fa fa-star"></span>';
+const starImg = '<img class="icon icon--star icon--star-small active" src="assets/img/icons/star-solid.svg" alt=""></img>';
 
 let starsArrMap = {
   1: starImg,

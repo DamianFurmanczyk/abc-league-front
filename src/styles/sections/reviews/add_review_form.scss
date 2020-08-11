@@ -33,17 +33,6 @@
         }
     }
     .rating-display {
-        .fa-star {
-            font-size: 1.5rem;
-            letter-spacing: .2rem;
-            cursor: pointer;
-            color: lighten($gray, 30%);
-            
-            &.active {
-                color: $yellow;
-            }
-        }
-
         margin: 2rem 0;
         text-align: center;
         small {

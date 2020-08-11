@@ -97,9 +97,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-font-awesome
-(OFL-1.1 AND MIT)
-
 moment
 MIT
 Copyright (c) JS Foundation and other contributors

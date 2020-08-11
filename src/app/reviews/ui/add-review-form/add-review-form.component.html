@@ -2,12 +2,12 @@
 
 <form class="add-review-form" [formGroup]="reviewForm" #form (submit)="presenter.submitAddReviewForm($event)">
     <h2> Add review
-        <span (click)='hideFormAndToggleDisplayAfter()' class="fa fa-times"></span>
+        <img (click)="hideFormAndToggleDisplayAfter()" src="assets/img/icons/times-solid.svg" class="icon icon--close" alt="close">
     </h2>
 
     <div class="rating-display">
         <small>Rating</small>
-        <span *ngFor="let item of presenter.stars; let i = index" (click)="presenter.onStarClick(i)" [ngClass]="['fa fa-star', item == 'active' ? 'active' : '']"></span>
+        <img src="assets/img/icons/star-solid.svg" alt=""  *ngFor="let item of presenter.stars; let i = index" (click)="presenter.onStarClick(i)" [ngClass]="['icon icon--star', item == 'active' ? 'active' : '']">
     </div>
 
     <div class="add-review-form_input-wrapper">

@@ -37,7 +37,7 @@
     border-bottom-right-radius: 0;
     background: #4E6ED9;
 
-    .fa-chevron-down {
+    .icon--expand {
       transform: rotate(-180deg);
     }
 
@@ -45,9 +45,9 @@
       display: block;
     }
   }
-
-  .fa-chevron-down {
-    font-size: .9rem;
+  .icon--expand {
+    height: 15.5px;
+    filter: invert(99%) sepia(99%) saturate(2%) hue-rotate(177deg) brightness(111%) contrast(100%);
     display: inline-block;
     margin-left: .5rem;
   }

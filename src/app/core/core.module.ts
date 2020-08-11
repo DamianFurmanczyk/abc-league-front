@@ -87,7 +87,7 @@ import { PipesModule } from './pipes/pipes.module';
     NavComponent
   ],
   imports: [
-  PerfectScrollbarModule,
+    PerfectScrollbarModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
