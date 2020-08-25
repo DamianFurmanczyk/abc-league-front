@@ -23,6 +23,31 @@ export const getCountry = createSelector(
   (state: AppStateInterface) => state.country
 );
 
+export const getCurrencyLoadingErr = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.currencyLoadingErr
+);
+
+export const getReviewsLoadingErr = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsLoadingErr
+);
+
+export const getAccountsLoadingErr = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.accountsLoadingErr
+);
+
+export const getReviewsAvgRatingError = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsAvgRatingError
+);
+
+export const getRegionsLoadingErr = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.currencyLoadingErr
+);
+
 export const getCoupons = createSelector(
   getAppState,
   (state: AppStateInterface) => state.coupons
@@ -33,14 +58,34 @@ export const getReviewsRatingAvg = createSelector(
   (state: AppStateInterface) => state.reviewsAvgRating
 );
 
-export const getReviews = createSelector(
-  getAppState,
-  (state: AppStateInterface) => selectAll(state.reviews)
-);
-
 export const getReviewsLoading = createSelector(
   getAppState,
   (state: AppStateInterface) => state.reviewsLoading
+);
+
+export const getRegionsLoading = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.regionsLoading
+);
+
+export const getCurrencyLoading = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.currencyLoading
+);
+
+export const getAccountsLoading = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.accountsLoading
+);
+
+export const getReviewsAvgRatingLoading = createSelector(
+  getAppState,
+  (state: AppStateInterface) => state.reviewsAvgRatingLoading
+);
+
+export const getReviews = createSelector(
+  getAppState,
+  (state: AppStateInterface) => selectAll(state.reviews)
 );
 
 export const getRegions = createSelector(
@@ -48,10 +93,6 @@ export const getRegions = createSelector(
   (state: AppStateInterface) => state.regions
 );
 
-export const getRegionsLoading = createSelector(
-  getAppState,
-  (state: AppStateInterface) => state.reviewsLoading
-);
 
 export const getAccounts = createSelector(
   getAppState,

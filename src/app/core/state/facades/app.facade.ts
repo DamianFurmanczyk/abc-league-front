@@ -10,13 +10,20 @@ import { fromAppActions } from '../app.actions';
 @Injectable({providedIn: 'root'})
 export class AppFacade {
   regions$ = this.store.pipe(select(selectors.getRegions));
-  loading$ = this.store.pipe(select(selectors.getRegionsLoading));
   selectedRegion$ = this.store.pipe(select(selectors.getSelectedRegion));
   accounts$ = this.store.pipe(select(selectors.getAccounts));
   currency$ = this.store.pipe(select(selectors.getCurrency));
   coupons$ = this.store.pipe(select(selectors.getCoupons));
   reviewsRatingAvg$ = this.store.pipe(select(selectors.getReviewsRatingAvg));
   country$ = this.store.pipe(select(selectors.getCountry));
+  loadingRegions$ = this.store.pipe(select(selectors.getRegionsLoading));
+  currencyLoading$ = this.store.pipe(select(selectors.getCurrencyLoading));
+  accountsLoading$ = this.store.pipe(select(selectors.getAccountsLoading));
+  accountsLoadingErr$ = this.store.pipe(select(selectors.getAccountsLoadingErr));
+  currencyLoadingErr$ = this.store.pipe(select(selectors.getCurrencyLoadingErr));
+  loadingRegionsErr$ = this.store.pipe(select(selectors.getRegionsLoadingErr));
+  reviewsAvgRatingLoading$ = this.store.pipe(select(selectors.getReviewsAvgRatingLoading));
+  reviewsAvgRatingError$ = this.store.pipe(select(selectors.getReviewsAvgRatingError));
 
   constructor(private store: Store<fromApp.AppPartialState>) {}
 

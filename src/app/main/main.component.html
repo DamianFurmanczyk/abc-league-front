@@ -3,7 +3,9 @@
     [scrollActiveNavNoMatterWhat]='scrollActiveNavNoMatterWhat'
     [activeClassScroll]='scrollStyles'
     (currencyChange)='onCurrencyChange($event)' 
-    [currencySetHandler]="currency$ | async">
+    [currencySetHandler]="currency$ | async"
+    [currencyLoadingErr]="facade.currencyLoadingErr$ | async"
+    [currencyLoading]="facade.currencyLoading$ | async">
 </app-nav>
 <router-outlet></router-outlet>
 <app-payment-method-stripe></app-payment-method-stripe>

@@ -10,7 +10,9 @@
   <div class="hero_reviews">
       <div (click)="navigateAndScrollToReviews()">
         <span [innerHTML]="stars"></span>
-        <span class="reviews_count">{{reviewsNum}} reviews</span>
+        <!-- <ng-container *ngIf="reviewsNum"><span class="reviews_count">{{reviewsNum}} reviews</span></ng-container> -->
+        <ng-container *ngIf="true"> <app-loader-dots></app-loader-dots> </ng-container>
+        <!-- <ng-container *ngIf="reviewsAvgRatingLoadingErr"> <p class="alert-text">Error</p> </ng-container> -->
       </div>
   </div>
 </header>

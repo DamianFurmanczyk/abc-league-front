@@ -6,7 +6,6 @@ export class RedirectService {
     constructor() { }
     post(obj, url) {
         var mapForm = document.createElement("form");
-        mapForm.target = "_blank";
         mapForm.method = "POST";
         mapForm.action = url;
         Object.keys(obj).forEach(function (param) {

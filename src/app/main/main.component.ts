@@ -47,7 +47,7 @@ export class MainComponent implements OnDestroy, AfterViewInit {
     this.elementsThatNeedToDeactivateOnWindowClick = this.getElementsThatNeedToDeactivateOnWindowClick();
   }
 
-  constructor(private facade: AppFacade, router: Router, private cookieService: CookieService, private appCookieService: CookiesAppService) {
+  constructor(public facade: AppFacade, router: Router, private cookieService: CookieService, private appCookieService: CookiesAppService) {
     this.showCookiesBar = this.appCookieService.showConsentCookieBar;
     this.currency$ = this.facade.currency$;
     this.scrollActiveNavNoMatterWhat = window.innerWidth < 981;

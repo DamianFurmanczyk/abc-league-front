@@ -18,7 +18,7 @@ export class ReviewsFeatureComponent   {
     this.showAddReviewFormFlag = !this.showAddReviewFormFlag
   }
 
-  constructor(private facade: ReviewsFacade, private daService: DataAccessService) { }
+  constructor(public facade: ReviewsFacade, private daService: DataAccessService) { }
 
   onAddReview(review: ReviewToAdd) {
     this.daService.addReview(review);

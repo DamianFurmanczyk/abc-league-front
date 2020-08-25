@@ -61,9 +61,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
 
 import { PipesModule } from './pipes/pipes.module';
+
+import { AllResourcesResolver } from './../resolvers/main.resolver';
+
+import { LoaderSpinnerComponent } from './../shared/loader-spinner/loader-spinner.component';
+import { LoaderDotsComponent } from './../shared/loader-dots/loader-dots.component';
 @NgModule({
   declarations: [    
     MainComponent,
+    LoaderDotsComponent,
     NotificationPopupComponent,
     AppComponent,
     AccountPurchaseStripeComponent,
@@ -84,7 +90,8 @@ import { PipesModule } from './pipes/pipes.module';
     AddReviewFormComponent,
     ReviewsFeatureComponent,
     AccountsFeatureComponent,
-    NavComponent
+    NavComponent,
+    LoaderSpinnerComponent
   ],
   imports: [
     PerfectScrollbarModule,
@@ -108,15 +115,8 @@ import { PipesModule } from './pipes/pipes.module';
     RedirectService,
     CookieService,
     DataAccessService,
-    ReviewsInitiateResolver,
+    AllResourcesResolver,
     ReviewsFacade,
-    RegionsInitiateResolver,
-    CurrencyResolver,
-    CouponsInitiateResolver,
-    ReviewsRatingAvgCacheConditionedResolver,
-    ReviewsCacheConditionedResolver,
-    AccountsCacheConditionedResolver,
-    RegionsCacheConditionedResolver
   ]
 })
 export class CoreModule {}

@@ -107,7 +107,7 @@ export class CheckoutDialogComponent implements AfterViewInit {
     this.DataAccessService.initiatePaypalPayment(this.price, this.currency.name, selAcc.orderQty, selAcc.name).then(res => {
       window.open(
         res,
-        '_blank'
+        '_self'
       );
     });
   }

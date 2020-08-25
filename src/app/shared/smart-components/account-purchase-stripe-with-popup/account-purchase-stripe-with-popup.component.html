@@ -3,6 +3,8 @@
 (checkoutToggle)="onToggleCheckoutFlag()"  
 [currency]='currency$ | async' 
 [alternativeStyles]='altStyles'
+[accountsLoading]='facade.accountsLoading$ | async'
+[accountsLoadingErr]='facade.accountsLoadingErr$ | async'
 (changeOrderQuantity)="onChangeOrderQuantity($event)"
 [accounts]='accountsExtended$ | async'></app-account-purchase-stripe>
 

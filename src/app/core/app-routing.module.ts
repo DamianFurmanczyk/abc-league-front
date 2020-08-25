@@ -4,6 +4,7 @@ import { HomepageFeatureComponent } from '../homepage/feature/feature.component'
 import { AccountsFeatureComponent } from '../accounts/feature/feature.component';
 import { ReviewsFeatureComponent } from '../reviews/feature/feature.component';
 
+import { AllResourcesResolver } from './../resolvers/main.resolver';
 import { CouponsInitiateResolver } from './../resolvers/coupons.resolver';
 import { ReviewsRatingAvgCacheConditionedResolver } from './../resolvers/reviewsRatingAvgCacheConditioned.resolver';
 import { ReviewsRatingAvgInitiateResolver } from './../resolvers/reviewsAvgRating.resolver';
@@ -16,16 +17,13 @@ import { AccountsInitiateResolver } from './../resolvers/accounts.resolver';
 import { RegionsInitiateResolver } from './../resolvers/regions.resolver';
 import { ReviewsInitiateResolver } from './../resolvers/reviews.resolver';
 
-ReviewsRatingAvgInitiateResolver
-ReviewsRatingAvgCacheConditionedResolver
-CouponsInitiateResolver
-
 const routes: Routes = [
   {
     path: '',
     component: MainComponent, 
-    resolve: {ReviewsRatingAvgInitiateResolver, CouponsInitiateResolver, RegionsInitiateResolver, 
-      AccountsInitiateResolver, CurrencyResolver, ReviewsInitiateResolver},
+    resolve: {
+      AllResourcesResolver
+    },
     children: [
       {
         path: 'payment/:paymentId',
@@ -41,16 +39,13 @@ const routes: Routes = [
       },
     {
       path: '',
-      component: HomepageFeatureComponent,
-      resolve: {ReviewsRatingAvgCacheConditionedResolver, RegionsCacheConditionedResolver, AccountsCacheConditionedResolver}
+      component: HomepageFeatureComponent
     }, {
       path: 'reviews',
-      component: ReviewsFeatureComponent,
-      resolve: {ReviewsCacheConditionedResolver},
+      component: ReviewsFeatureComponent
     }, {
       path: 'accounts',
-      component: AccountsFeatureComponent,
-      resolve: {RegionsCacheConditionedResolver, AccountsCacheConditionedResolver}
+      component: AccountsFeatureComponent
     }, {
       path: '**', redirectTo: ''
     }
@@ -59,6 +54,6 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

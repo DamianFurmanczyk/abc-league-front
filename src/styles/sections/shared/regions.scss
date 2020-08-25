@@ -1,6 +1,14 @@
 .regions {
     margin: 5% 3rem;
 
+    &_loader-wrapper {
+        min-height: 190px;
+        align-content: center;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
     h2 {
         text-align: center;
         font-size: 2rem;
@@ -56,7 +64,11 @@
             content: '';
             padding: .5rem;
         }
+        .region_caption {
+            transform: translateY(7px);
+        }
     }
+
     .region_caption {
         font-weight: bold;
         text-align: center;

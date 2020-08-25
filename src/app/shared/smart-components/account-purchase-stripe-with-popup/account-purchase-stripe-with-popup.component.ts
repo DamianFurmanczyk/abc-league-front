@@ -56,7 +56,7 @@ export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestro
     this.accountsExtended$.next(this.accounts);
   }
 
-  constructor(private facade: AppFacade) {}
+  constructor(public facade: AppFacade) {}
 
   ngOnInit(): void {
     this.facade.accounts$.pipe(

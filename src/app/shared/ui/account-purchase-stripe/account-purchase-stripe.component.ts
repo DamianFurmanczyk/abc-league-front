@@ -18,6 +18,8 @@ export class AccountPurchaseStripeComponent   {
   @Output() changeSelectedAccount: EventEmitter<AccountWithCountAndOrderQty> = new EventEmitter();
   @Output() changeOrderQuantity: EventEmitter<{q: number, id: number, selectedAccIsTarget: boolean}> = new EventEmitter();
   @Input() accounts: AccountWithCountAndOrderQty[] = [];
+  @Input() accountsLoading;
+  @Input() accountsLoadingErr;
 
   accountToDustAmountMap = {
     Basic: 40000,

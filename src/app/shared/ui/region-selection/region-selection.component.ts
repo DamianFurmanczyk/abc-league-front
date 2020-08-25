@@ -19,7 +19,7 @@ export class RegionSelectionComponent implements OnInit, OnDestroy {
   regions: Region[];
   selectedRegionSet: Region;
   
-  constructor(private facade: AppFacade) { }
+  constructor(public facade: AppFacade) { }
 
   selectRegion(region: number) {
     this.facade.SelectRegion(region);

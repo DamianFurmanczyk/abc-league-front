@@ -22,7 +22,6 @@ export class AppEffects {
     mergeMap((action: fromAppActions.loadCurrencyBasedOnLocation) =>
       this.dataAccessService.getCurrencyAdequateToUsersCountry().pipe(
         mergeMap(resp => {
-          console.log(resp);
           return forkJoin([this.dataAccessService.getExchangeRateToDollar(resp[0]['0']), of(resp[0]['0']), of(resp[1]['0']), of(resp[2]['0'])])
         }),
         map(resp =>{

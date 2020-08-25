@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./feature.component.scss']
 })
 export class HomepageFeatureComponent {
-  reviewsRatingAvg$ = this.facade.reviewsRatingAvg$;
 
-  constructor(private facade: AppFacade) {}
+  constructor(public facade: AppFacade) {}
 }

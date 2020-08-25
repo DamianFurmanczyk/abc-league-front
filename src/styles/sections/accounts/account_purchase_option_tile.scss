@@ -1,6 +1,14 @@
 .account-options {
   background: $lightGray;
   padding: 4% 0;
+
+  &_loader-wrapper {
+  height: 470px;
+
+    &.alt {
+      height: 550px;
+    }
+  }
 }
 
 .account-options-wrapper {

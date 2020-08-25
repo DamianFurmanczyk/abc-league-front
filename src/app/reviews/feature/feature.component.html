@@ -1,6 +1,9 @@
 <app-reviews-list 
     (toggleAddReviewForm)='onToggleAddReviewForm()' 
-    [reviewsList]='reviews$ | async'>
+    [reviewsList]='reviews$ | async'
+    [reviewsLoading]='facade.reviewsLoading$ | async'
+    [reviewsLoadingErr]='facade.reviewsLoadingErr$ | async'
+    >
 </app-reviews-list>
 
 <app-add-review-form 

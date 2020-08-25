@@ -28,6 +28,8 @@ export class ReviewsListComponent implements OnInit, OnDestroy {
     this.reviews = reviews;
     this.sort(this.activeSortingOption);
   };
+  @Input() reviewsLoading;
+  @Input() reviewsLoadingErr;
   sortedReviews: Review[] = [];
   reviews: Review[];
 

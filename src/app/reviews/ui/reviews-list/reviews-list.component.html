@@ -22,14 +22,21 @@
     </button>
   </div>
 
+  <app-loader-spinner *ngIf="reviewsLoading"></app-loader-spinner>
 
-  <ng-container *ngIf="!sortedReviews || sortedReviews.length == 0; else elseTemplate">
+  <ng-container *ngIf="reviewsLoadingErr">
     <p class="noInfo">
       No reviews data retrieved from server.
     </p>
   </ng-container>
+
+  <ng-container *ngIf="sortedReviews.length == 0 && !reviewsLoading">
+    <p class="noInfo">
+      No reviews.
+    </p>
+  </ng-container>
   
-  <ng-template #elseTemplate>
+  <ng-container *ngIf="sortedReviews.length != 0">
     <div class="reviews-wrapper">
       <div *ngFor="let review of sortedReviews" class="review">
         <div class="review_header">
@@ -43,6 +50,6 @@
         <small class="review-date-added">{{review.updated_at || review.created_at}}</small>
       </div>
     </div>
-  </ng-template>
+  </ng-container>
 
 </section>

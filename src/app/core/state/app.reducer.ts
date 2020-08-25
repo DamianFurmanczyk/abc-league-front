@@ -100,6 +100,17 @@ export function reducer(
       break;
     }
 
+    case fromAppActions.Types.LoadRegionsFail: {
+
+      state = {
+        ...state,
+        regionsLoading: true,
+        regionsLoadingErr: action.payload
+      };
+
+      break;
+    }
+
     case fromAppActions.Types.LoadRegionsSuccess: {
 
       state = {
@@ -136,11 +147,23 @@ export function reducer(
 
       break;
     }
+
     case fromAppActions.Types.LoadReviewsRatingAvg: {
 
       state = {
         ...state,
         reviewsAvgRatingLoading: true
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.LoadReviewsRatingAvgFail: {
+
+      state = {
+        ...state,
+        reviewsAvgRatingLoading: false,
+        reviewsAvgRatingError: action.payload
       };
 
       break;
@@ -161,7 +184,9 @@ export function reducer(
       
       state = {
         ...state,
-        selectedRegion: action.payload
+        selectedRegion: action.payload,
+        accountsLoading: true,
+        accountsLoadingErr: false
       };
 
       break;
@@ -173,6 +198,17 @@ export function reducer(
         ...state,
         currencyLoading: true,
         currencyLoadingErr: false
+      };
+
+      break;
+    }
+
+    case fromAppActions.Types.loadCurrencyBasedOnLocationFail: {
+
+      state = {
+        ...state,
+        currencyLoading: false,
+        currencyLoadingErr: action.payload
       };
 
       break;
@@ -199,15 +235,6 @@ export function reducer(
         ...state,
         currencyLoading: false,
         currencyLoadingErr: action.payload
-      };
-
-      break;
-    }
-
-    case fromAppActions.Types.SelectRegion: {
-      state = {
-        ...state,
-        selectedRegion: action.payload
       };
 
       break;
@@ -271,12 +298,21 @@ export function reducer(
     case fromAppActions.Types.LoadReviewsSuccess: {
       const reviewsCopy = JSON.parse(JSON.stringify(action.payload)),
       loadedReviewsAltered = reviewsCopy.map(el => {
-          if(!el.updated_at) return el;
-          return  {
-          ...el, updated_at: el.updated_at.split('T')[0]
-        }}
-      );
+          if(el.updated_at) {
+            return {
+              ...el, updated_at: el.updated_at.split('T')[0]
+            }
+          }
 
+          if(el.created_at) {
+              return {
+                ...el, updated_at: el.created_at.split('T')[0]
+              }
+          }
+
+          return el;
+        }
+      );
 
       state = {
         ...state,

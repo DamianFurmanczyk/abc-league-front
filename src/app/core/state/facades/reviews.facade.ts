@@ -10,7 +10,9 @@ import { fromAppActions } from '../app.actions';
 @Injectable()
 export class ReviewsFacade {
   reviews$ = this.store.pipe(select(selectors.getReviews));
-  loading$ = this.store.pipe(select(selectors.getReviewsLoading));
+  loadingRegions$ = this.store.pipe(select(selectors.getReviewsLoading));
+  reviewsLoading$ = this.store.pipe(select(selectors.getReviewsLoading));
+  reviewsLoadingErr$ = this.store.pipe(select(selectors.getReviewsLoadingErr));
 
   constructor(private store: Store<fromApp.AppPartialState>) {}
 

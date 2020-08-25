@@ -22,6 +22,8 @@ export class NavComponent  {
   @Input() set activeClassScroll(flag:  boolean) {
     this.activeClassScrollSet = flag;
   }
+  @Input() currencyLoadingErr;
+  @Input() currencyLoading;
   @Input() set currencySetHandler(excludeCurr: { name: string, exchangeRateToDollar: number }) {
     if(!this.hasCurrencyBeenSetBasedOnIpFlag) {
       this.currencyOptions = [...this.currencyOptions, excludeCurr.name];
@@ -46,7 +48,7 @@ export class NavComponent  {
   dropOpen = [false, false];
   activeCurrency = '';
   currencyOptions = this.initialCurrencyOptions;
-  currencyOptionsToDisplay: string[] = [];
+  currencyOptionsToDisplay: string[] = ['USD', 'GBP', 'EUR'];
   currencySymbolMap = CountryToCurrencyAbbrevMap;
 
   constructor(private scrollSer: ScrollService) { }

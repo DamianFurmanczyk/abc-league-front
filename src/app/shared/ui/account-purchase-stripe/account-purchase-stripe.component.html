@@ -1,11 +1,16 @@
 <section class="account-options">
+<app-loader-dots></app-loader-dots>
+  <div *ngIf="accountsLoading" class="account-options_loader-wrapper" [ngClass]="{alt: alternativeStyles}">
+    <app-loader-spinner></app-loader-spinner>
+  </div>
 
-  <ng-container *ngIf="!accounts || accounts.length == 0; else elseTemplate">
+  <div *ngIf="accountsLoadingErr" class="account-options_loader-wrapper" [ngClass]="{alt: alternativeStyles}">
     <p class="noInfo">
       No account data retrieved from server.
     </p>
-  </ng-container>
-  <ng-template #elseTemplate>
+  </div>
+
+  <ng-container *ngIf="!accountsLoading">
   
     <perfect-scrollbar>
       <div *ngIf="!alternativeStyles" ss-container class="account-options-wrapper">
@@ -20,7 +25,7 @@
           <div class="account_cost">
             <small>{{acc.name | uppercase}}</small> <br>
             <small>30 lvl instant delivery</small> <br>
-            {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
+            {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + (currency ? currency.name: '')}}
           </div>
 
           <p class="account_description">
@@ -63,7 +68,7 @@
     
           <div class="account_cost--alt">
             <small>{{acc.name | uppercase}}</small> <br>
-            {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + currency.name}}
+            {{(acc.priceAfterConversion ? acc.priceAfterConversion : acc.price_usd) + ' ' + (currency ? currency.name: '')}}
           </div>
     
           <p class="account_description--alt">
@@ -92,5 +97,5 @@
       </div>
       </perfect-scrollbar>
 
-    </ng-template>
+    </ng-container>
 </section>
