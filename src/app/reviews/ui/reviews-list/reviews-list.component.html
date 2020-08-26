@@ -26,11 +26,11 @@
 
   <ng-container *ngIf="reviewsLoadingErr">
     <p class="noInfo">
-      No reviews data retrieved from server.
+      Couldn't retrieve reviews data from server.
     </p>
   </ng-container>
 
-  <ng-container *ngIf="sortedReviews.length == 0 && !reviewsLoading">
+  <ng-container *ngIf="sortedReviews.length == 0 && !reviewsLoading && !reviewsLoadingErr">
     <p class="noInfo">
       No reviews.
     </p>

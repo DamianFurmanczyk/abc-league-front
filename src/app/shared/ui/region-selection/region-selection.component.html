@@ -1,7 +1,7 @@
     <section class="regions">
       <h2>Choose your region</h2>
 
-      <div *ngIf="facade.loadingRegions$ | async" class="regions_loader-wrapper">
+      <div *ngIf="(facade.loadingRegions$ | async) && !(facade.loadingRegionsErr$ | async)" class="regions_loader-wrapper">
         <app-loader-spinner></app-loader-spinner>
       </div>
 
@@ -10,7 +10,7 @@
 
           <ng-container *ngIf="facade.loadingRegionsErr$ | async; else elseTemplate">
             <p class="noInfo">
-              No regions data retrieved from server.
+              Couldn't retrieve regions data from server.
             </p>
           </ng-container>
           

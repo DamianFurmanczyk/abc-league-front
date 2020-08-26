@@ -4,13 +4,13 @@
     <app-loader-spinner></app-loader-spinner>
   </div>
 
-  <div *ngIf="accountsLoadingErr" class="account-options_loader-wrapper" [ngClass]="{alt: alternativeStyles}">
+  <div *ngIf="accountsLoadingErr" class="account-options_loader-wrapper--err-alt" [ngClass]="{alt: alternativeStyles}">
     <p class="noInfo">
-      No account data retrieved from server.
+      Couldn't retrieve accounts data from server.
     </p>
   </div>
 
-  <ng-container *ngIf="!accountsLoading">
+  <ng-container *ngIf="!accountsLoading && !accountsLoadingErr">
   
     <perfect-scrollbar>
       <div *ngIf="!alternativeStyles" ss-container class="account-options-wrapper">

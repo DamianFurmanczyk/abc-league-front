@@ -3,10 +3,16 @@
   padding: 4% 0;
 
   &_loader-wrapper {
-  height: 470px;
+    height: 470px;
 
     &.alt {
       height: 550px;
+    }
+
+    &--err-alt  {
+      height: 350px;
+      display: flex;
+      align-items: center;
     }
   }
 }

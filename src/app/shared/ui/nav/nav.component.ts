@@ -25,6 +25,7 @@ export class NavComponent  {
   @Input() currencyLoadingErr;
   @Input() currencyLoading;
   @Input() set currencySetHandler(excludeCurr: { name: string, exchangeRateToDollar: number }) {
+    if(!excludeCurr) return;
     if(!this.hasCurrencyBeenSetBasedOnIpFlag) {
       this.currencyOptions = [...this.currencyOptions, excludeCurr.name];
       this.initialCurrencyBasedOnIp = excludeCurr.name;
