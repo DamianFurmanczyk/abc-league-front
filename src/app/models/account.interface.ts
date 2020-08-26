@@ -2,6 +2,7 @@ import { currencyData } from './currencyData.interface';
 export interface Account {
     created_at: null | string,
     description: string,
+    factory: number,
     id: number,
     name: string,
     price_usd: string,

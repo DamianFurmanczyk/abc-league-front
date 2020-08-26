@@ -26,9 +26,11 @@ export class AccountPurchaseStripeWithPopupComponent implements OnInit, OnDestro
   set accountsSetter(accData: {acc: Account[], count: number[]}) {
     if(!accData.acc) return;
 
-    const accounts_with_count = accData.acc.map((el, i) => { 
+    let accounts_with_count = accData.acc.map((el, i) => { 
       return { ...el, count: accData.count[i], orderQty: 1 }
     });
+
+    accounts_with_count = accounts_with_count.filter(el => el.factory != 1);
 
     this.accounts = accounts_with_count;
 
