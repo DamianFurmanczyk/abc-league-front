@@ -66,9 +66,11 @@ import { AllResourcesResolver } from './../resolvers/main.resolver';
 
 import { LoaderSpinnerComponent } from './../shared/loader-spinner/loader-spinner.component';
 import { LoaderDotsComponent } from './../shared/loader-dots/loader-dots.component';
+import { SmthWentWrongComponent } from './../shared/smth-went-wrong/smth-went-wrong.component';
 @NgModule({
   declarations: [    
     MainComponent,
+    SmthWentWrongComponent,
     LoaderDotsComponent,
     NotificationPopupComponent,
     AppComponent,
@@ -94,7 +96,7 @@ import { LoaderDotsComponent } from './../shared/loader-dots/loader-dots.compone
     LoaderSpinnerComponent
   ],
   imports: [
-    PerfectScrollbarModule,
+  PerfectScrollbarModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
