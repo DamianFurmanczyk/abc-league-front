@@ -1,7 +1,6 @@
-<app-smth-went-wrong *ngIf="true"></app-smth-went-wrong>
+<app-smth-went-wrong *ngIf="accountsLoadingErr"></app-smth-went-wrong>
 
 <section class="account-options">
-<app-loader-dots></app-loader-dots>
   <div *ngIf="accountsLoading" class="account-options_loader-wrapper" [ngClass]="{alt: alternativeStyles}">
     <app-loader-spinner></app-loader-spinner>
   </div>
